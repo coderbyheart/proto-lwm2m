@@ -1,6 +1,7 @@
+import { writeFile } from 'fs/promises'
 import { Type, type TSchema } from '@sinclair/typebox'
-import { fromXML2JSON } from './fromXML2JSON.js';
-
+import { fromXML2JSON } from './fromXML2JSON.js'
+import path from 'node:path'
 
 /**
  * Create Typebox definition for object 14201
@@ -10,14 +11,25 @@ export const typeboxDefinition = async (id: number): Promise<TSchema> => {
 	const obj = await fromXML2JSON(id)
 	//console.log(obj)
 
-    const objId = obj.ObjectID[0];
-    const name = obj.Name[0];
+	const objId = obj.ObjectID[0]
+	const name = obj.Name[0]
+	await writeTypeboxDefinition(id)
 
 	return definition
 }
 
-const writeTypeboxDefinition = () => {
-
+/**
+ * Create new file with typebox definition
+ * 
+ * file created path: lwm2m/object-id.ts
+ */
+const writeTypeboxDefinition = async (objectId: number) => {
+	const importTypebox = `import { Type } from "@sinclair/typebox";`
+	const typeBoxDeclaration = `export const _${objectId} = Type.Object({})`
+	const LwM2MType = `${importTypebox} ${typeBoxDeclaration}`
+	const baseDir = process.cwd()
+	const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
+	await writeFile(subDir('lwm2m', `${objectId}.ts`), LwM2MType)
 }
 
 /**
