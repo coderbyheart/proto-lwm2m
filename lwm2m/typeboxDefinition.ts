@@ -9,11 +9,25 @@ import path from 'node:path'
 export const typeboxDefinition = async (id: number): Promise<TSchema> => {
 	// from xml to json
 	const obj = await fromXML2JSON(id)
-	//console.log(obj)
+	console.log(obj.Resources[0].Item)
 
 	const objId = obj.ObjectID[0]
 	const name = obj.Name[0]
-	await writeTypeboxDefinition(id)
+	
+	let object = `Type.Object({
+		ObjectVersion: Type.String({ examples: ['${obj.ObjectVersion[0]}'] }),
+	})`
+
+	if (obj.MultipleInstances['0'] === 'Multiple') object = `Type.Array(
+		${object}
+	)`
+
+	
+	if (obj.Mandatory['0'] === 'Optional') object = `Type.Optional(
+		${object}
+	)`
+
+	await writeTypeboxDefinition(id, object)
 
 	return definition
 }
@@ -23,9 +37,9 @@ export const typeboxDefinition = async (id: number): Promise<TSchema> => {
  * 
  * file created path: lwm2m/object-id.ts
  */
-const writeTypeboxDefinition = async (objectId: number) => {
+const writeTypeboxDefinition = async (objectId: number, objectDefinition: string) => {
 	const importTypebox = `import { Type } from "@sinclair/typebox";`
-	const typeBoxDeclaration = `export const _${objectId} = Type.Object({})`
+	const typeBoxDeclaration = `export const _${objectId} = ${objectDefinition}`
 	const LwM2MType = `${importTypebox} ${typeBoxDeclaration}`
 	const baseDir = process.cwd()
 	const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
