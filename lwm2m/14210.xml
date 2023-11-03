@@ -8,7 +8,7 @@
 		</Description1>
 		<ObjectID>14210</ObjectID>
 		<ObjectURN>urn:oma:lwm2m:x:14210</ObjectURN>
-						<MultipleInstances>Single</MultipleInstances>
+		<MultipleInstances>Single</MultipleInstances>
 		<Mandatory>Optional</Mandatory>
 		<Resources>
 			<Item ID="0">

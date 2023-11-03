@@ -3,8 +3,7 @@ import { Type } from '@sinclair/typebox'
 export const ModelIDRegExp = /^[A-Za-z0-9+]+$/
 
 export enum TransformerType {
-	ShadowReported = 'reported',
-	ShadowDesired = 'desired',
+	Shadow = 'shadow',
 	Messages = 'messages',
 }
 type Transformer = {
@@ -23,9 +22,5 @@ export type Models = Readonly<
 >
 
 export const FrontMatter = Type.Object({
-	type: Type.Union([
-		Type.Literal('reported'),
-		Type.Literal('desired'),
-		Type.Literal('messages'),
-	]),
+	type: Type.Union([Type.Literal('shadow'), Type.Literal('messages')]),
 })

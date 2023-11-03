@@ -8,7 +8,7 @@
 		</Description1>
 		<ObjectID>14201</ObjectID>
 		<ObjectURN>urn:oma:lwm2m:x:14201</ObjectURN>
-						<MultipleInstances>Single</MultipleInstances>
+		<MultipleInstances>Single</MultipleInstances>
 		<Mandatory>Optional</Mandatory>
 		<Resources>
 			<Item ID="0">
@@ -81,6 +81,18 @@
 				<Units>degrees</Units>
 				<Description>
 					<![CDATA[The angle of movement.]]>
+				</Description>
+			</Item>
+			<Item ID="6">
+				<Name>Source</Name>
+				<Operations>R</Operations>
+				<MultipleInstances>Single</MultipleInstances>
+				<Mandatory>Mandatory</Mandatory>
+				<Type>String</Type>
+				<RangeEnumeration>GNSS,SCELL,MCELL,WIFI</RangeEnumeration>
+				<Units></Units>
+				<Description>
+					<![CDATA[The source of the geo location, e.g. GNSS, SCELL, MCELL, WIFI.]]>
 				</Description>
 			</Item>
 			<Item ID="99">

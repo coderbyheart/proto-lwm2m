@@ -75,8 +75,10 @@ for (const model of await readdir(modelsDir)) {
 				chalk.gray('Select expression evaluated to true for the example input'),
 			)
 
-			const transformResult =
-				await jsonata(transformExpression).evaluate(inputExample)
+			const transformResult = await jsonata(
+				// For testing purposes this function call result is hardcoded
+				transformExpression.replace('$millis()', '1699999999999'),
+			).evaluate(inputExample)
 			const maybeValidSenML = validateSenML(transformResult)
 			if ('errors' in maybeValidSenML) {
 				console.error(maybeValidSenML.errors)

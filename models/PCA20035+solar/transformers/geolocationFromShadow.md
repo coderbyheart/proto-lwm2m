@@ -1,5 +1,5 @@
 ---
-type: reported
+type: shadow
 ---
 
 # Geo Location
@@ -21,7 +21,8 @@ $exists(state.reported.gnss.v.lat)
     {"n": 2, "v": state.reported.gnss.v.alt },
     {"n": 3, "v": state.reported.gnss.v.acc },
     {"n": 4, "v": state.reported.gnss.v.spd },
-    {"n": 5, "v": state.reported.gnss.v.hdg }
+    {"n": 5, "v": state.reported.gnss.v.hdg },
+    {"n": 6, "vs": "GNSS" }
 ]
 ```
 
@@ -76,6 +77,10 @@ $exists(state.reported.gnss.v.lat)
   {
     "n": 5,
     "v": 359.15457153320312
+  },
+  {
+    "n": 6,
+    "vs": "GNSS"
   }
 ]
 ```
