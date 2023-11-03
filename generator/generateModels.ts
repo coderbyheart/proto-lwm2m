@@ -5,7 +5,7 @@ export const generateModels = (
 	models: {
 		id: string
 		transforms: {
-			type: 'shadow' | 'messages'
+			type: 'reported' | 'desired' | 'messages'
 			match: string
 			transform: string
 		}[]
@@ -64,13 +64,22 @@ export const generateModels = (
 													// type
 													ts.factory.createPropertyAssignment(
 														ts.factory.createStringLiteral('type'),
-														transform.type === 'messages'
-															? ts.factory.createIdentifier(
-																	'TransformerType.Messages',
-															  )
-															: ts.factory.createIdentifier(
-																	'TransformerType.Shadow',
-															  ),
+														((type) => {
+															switch (type) {
+																case 'messages':
+																	return ts.factory.createIdentifier(
+																		'TransformerType.Messages',
+																	)
+																case 'reported':
+																	return ts.factory.createIdentifier(
+																		'TransformerType.ShadowReported',
+																	)
+																default:
+																	return ts.factory.createIdentifier(
+																		'TransformerType.ShadowDesired',
+																	)
+															}
+														})(transform.type),
 													),
 													// match
 													ts.factory.createPropertyAssignment(

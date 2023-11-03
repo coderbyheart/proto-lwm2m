@@ -21,7 +21,7 @@ const loadModelTransforms = async (
 	model: string,
 ): Promise<
 	{
-		type: 'shadow' | 'messages'
+		type: 'reported' | 'desired' | 'messages'
 		match: string
 		transform: string
 	}[]

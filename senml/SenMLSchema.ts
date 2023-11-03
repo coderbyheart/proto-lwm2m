@@ -38,7 +38,8 @@ export const Measurement = Type.Intersect(
 					v: Value,
 				}),
 				Type.Object({
-					v: Value,
+					// Value can be undefined, if it is not mandatory
+					v: Type.Optional(Value),
 				}),
 			]),
 			Type.Object({

@@ -1,13 +1,5 @@
 import { Type, type Static } from '@sinclair/typebox'
 
-const MultipleInstances = Type.Union([
-	Type.Literal('Multiple'),
-	Type.Literal('Single'),
-])
-const Mandatory = Type.Union([
-	Type.Literal('Optional'),
-	Type.Literal('Mandatory'),
-])
 const ResourceType = Type.Union([
 	Type.Literal('String'),
 	Type.Literal('Integer'),
@@ -15,7 +7,6 @@ const ResourceType = Type.Union([
 	Type.Literal('Boolean'),
 	Type.Literal('Opaque'),
 	Type.Literal('Time'),
-	Type.Literal('Objlnk'),
 ])
 export const LWM2MObjectDefinition = Type.Object(
 	{
@@ -28,8 +19,20 @@ export const LWM2MObjectDefinition = Type.Object(
 		}),
 		ObjectID: Type.RegExp(/^14[0-9]{3}$/),
 		ObjectURN: Type.RegExp(/^urn:oma:lwm2m:x:14[0-9]{3}$/),
-		MultipleInstances,
-		Mandatory,
+		LWM2MVersion: Type.Literal('1.1', {
+			title: 'LwM2M version',
+			description: 'Defaults to 1.1',
+		}),
+		ObjectVersion: Type.Optional(
+			Type.String({
+				minLength: 1,
+				examples: ['1.1'],
+				title: 'ObjectVersion',
+				description: 'Defaults to 1.0',
+			}),
+		),
+		MultipleInstances: Type.Literal('Single'),
+		Mandatory: Type.Literal('Optional'),
 		Resources: Type.Record(
 			Type.Integer({ minimum: 1 }),
 			Type.Object({
@@ -37,11 +40,20 @@ export const LWM2MObjectDefinition = Type.Object(
 				Operations: Type.Literal('R', {
 					description: 'Only read-properties are supported',
 				}),
-				MultipleInstances,
-				Mandatory,
+				MultipleInstances: Type.Literal('Single'),
+				Mandatory: Type.Union([
+					Type.Literal('Optional'),
+					Type.Literal('Mandatory'),
+				]),
 				Type: ResourceType,
-				RangeEnumeration: Type.Optional(Type.String({ minLength: 1 })),
-				Units: Type.Optional(Type.String({ minLength: 1, examples: ['lat'] })),
+				RangeEnumeration: Type.String({
+					title: 'RangeEnumeration',
+					description: 'This is ignored.',
+				}),
+				Units: Type.String({
+					examples: ['lat'],
+					title: 'Units',
+				}),
 				Description: Type.String({
 					minLength: 1,
 					examples: [
@@ -54,7 +66,7 @@ export const LWM2MObjectDefinition = Type.Object(
 				description: 'Defines the object resources as a map',
 			},
 		),
-		Description2: Type.Optional(Type.String({ minLength: 1 })),
+		Description2: Type.String(),
 	},
 	{
 		description:

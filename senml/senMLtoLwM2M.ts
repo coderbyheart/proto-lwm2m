@@ -14,14 +14,18 @@ type MeasurementWithObjectInfo = MeasurementType & {
 const isObjectInfo = (
 	measurement: MeasurementType,
 ): measurement is MeasurementWithObjectInfo => 'bn' in measurement
-const getValue = (measurement: MeasurementType): string | number | boolean => {
+
+const getValue = (
+	measurement: MeasurementType,
+): string | number | boolean | undefined => {
 	if ('bv' in measurement && !('v' in measurement)) return measurement.bv
 	if ('bv' in measurement && 'v' in measurement)
 		return measurement.bv + measurement.v
 	if ('v' in measurement) return measurement.v
 	if ('vs' in measurement) return measurement.vs
 	if ('vb' in measurement) return measurement.vb
-	return measurement.vd
+	if ('vd' in measurement) return measurement.vd
+	return undefined
 }
 export const senMLtoLwM2M = (senML: SenMLType): Array<LwM2MObject> => {
 	let currentObject: LwM2MObject | undefined = undefined
@@ -35,16 +39,19 @@ export const senMLtoLwM2M = (senML: SenMLType): Array<LwM2MObject> => {
 				throw new Error(`Unknown LwM2M Object ID: ${item.bn}!`)
 			currentObject = {
 				ObjectID: item.bn,
-				ObjectVersion: item.blv,
+				ObjectVersion: item.blv ?? '1.0',
 				Resources: {
 					[tsRes]: new Date(item.bt),
 				},
 			}
 		}
 		if (currentObject?.Resources === undefined) continue
-		currentObject.Resources = {
-			...currentObject.Resources,
-			[item.n]: getValue(item),
+		const value = getValue(item)
+		if (value !== undefined) {
+			currentObject.Resources = {
+				...currentObject.Resources,
+				[item.n]: value,
+			}
 		}
 	}
 	if (currentObject !== undefined) items.push(currentObject)

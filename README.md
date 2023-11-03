@@ -95,6 +95,12 @@ The conformity to the rules is checked using the script
 - The URN must have the prefix `urn:oma:lwm2m:x:`.
 - The object version must be appended if it is not `1.0`
 - All objects must define one timestamp property.
+- Objects must be `Single` instance, and `Optional`
+- Resources must be `Single` instance. `Multiple` could be useful in some cases,
+  e.g. IP addresses, but until it is really needed, we do not support it.
+- `RangeEnumeration` is ignored
+- `Objlnk` resource type is not supported
+- `LWM2MVersion` must be `1.1`
 
 The conformity to the rules is checked using the script
 [`./lwm2m/check-lwm2m-rules.ts`](./lwm2m/check-lwm2m-rules.ts).

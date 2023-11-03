@@ -1,5 +1,5 @@
 ---
-type: shadow
+type: reported
 ---
 
 # Geo Location
@@ -16,7 +16,7 @@ $exists(state.reported.gnss.v.lat)
 
 ```jsonata
 [
-    {"bn": 14201, "n": 0,"v": state.reported.gnss.v.lat, "bt": state.reported.gnss.ts },
+    {"bn": 14201, "n": 0, "v": state.reported.gnss.v.lat, "bt": state.reported.gnss.ts },
     {"n": 1, "v": state.reported.gnss.v.lng },
     {"n": 2, "v": state.reported.gnss.v.alt },
     {"n": 3, "v": state.reported.gnss.v.acc },
@@ -53,9 +53,9 @@ $exists(state.reported.gnss.v.lat)
 [
   {
     "bn": 14201,
-    "bt": 1698155694999,
     "n": 0,
-    "v": 33.98755678796222
+    "v": 33.98755678796222,
+    "bt": 1698155694999
   },
   {
     "n": 1,

@@ -10,7 +10,6 @@ import {
 	type LWM2MObjectDefinitionType,
 } from './LWM2MObjectDefinition.js'
 import { validateWithTypeBox } from '@hello.nrfcloud.com/proto'
-import { undefinedIfBlank } from './undefinedIfBlank.js'
 import type { ParsedLwM2MObjectDefinition } from './ParsedLwM2MObjectDefinition.js'
 
 const v = validateWithTypeBox(LWM2MObjectDefinition)
@@ -37,7 +36,6 @@ const listLwm2mDefinitions = async (
 			exec(
 				`xmllint --noout --schema ${path.join(
 					process.cwd(),
-
 					'lwm2m',
 					'LWM2M-v1_1.xsd',
 				)} ${objectDefinitionFile}`,
@@ -87,15 +85,11 @@ const listLwm2mDefinitions = async (
 
 		const objectDef: LWM2MObjectDefinitionType = {
 			...definition,
-			Description2: undefinedIfBlank(definition.Description2),
+			LWM2MVersion: '1.1',
 			Resources: definition.Resources.Item.reduce(
 				(resources, { $, ...item }) => ({
 					...resources,
-					[$.ID]: {
-						...item,
-						RangeEnumeration: undefinedIfBlank(item.RangeEnumeration),
-						Units: undefinedIfBlank(item.Units),
-					},
+					[$.ID]: item,
 				}),
 				{},
 			),
@@ -122,7 +116,7 @@ const listLwm2mDefinitions = async (
 		assert.equal(
 			TimeResources.length,
 			1,
-			'Objects must defined one Time resource',
+			'Objects must define one Time resource',
 		)
 		console.log(
 			chalk.green('✔'),

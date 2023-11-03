@@ -2,85 +2,85 @@
 <LWM2M
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
 	<Object ObjectType="MODefinition">
-		<Name>Geolocation</Name>
+		<Name>Battery</Name>
 		<Description1>
-			<![CDATA[Describes the geo location of a device]]>
+			<![CDATA[Information about the battery and power status of the device.]]>
 		</Description1>
-		<ObjectID>14201</ObjectID>
-		<ObjectURN>urn:oma:lwm2m:x:14201</ObjectURN>
+		<ObjectID>14202</ObjectID>
+		<ObjectURN>urn:oma:lwm2m:x:14202</ObjectURN>
 						<MultipleInstances>Single</MultipleInstances>
 		<Mandatory>Optional</Mandatory>
 		<Resources>
-			<Item ID="0">
-				<Name>Latitude</Name>
+        <Item ID="0">
+				<Name>State of charge</Name>
 				<Operations>R</Operations>
 				<MultipleInstances>Single</MultipleInstances>
 				<Mandatory>Mandatory</Mandatory>
-				<Type>Float</Type>
-				<RangeEnumeration></RangeEnumeration>
-				<Units>lat</Units>
+				<Type>Integer</Type>
+				<RangeEnumeration>0-100</RangeEnumeration>
+				<Units>%</Units>
 				<Description>
-					<![CDATA[The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].]]>
+					<![CDATA[State of charge in percent. Examples: 23, 1, 100.]]>
 				</Description>
 			</Item>
-			<Item ID="1">
-				<Name>Longitude</Name>
-				<Operations>R</Operations>
-				<MultipleInstances>Single</MultipleInstances>
-				<Mandatory>Mandatory</Mandatory>
-				<Type>Float</Type>
-				<RangeEnumeration></RangeEnumeration>
-				<Units>lon</Units>
-				<Description>
-					<![CDATA[The decimal notation of longitude, e.g. 153.21760 [World Geodetic System 1984].]]>
-				</Description>
-			</Item>
-			<Item ID="2">
-				<Name>Altitude</Name>
+        <Item ID="1">
+				<Name>Voltage</Name>
 				<Operations>R</Operations>
 				<MultipleInstances>Single</MultipleInstances>
 				<Mandatory>Optional</Mandatory>
 				<Type>Float</Type>
 				<RangeEnumeration></RangeEnumeration>
-				<Units>m</Units>
+				<Units>V</Units>
 				<Description>
-					<![CDATA[The decimal notation of altitude in meters above sea level.]]>
+					<![CDATA[Battery voltage in Volt. Examples: 2.754, 3.3.]]>
 				</Description>
 			</Item>
-			<Item ID="3">
-				<Name>Radius</Name>
+        <Item ID="2">
+				<Name>Charge current</Name>
 				<Operations>R</Operations>
 				<MultipleInstances>Single</MultipleInstances>
 				<Mandatory>Optional</Mandatory>
 				<Type>Float</Type>
 				<RangeEnumeration></RangeEnumeration>
-				<Units>m</Units>
+				<Units>mA</Units>
 				<Description>
-					<![CDATA[The value in this resource indicates the radius of a circular area in meters. The circular area is used to describe uncertainty about a point for coordinates in a two-dimensional coordinate reference systems (CRS). The center point of a circular area is specified by using the Latitude and the Longitude Resources.]]>
+					<![CDATA[Charge current in mA. Examples: 429, -244.]]>
 				</Description>
 			</Item>
-			<Item ID="4">
-				<Name>Speed</Name>
+        <Item ID="3">
+				<Name>Battery temperature</Name>
 				<Operations>R</Operations>
 				<MultipleInstances>Single</MultipleInstances>
 				<Mandatory>Optional</Mandatory>
 				<Type>Float</Type>
 				<RangeEnumeration></RangeEnumeration>
-				<Units>m/s</Units>
+				<Units>C</Units>
 				<Description>
-					<![CDATA[Speed is the time rate of change in position.]]>
+					<![CDATA[Battery temperature in Celsius. Examples: 21.7, 23.123.]]>
 				</Description>
 			</Item>
-			<Item ID="5">
-				<Name>Heading</Name>
+        <Item ID="4">
+				<Name>Time to full</Name>
 				<Operations>R</Operations>
 				<MultipleInstances>Single</MultipleInstances>
 				<Mandatory>Optional</Mandatory>
-				<Type>Float</Type>
+				<Type>Integer</Type>
 				<RangeEnumeration></RangeEnumeration>
-				<Units>degrees</Units>
+				<Units>s</Units>
 				<Description>
-					<![CDATA[The angle of movement.]]>
+					<![CDATA[Time to full in seconds. Examples: 4652.]]>
+				</Description>
+			</Item>
+        <Item ID="4">
+				<Name>Time to empty</Name>
+				<Operations>R</Operations>
+				<MultipleInstances>Single</MultipleInstances>
+				<Mandatory>Optional</Mandatory>
+				<Type>Integer</Type>
+				<RangeEnumeration></RangeEnumeration>
+				<Units>s</Units>
+				<Description>
+					<![CDATA[Time to empty in seconds. Examples: 4652.]]>
 				</Description>
 			</Item>
 			<Item ID="99">
@@ -92,7 +92,7 @@
 				<RangeEnumeration></RangeEnumeration>
 				<Units></Units>
 				<Description>
-					<![CDATA[The timestamp of when the location measurement was performed.]]>
+					<![CDATA[The timestamp of when the measurement was performed.]]>
 				</Description>
 			</Item>
 		</Resources>
