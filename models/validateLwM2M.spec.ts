@@ -5,7 +5,7 @@ import { validateWithTypeBox } from '@hello.nrfcloud.com/proto'
 import { typeboxDefinition } from 'lwm2m/typeboxDefinition'
 
 void describe('validateLwM2M', () => {
-	void it(`should validate LwM2M object follows type  definition`, () => {
+	void it(`should validate LwM2M object follows type  definition`, async () => {
 		const object: LwM2MObject = {
 			ObjectID: 14201,
 			ObjectVersion: '1.1',
@@ -20,7 +20,7 @@ void describe('validateLwM2M', () => {
 			},
 		}
 
-		const typeDefinition = typeboxDefinition(14201)
+		const typeDefinition = await typeboxDefinition(14201)
 
 		const result = validateWithTypeBox(typeDefinition)(object) as unknown as {
 			value: unknown
