@@ -118,6 +118,11 @@ const listLwm2mDefinitions = async (
 			1,
 			'Objects must define one Time resource',
 		)
+		assert.equal(
+			TimeResources[0]?.Mandatory,
+			'Mandatory',
+			'The Time resources must be mandatory.',
+		)
 		console.log(
 			chalk.green('✔'),
 			chalk.gray(`Object has one time resource (${TimeResources[0]?.Name})`),

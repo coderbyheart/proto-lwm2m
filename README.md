@@ -54,22 +54,18 @@ objects provide special behavior (for example object
 [`14201` (Geolocation)](./lwm2m/14201.xml) will place the device's location on
 the map).
 
-Data from devices is received via nRF Cloud (using the Message Bridge), and
-devices have to use the shadow update API or messaging API to publish their
-data.
-
-Devices can publish data using
+Devices can publish LwM2M objects using
 [SenML](https://datatracker.ietf.org/doc/html/rfc8428) directly, which needs to
 map to the defined LwM2M objects ([example](./senml/SenMLSchema.spec.ts)).
 
-Optionally, a set of [JSONata](https://jsonata.org/) expression can be defined
-per model which allow to convert from the JSON data format that is published by
-the devices to the SenML data format required by the data store
-([example mapping](./models/PCA20035+solar/transformers/geolocation.md).
+The SenML will be [expanded](./senml/senMLtoLwM2M.spec.ts the SenML payload) to
+fully qualified LwM2M object representations which can then be processed
+further, e.g. stored in a database.
 
-The data store will [expand](./senml/senMLtoLwM2M.spec.ts the SenML payload) and
-store it under the deviceID, and the respective object and resource ID, binned
-to 10 minutes.
+Optionally, a set of [JSONata](https://jsonata.org/) expression can be defined
+per model which allow to convert from the data format that is published by the
+devices to the SenML data format
+([example mapping](./models/PCA20035+solar/transformers/geolocation.md).
 
 ## Model definition rules
 
@@ -78,7 +74,7 @@ to 10 minutes.
 - a [`README.md`](./models/PCA20035+solar/README.md) must be provided that
   describes the model
 - transforms may define transforms that convert the data sent by the device
-  using JSONata in one or more Markdown files
+  using JSONata for JSON payloads in one or more Markdown files
   ([Example](./models/PCA20035+solar/transformers/geolocation.md)):
   - The `Match Expression` the must evaluate to `true` for the
     `Transform Expression` to be applied to the input message
@@ -92,24 +88,28 @@ The conformity to the rules is checked using the script
 
 ## LwM2M rules
 
+- `LWM2MVersion` must be `1.1`
 - LwM2M objects are defined in the ID range from `14200` to `15000`
   (non-inclusively).
 - The URN must have the prefix `urn:oma:lwm2m:x:`.
-- The object version must be appended if it is not `1.0`
-- All objects must define one timestamp property.
+- The object version must be appended if it is not `1.0`, which is the default.
+- All objects must define one `Time` property.
 - Objects must be `Single` instance, and `Optional`
 - Resources must be `Single` instance. `Multiple` could be useful in some cases,
   e.g. IP addresses, but until it is really needed, we do not support it.
-- `RangeEnumeration` is ignored
+- Resources should only be marked as mandatory in case they must be published
+  together (e.g. latitude and longitued). This allows devices to only update the
+  values that have changed.
+- `RangeEnumeration` is ignored, because there is no standard for the use of
+  this field.
 - `Objlnk` resource type is not supported
-- `LWM2MVersion` must be `1.1`
 
 The conformity to the rules is checked using the script
 [`./lwm2m/check-lwm2m-rules.ts`](./lwm2m/check-lwm2m-rules.ts).
 
 ## SenML rules
 
-- Use the object ID as the **base name** `bn`, `urn:oma:lwm2m:x:` must be
+- Use the LwM2M object ID as the **base name** `bn`, `urn:oma:lwm2m:x:` must be
   omitted.
 - `bn` and `n` are joined using `:`, therefore `bn` should only contain the
   object ID
@@ -120,12 +120,3 @@ The conformity to the rules is checked using the script
 - Timestamps are to be expressed in the **base time** property `bt` and are
   mapped to the LwM2M object's timestamp property and must not be send as a
   property.
-
-## Data rules
-
-- Published **device messages** must not be older than 7 days
-- Device data will be removed after 30 days
-- Devices must not send more than 200 messages per day (in average ~1 message
-  every 10 minutes).
-- Data history resolution will be 10 minutes, updates are not possible.
-- Real-time interactivity is not supported.

@@ -6,5 +6,5 @@ exploring the endless possibilities with solar powered IoT applications and to
 develop products with eternal life or even battery-free products.​
 
 The Thingy:91 runs the
-[`asset_tracker_v2` application](https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html)
-and sends messages to nRF Cloud using MQTT.
+[`asset_tracker_v2`](https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html)
+application and sends messages to nRF Cloud using MQTT.
