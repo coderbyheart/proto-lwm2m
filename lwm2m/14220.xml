@@ -1,41 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LWM2M
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
-	<Object ObjectType="MODefinition">
-		<Name>Button press</Name>
-		<Description1>
-			<![CDATA[Describes a button press event.]]>
-		</Description1>
-		<ObjectID>14220</ObjectID>
-		<ObjectURN>urn:oma:lwm2m:x:14220</ObjectURN>
-		<MultipleInstances>Single</MultipleInstances>
-		<Mandatory>Optional</Mandatory>
-		<Resources>
-			<Item ID="0">
-				<Name>Button ID</Name>
-				<Operations>R</Operations>
-				<MultipleInstances>Single</MultipleInstances>
-				<Mandatory>Mandatory</Mandatory>
-				<Type>Integer</Type>
-				<RangeEnumeration></RangeEnumeration>
-				<Units></Units>
-				<Description>
-					<![CDATA[The ID of the button that was pressed. Examples: 1, 2.]]>
-				</Description>
-			</Item>
-			<Item ID="99">
-				<Name>Timestamp</Name>
-				<Operations>R</Operations>
-				<MultipleInstances>Single</MultipleInstances>
-				<Mandatory>Mandatory</Mandatory>
-				<Type>Time</Type>
-				<RangeEnumeration></RangeEnumeration>
-				<Units></Units>
-				<Description>
-					<![CDATA[The timestamp of when the measurement was performed.]]>
-				</Description>
-			</Item>
-		</Resources>
-		<Description2></Description2>
-	</Object>
+<LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
+  <Object ObjectType="MODefinition">
+    <Name>Button press</Name>
+    <Description1><![CDATA[Describes a button press event.]]></Description1>
+    <ObjectID>14220</ObjectID>
+    <ObjectURN>urn:oma:lwm2m:x:14220</ObjectURN>
+    <MultipleInstances>Single</MultipleInstances>
+    <Mandatory>Optional</Mandatory>
+    <Resources>
+      <Item ID="0">
+        <Name>Button ID</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Integer</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[The ID of the button that was pressed. Examples: 1, 2.]]></Description>
+      </Item>
+      <Item ID="99">
+        <Name>Timestamp</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Time</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[The timestamp of when the measurement was performed.]]></Description>
+      </Item>
+    </Resources>
+    <Description2/>
+  </Object>
 </LWM2M>

@@ -26,6 +26,8 @@ Install the dependencies:
 npm ci
 ```
 
+Install [xmllint](https://github.com/GNOME/libxml2).
+
 ## Run tests
 
 ```bash

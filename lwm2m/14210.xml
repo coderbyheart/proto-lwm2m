@@ -1,41 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LWM2M
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
-	<Object ObjectType="MODefinition">
-		<Name>Solar charge</Name>
-		<Description1>
-			<![CDATA[Measurements from the solar shield.]]>
-		</Description1>
-		<ObjectID>14210</ObjectID>
-		<ObjectURN>urn:oma:lwm2m:x:14210</ObjectURN>
-		<MultipleInstances>Single</MultipleInstances>
-		<Mandatory>Optional</Mandatory>
-		<Resources>
-			<Item ID="0">
-				<Name>Gain</Name>
-				<Operations>R</Operations>
-				<MultipleInstances>Single</MultipleInstances>
-				<Mandatory>Mandatory</Mandatory>
-				<Type>Float</Type>
-				<RangeEnumeration></RangeEnumeration>
-				<Units>mA</Units>
-				<Description>
-					<![CDATA[The current gain from the solar shield, measured in mA. Example: 3.123, -0.0032.]]>
-				</Description>
-			</Item>
-			<Item ID="99">
-				<Name>Timestamp</Name>
-				<Operations>R</Operations>
-				<MultipleInstances>Single</MultipleInstances>
-				<Mandatory>Mandatory</Mandatory>
-				<Type>Time</Type>
-				<RangeEnumeration></RangeEnumeration>
-				<Units></Units>
-				<Description>
-					<![CDATA[The timestamp of when the measurement was performed.]]>
-				</Description>
-			</Item>
-		</Resources>
-		<Description2></Description2>
-	</Object>
+<LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
+  <Object ObjectType="MODefinition">
+    <Name>Solar charge</Name>
+    <Description1><![CDATA[Measurements from the solar shield.]]></Description1>
+    <ObjectID>14210</ObjectID>
+    <ObjectURN>urn:oma:lwm2m:x:14210</ObjectURN>
+    <MultipleInstances>Single</MultipleInstances>
+    <Mandatory>Optional</Mandatory>
+    <Resources>
+      <Item ID="0">
+        <Name>Gain</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Float</Type>
+        <RangeEnumeration/>
+        <Units>mA</Units>
+        <Description><![CDATA[The current gain from the solar shield, measured in mA. Example: 3.123, -0.0032.]]></Description>
+      </Item>
+      <Item ID="99">
+        <Name>Timestamp</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Time</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[The timestamp of when the measurement was performed.]]></Description>
+      </Item>
+    </Resources>
+    <Description2/>
+  </Object>
 </LWM2M>

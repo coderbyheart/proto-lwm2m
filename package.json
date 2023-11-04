@@ -87,6 +87,9 @@
     ],
     "*.{md,json,yaml,yml,html}": [
       "prettier --write"
+    ],
+    "*.xml": [
+      "./lwm2m/format.sh"
     ]
   },
   "prettier": "@nordicsemiconductor/asset-tracker-cloud-code-style/.prettierrc",
