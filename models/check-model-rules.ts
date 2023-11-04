@@ -4,13 +4,11 @@ import assert from 'node:assert/strict'
 import { readFile, readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { FrontMatter, ModelIDRegExp } from './model.js'
-import { validateWithTypeBox } from '@hello.nrfcloud.com/proto'
-import { SenML } from '../senml/SenMLSchema.js'
 import { senMLtoLwM2M } from '../senml/senMLtoLwM2M.js'
 import { getCodeBlock } from '../markdown/getCodeBlock.js'
 import { getFrontMatter } from 'markdown/getFrontMatter.js'
-
-const validateSenML = validateWithTypeBox(SenML)
+import { validateSenML } from 'senml/validateSenML.js'
+import { stripEmptyValues } from 'senml/stripEmptyValues.js'
 
 console.log(chalk.gray('Models rules check'))
 console.log('')
@@ -22,7 +20,7 @@ for (const model of await readdir(modelsDir)) {
 	assert.match(
 		model,
 		ModelIDRegExp,
-		'Model identifiers must consist of numbers and letters only',
+		'Model identifiers must consist of numbers, letters, dash, plus, and underscore only',
 	)
 	console.log(chalk.green('✔'), chalk.gray('Model name is correct'))
 
@@ -79,11 +77,13 @@ for (const model of await readdir(modelsDir)) {
 				// For testing purposes this function call result is hardcoded
 				transformExpression.replace('$millis()', '1699999999999'),
 			).evaluate(inputExample)
-			const maybeValidSenML = validateSenML(transformResult)
+
+			const maybeValidSenML = validateSenML(stripEmptyValues(transformResult))
 			if ('errors' in maybeValidSenML) {
 				console.error(maybeValidSenML.errors)
 				throw new Error('The JSONata expression must produce valid SenML')
 			}
+
 			assert.deepEqual(maybeValidSenML.value, resultExample)
 			console.log(
 				' ',
@@ -91,7 +91,7 @@ for (const model of await readdir(modelsDir)) {
 				chalk.gray('Transformation result is valid SenML'),
 			)
 
-			assert.deepEqual(transformResult, resultExample)
+			assert.deepEqual(maybeValidSenML.value, resultExample)
 			console.log(
 				' ',
 				chalk.green('✔'),

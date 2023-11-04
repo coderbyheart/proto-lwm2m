@@ -79,11 +79,6 @@ appId = 'DEVICE' and $exists(data.networkInfo)
   {
     "n": 6,
     "vs": "10.160.243.113"
-  },
-  {
-    "n": 11
   }
 ]
 ```
-
-Note: In this example the resource 11 is not defined.

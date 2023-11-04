@@ -105,4 +105,35 @@ void describe('senMLtoLwM2M()', () => {
 				},
 			],
 		))
+
+	void it('should ignore repeated base properties', () =>
+		assert.deepEqual(
+			senMLtoLwM2M([
+				{ bn: 14203, n: 0, vs: 'LTE-M', bt: 1699049665511 },
+				{ n: 1, v: 20 },
+				{ bn: 14203, n: 2, v: -89, bt: 1699049665511 },
+				{ n: 3, v: 2305 },
+				{ n: 4, v: 34784790 },
+				{ n: 5, v: 24202 },
+				{ n: 6, vs: '100.81.95.75' },
+				{ bn: 14203, n: 11, v: 7, bt: 1699049665511 },
+			]),
+			[
+				{
+					ObjectID: 14203,
+					ObjectVersion: '1.0',
+					Resources: {
+						0: 'LTE-M',
+						1: 20,
+						2: -89,
+						3: 2305,
+						4: 34784790,
+						5: 24202,
+						6: '100.81.95.75',
+						11: 7,
+						99: new Date(1699049665511),
+					},
+				},
+			],
+		))
 })

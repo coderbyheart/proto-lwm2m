@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
   <Object ObjectType="MODefinition">
-    <Name>Battery</Name>
+    <Name>Battery and Power</Name>
     <Description1><![CDATA[Information about the battery and power status of the device.]]></Description1>
     <ObjectID>14202</ObjectID>
     <ObjectURN>urn:oma:lwm2m:x:14202</ObjectURN>
@@ -12,7 +12,7 @@
         <Name>State of charge</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
-        <Mandatory>Mandatory</Mandatory>
+        <Mandatory>Optional</Mandatory>
         <Type>Integer</Type>
         <RangeEnumeration>0-100</RangeEnumeration>
         <Units>%</Units>

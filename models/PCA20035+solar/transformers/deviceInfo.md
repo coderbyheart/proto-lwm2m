@@ -67,11 +67,6 @@ appId = 'DEVICE' and $exists(data.deviceInfo)
   {
     "n": 4,
     "vs": "thingy91_nrf9160"
-  },
-  {
-    "n": 5
   }
 ]
 ```
-
-Note: In this example the resource 5 is not defined.

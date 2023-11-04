@@ -1,7 +1,8 @@
 import type { MeasurementType, SenMLType } from './SenMLSchema'
 import { timestampResources } from '../lwm2m/timestampResources.js'
+import { stripEmptyValues } from './stripEmptyValues.js'
 
-type LwM2MObject = {
+export type LwM2MObject = {
 	ObjectID: number
 	ObjectVersion: string
 	Resources: Record<number, string | number | boolean | Date>
@@ -14,6 +15,20 @@ type MeasurementWithObjectInfo = MeasurementType & {
 const isObjectInfo = (
 	measurement: MeasurementType,
 ): measurement is MeasurementWithObjectInfo => 'bn' in measurement
+
+const isInfoForDifferentObject = (
+	measurement: MeasurementWithObjectInfo,
+	currentObject?: LwM2MObject,
+): boolean => {
+	if (currentObject === undefined) return true
+	if (measurement.bn !== currentObject.ObjectID) return true
+	const tsRes = timestampResources[measurement.bn]
+	if (tsRes === undefined)
+		throw new Error(`Unknown LwM2M Object ID: ${measurement.bn}!`)
+	if (measurement.bt !== (currentObject.Resources[tsRes] as Date).getTime())
+		return true
+	return false
+}
 
 const getValue = (
 	measurement: MeasurementType,
@@ -31,8 +46,8 @@ export const senMLtoLwM2M = (senML: SenMLType): Array<LwM2MObject> => {
 	let currentObject: LwM2MObject | undefined = undefined
 	const items: LwM2MObject[] = []
 
-	for (const item of senML) {
-		if (isObjectInfo(item)) {
+	for (const item of stripEmptyValues(senML)) {
+		if (isObjectInfo(item) && isInfoForDifferentObject(item, currentObject)) {
 			if (currentObject !== undefined) items.push(currentObject)
 			const tsRes = timestampResources[item.bn]
 			if (tsRes === undefined)
