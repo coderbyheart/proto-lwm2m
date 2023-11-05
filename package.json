@@ -107,7 +107,8 @@
     "export.js",
     "index.d.ts",
     "senml",
-    "models"
+    "models",
+    "lwm2m"
   ],
   "dependencies": {
     "@hello.nrfcloud.com/proto": "5.5.18",
