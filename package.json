@@ -3,31 +3,11 @@
   "version": "0.0.0-development",
   "description": "Documents the LwM2M communication protocol between devices, the hello.nrfcloud.com backend and the web application",
   "type": "module",
+  "types": "./index.d.ts",
   "exports": {
-    "./generator": {
-      "import": "./dist/generator/export.js",
-      "node": "./dist/generator/export.js",
-      "types": "./generator/index.d.ts"
-    },
-    "./lwm2m": {
-      "import": "./dist/lwm2m/export.js",
-      "node": "./dist/lwm2m/export.js",
-      "types": "./lwm2m/index.d.ts"
-    },
-    "./markdown": {
-      "import": "./dist/markdown/export.js",
-      "node": "./dist/markdown/export.js",
-      "types": "./markdown/index.d.ts"
-    },
-    "./models": {
-      "import": "./dist/models/export.js",
-      "node": "./dist/models/export.js",
-      "types": "./models/index.d.ts"
-    },
-    "./senml": {
-      "import": "./dist/senml/export.js",
-      "node": "./dist/senml/export.js",
-      "types": "./senml/index.d.ts"
+    ".": {
+      "import": "./export.js",
+      "node": "./export.js"
     }
   },
   "repository": {
@@ -125,7 +105,9 @@
     "README.md",
     "dist",
     "export.js",
-    "index.d.ts"
+    "index.d.ts",
+    "senml",
+    "models"
   ],
   "dependencies": {
     "@hello.nrfcloud.com/proto": "5.5.18",

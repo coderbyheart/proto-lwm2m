@@ -10,7 +10,7 @@ import { getCodeBlock } from '../markdown/getCodeBlock.js'
 import { getFrontMatter } from '../markdown/getFrontMatter.js'
 import { generateModels } from './generateModels.js'
 import { printNode } from './printNode.js'
-import { FrontMatter } from 'models/model.js'
+import { FrontMatter } from '../models/types.js'
 
 const baseDir = process.cwd()
 const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)

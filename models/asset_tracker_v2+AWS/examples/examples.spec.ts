@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
 import { senMLtoLwM2M, type LwM2MObject } from '../../../senml/senMLtoLwM2M.js'
-import { TransformerType, type Transformer } from '../../../models/model.js'
+import { TransformerType, type Transformer } from '../../types.js'
 import jsonata from 'jsonata'
 import { arrayContaining, check } from 'tsmatchers'
 import { models } from '../../../models/models.js'

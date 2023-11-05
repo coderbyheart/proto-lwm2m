@@ -11,15 +11,6 @@ export type Transformer = {
 	match: string
 	transform: string
 }
-export type Models = Readonly<
-	Record<
-		string,
-		{
-			id: string
-			transforms: Transformer[]
-		}
-	>
->
 
 export const FrontMatter = Type.Object({
 	type: Type.Union([Type.Literal('shadow'), Type.Literal('messages')]),
