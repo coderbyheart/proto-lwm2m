@@ -2,13 +2,14 @@ import type { MeasurementType, SenMLType } from './SenMLSchema'
 import { timestampResources } from '../lwm2m/timestampResources.js'
 import { stripEmptyValues } from './stripEmptyValues.js'
 
+export type LwM2MResourceValue = string | number | boolean | Date
 export type LwM2MObject = {
 	ObjectID: number
 	/**
 	 * @default '1.0'
 	 */
 	ObjectVersion?: string
-	Resources: Record<number, string | number | boolean | Date>
+	Resources: Record<number, LwM2MResourceValue>
 }
 type MeasurementWithObjectInfo = MeasurementType & {
 	bn: number
