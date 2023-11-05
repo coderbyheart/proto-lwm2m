@@ -52,7 +52,7 @@
         <Name>Timestamp</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
-        <Mandatory>Optional</Mandatory>
+        <Mandatory>Mandatory</Mandatory>
         <Type>Time</Type>
         <RangeEnumeration/>
         <Units/>

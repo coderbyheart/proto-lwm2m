@@ -12,6 +12,7 @@
         <Name>Network mode</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
         <Type>String</Type>
         <RangeEnumeration/>
         <Units/>
@@ -21,6 +22,7 @@
         <Name>Band</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
         <Type>Integer</Type>
         <RangeEnumeration/>
         <Units/>
@@ -30,6 +32,7 @@
         <Name>RSRP</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
         <Type>Integer</Type>
         <RangeEnumeration/>
         <Units>dBm</Units>
@@ -39,6 +42,7 @@
         <Name>Area</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
         <Type>Integer</Type>
         <RangeEnumeration/>
         <Units/>
@@ -48,6 +52,7 @@
         <Name>Cell</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
         <Type>Integer</Type>
         <RangeEnumeration/>
         <Units/>
@@ -57,6 +62,7 @@
         <Name>Mobile country code and mobile network code</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
         <Type>Integer</Type>
         <RangeEnumeration/>
         <Units/>
@@ -66,6 +72,7 @@
         <Name>IP address</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
         <Type>String</Type>
         <RangeEnumeration/>
         <Units/>
@@ -75,6 +82,7 @@
         <Name>Energy Estimate</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
         <Type>Integer</Type>
         <RangeEnumeration/>
         <Units/>
