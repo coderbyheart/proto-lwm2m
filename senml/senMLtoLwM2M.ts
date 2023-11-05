@@ -4,7 +4,10 @@ import { stripEmptyValues } from './stripEmptyValues.js'
 
 export type LwM2MObject = {
 	ObjectID: number
-	ObjectVersion: string
+	/**
+	 * @default '1.0'
+	 */
+	ObjectVersion?: string
 	Resources: Record<number, string | number | boolean | Date>
 }
 type MeasurementWithObjectInfo = MeasurementType & {
@@ -54,11 +57,11 @@ export const senMLtoLwM2M = (senML: SenMLType): Array<LwM2MObject> => {
 				throw new Error(`Unknown LwM2M Object ID: ${item.bn}!`)
 			currentObject = {
 				ObjectID: item.bn,
-				ObjectVersion: item.blv ?? '1.0',
 				Resources: {
 					[tsRes]: new Date(item.bt),
 				},
 			}
+			if ('blv' in item) currentObject.ObjectVersion = item.blv
 		}
 		if (currentObject?.Resources === undefined) continue
 		const value = getValue(item)

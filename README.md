@@ -92,7 +92,7 @@ The conformity to the rules is checked using the script
 - LwM2M objects are defined in the ID range from `14200` to `15000`
   (non-inclusively).
 - The URN must have the prefix `urn:oma:lwm2m:x:`.
-- The object version must be appended if it is not `1.0`, which is the default.
+- The `ObjectVersion` must be appended if it is not `1.0`, which is the default.
 - All objects must define one `Time` property.
 - Objects must be `Single` instance, and `Optional`
 - Resources must be `Single` instance. `Multiple` could be useful in some cases,

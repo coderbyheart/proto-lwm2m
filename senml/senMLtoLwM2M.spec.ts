@@ -91,7 +91,6 @@ void describe('senMLtoLwM2M()', () => {
 			[
 				{
 					ObjectID: 14203,
-					ObjectVersion: '1.0',
 					Resources: {
 						0: 'LTE-M',
 						1: 20,
@@ -121,7 +120,6 @@ void describe('senMLtoLwM2M()', () => {
 			[
 				{
 					ObjectID: 14203,
-					ObjectVersion: '1.0',
 					Resources: {
 						0: 'LTE-M',
 						1: 20,

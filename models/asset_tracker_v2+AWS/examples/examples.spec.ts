@@ -12,7 +12,6 @@ void describe('asset_tracker_v2+AWS examples', () => {
 			[
 				{
 					ObjectID: 14202,
-					ObjectVersion: '1.0',
 					Resources: {
 						1: 4.398,
 						99: new Date(1699050063028),
@@ -20,7 +19,6 @@ void describe('asset_tracker_v2+AWS examples', () => {
 				},
 				{
 					ObjectID: 14205,
-					ObjectVersion: '1.0',
 					Resources: {
 						0: 27.06,
 						1: 31.125,
@@ -30,7 +28,6 @@ void describe('asset_tracker_v2+AWS examples', () => {
 				},
 				{
 					ObjectID: 14203,
-					ObjectVersion: '1.0',
 					Resources: {
 						11: 8,
 						99: new Date(1699050062990),
@@ -43,7 +40,6 @@ void describe('asset_tracker_v2+AWS examples', () => {
 			[
 				{
 					ObjectID: 14201,
-					ObjectVersion: '1.0',
 					Resources: {
 						0: 33.98771459323253,
 						1: -84.50632147267358,
@@ -57,7 +53,6 @@ void describe('asset_tracker_v2+AWS examples', () => {
 				},
 				{
 					ObjectID: 14202,
-					ObjectVersion: '1.0',
 					Resources: {
 						1: 4.414,
 						99: new Date(1699049729959),
@@ -66,7 +61,6 @@ void describe('asset_tracker_v2+AWS examples', () => {
 
 				{
 					ObjectID: 14205,
-					ObjectVersion: '1.0',
 					Resources: {
 						0: 21.915307998657227,
 						1: 34.569278717041016,
@@ -82,7 +76,6 @@ void describe('asset_tracker_v2+AWS examples', () => {
 			[
 				{
 					ObjectID: 14203,
-					ObjectVersion: '1.0',
 					Resources: {
 						2: -95,
 						11: 7,
@@ -96,7 +89,6 @@ void describe('asset_tracker_v2+AWS examples', () => {
 			[
 				{
 					ObjectID: 14202,
-					ObjectVersion: '1.0',
 					Resources: {
 						0: 99,
 						1: 4.179,
