@@ -1,6 +1,16 @@
 {
   "state": {
     "reported": {
+      "dev": {
+        "v": {
+          "imei": "358299840016535",
+          "iccid": "89450421180216254864",
+          "modV": "mfw_nrf91x1_2.0.0-77.beta",
+          "brdV": "thingy91x_nrf9161",
+          "appV": "0.0.0-development"
+        },
+        "ts": 1699284007851
+      },
       "roam": {
         "v": {
           "band": 20,

@@ -88,6 +88,17 @@ void describe('asset_tracker_v2+AWS examples', () => {
 			'./shadow/example-4.json',
 			[
 				{
+					ObjectID: 14204,
+					Resources: {
+						0: '358299840016535',
+						1: '89450421180216254864',
+						2: 'mfw_nrf91x1_2.0.0-77.beta',
+						3: '0.0.0-development',
+						4: 'thingy91x_nrf9161',
+						99: new Date(1699284007851),
+					},
+				},
+				{
 					ObjectID: 14202,
 					Resources: {
 						0: 99,
