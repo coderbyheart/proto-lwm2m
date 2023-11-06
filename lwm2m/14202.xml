@@ -58,7 +58,7 @@
         <Units>s</Units>
         <Description><![CDATA[Time to full in seconds. Examples: 4652.]]></Description>
       </Item>
-      <Item ID="4">
+      <Item ID="5">
         <Name>Time to empty</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>

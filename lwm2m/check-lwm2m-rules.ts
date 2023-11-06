@@ -86,11 +86,15 @@ const listLwm2mDefinitions = async (
 		const objectDef: LWM2MObjectDefinitionType = {
 			...definition,
 			LWM2MVersion: '1.1',
-			Resources: definition.Resources.Item.reduce(
-				(resources, { $, ...item }) => ({
-					...resources,
-					[$.ID]: item,
-				}),
+			Resources: definition.Resources.Item.reduce<Record<string, any>>(
+				(resources, { $, ...item }) => {
+					if (resources[$.ID] !== undefined)
+						throw new Error(`Duplicate resource ID: ${$.ID}`)
+					return {
+						...resources,
+						[$.ID]: item,
+					}
+				},
 				{},
 			),
 		}

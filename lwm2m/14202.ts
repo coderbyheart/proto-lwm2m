@@ -40,6 +40,12 @@ export type BatteryAndPower_14202 = LwM2MObject & {
 		 */
 		4?: number
 		/**
+		 * Time to empty (s)
+		 *
+		 * Time to empty in seconds. Examples: 4652.
+		 */
+		5?: number
+		/**
 		 * Timestamp (Time)
 		 *
 		 * The timestamp of when the measurement was performed.
