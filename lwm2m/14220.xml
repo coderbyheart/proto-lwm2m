@@ -26,7 +26,7 @@
         <Type>Time</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[The timestamp of when the measurement was performed.]]></Description>
+        <Description><![CDATA[The timestamp of when the button was pressed.]]></Description>
       </Item>
     </Resources>
     <Description2/>
