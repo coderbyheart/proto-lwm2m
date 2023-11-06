@@ -18,6 +18,16 @@
         <Units>mA</Units>
         <Description><![CDATA[The current gain from the solar shield, measured in mA. Example: 3.123, -0.0032.]]></Description>
       </Item>
+      <Item ID="1">
+        <Name>Voltage</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Float</Type>
+        <RangeEnumeration/>
+        <Units>V</Units>
+        <Description><![CDATA[Battery voltage in Volt. Examples: 2.754, 3.3.]]></Description>
+      </Item>
       <Item ID="99">
         <Name>Timestamp</Name>
         <Operations>R</Operations>

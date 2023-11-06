@@ -16,6 +16,12 @@ export type SolarCharge_14210 = LwM2MObject & {
 		 */
 		0: number
 		/**
+		 * Voltage (V)
+		 *
+		 * CDATA[Battery voltage in Volt. Examples: 2.754, 3.3.
+		 */
+		1?: number
+		/**
 		 * Timestamp (Time)
 		 *
 		 * The timestamp of when the measurement was performed.
