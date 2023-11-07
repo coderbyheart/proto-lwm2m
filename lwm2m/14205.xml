@@ -5,7 +5,7 @@
     <Description1><![CDATA[Environment information.]]></Description1>
     <ObjectID>14205</ObjectID>
     <ObjectURN>urn:oma:lwm2m:x:14205</ObjectURN>
-    <MultipleInstances>Single</MultipleInstances>
+    <MultipleInstances>Multiple</MultipleInstances>
     <Mandatory>Optional</Mandatory>
     <Resources>
       <Item ID="0">

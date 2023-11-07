@@ -5,7 +5,7 @@
     <Description1><![CDATA[Measurements from the solar shield.]]></Description1>
     <ObjectID>14210</ObjectID>
     <ObjectURN>urn:oma:lwm2m:x:14210</ObjectURN>
-    <MultipleInstances>Single</MultipleInstances>
+    <MultipleInstances>Multiple</MultipleInstances>
     <Mandatory>Optional</Mandatory>
     <Resources>
       <Item ID="0">

@@ -5,7 +5,7 @@
     <Description1><![CDATA[Describes a button press event.]]></Description1>
     <ObjectID>14220</ObjectID>
     <ObjectURN>urn:oma:lwm2m:x:14220</ObjectURN>
-    <MultipleInstances>Single</MultipleInstances>
+    <MultipleInstances>Multiple</MultipleInstances>
     <Mandatory>Optional</Mandatory>
     <Resources>
       <Item ID="0">

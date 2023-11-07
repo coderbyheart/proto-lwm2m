@@ -31,10 +31,10 @@ export const LWM2MObjectDefinition = Type.Object(
 				description: 'Defaults to 1.0',
 			}),
 		),
-		MultipleInstances: Type.Literal('Single'),
+		MultipleInstances: Type.Literal('Multiple'),
 		Mandatory: Type.Literal('Optional'),
 		Resources: Type.Record(
-			Type.Integer({ minimum: 1 }),
+			Type.Integer({ minimum: 0, maximum: 65534 }),
 			Type.Object({
 				Name: Type.String({ minLength: 1, examples: ['Latitude'] }),
 				Operations: Type.Literal('R', {

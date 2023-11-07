@@ -17,7 +17,7 @@ appId = 'BATTERY'
 
 ```jsonata
 [
-    {"bn": 14202, "n": 0, "v": $number(data), "bt": ts }
+    {"bn": "/14202/0/", "n": "0", "v": $number(data), "bt": ts }
 ]
 ```
 
@@ -37,8 +37,8 @@ appId = 'BATTERY'
 ```json
 [
   {
-    "bn": 14202,
-    "n": 0,
+    "bn": "/14202/0/",
+    "n": "0",
     "v": 94,
     "bt": 1687448260542
   }

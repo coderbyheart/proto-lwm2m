@@ -17,8 +17,8 @@ $exists(state.reported.sol)
 
 ```jsonata
 [
-    {"bn": 14210, "n": 0, "v": state.reported.sol.v.gain, "bt": state.reported.sol.ts },
-    {"n": 1, "v": state.reported.sol.v.bat }
+    {"bn": "/14210/0/", "n": "0", "v": state.reported.sol.v.gain, "bt": state.reported.sol.ts },
+    {"n": "1", "v": state.reported.sol.v.bat }
 ]
 ```
 
@@ -45,13 +45,13 @@ $exists(state.reported.sol)
 ```json
 [
   {
-    "bn": 14210,
-    "n": 0,
+    "bn": "/14210/0/",
+    "n": "0",
     "v": 4.391489028930664,
     "bt": 1699050063028
   },
   {
-    "n": 1,
+    "n": "1",
     "v": 3.872000217437744
   }
 ]

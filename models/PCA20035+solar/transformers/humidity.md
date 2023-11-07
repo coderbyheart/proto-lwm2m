@@ -14,7 +14,7 @@ appId = 'HUMID'
 
 ```jsonata
 [
-    {"bn": 14205, "n": 1, "v": $number(data), "bt": ts }
+    {"bn": "/14205/0/", "n": "1", "v": $number(data), "bt": ts }
 ]
 ```
 
@@ -34,8 +34,8 @@ appId = 'HUMID'
 ```json
 [
   {
-    "bn": 14205,
-    "n": 1,
+    "bn": "/14205/0/",
+    "n": "1",
     "v": 23.16,
     "bt": 1681985384511
   }

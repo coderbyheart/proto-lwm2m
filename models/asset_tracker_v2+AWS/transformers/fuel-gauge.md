@@ -14,12 +14,12 @@ $exists(state.reported.fg)
 
 ```jsonata
 [
-    {"bn": 14202, "n": 0, "v": state.reported.fg.v.SoC, "bt": state.reported.fg.ts },
-    {"n": 1, "v": state.reported.fg.v.V/1000 },
-    {"n": 2, "v": state.reported.fg.v.I },
-    {"n": 3, "v": state.reported.fg.v.T/10 },
-    {"n": 4, "v": state.reported.fg.v.TTF },
-    {"n": 5, "v": state.reported.fg.v.TTE }
+    {"bn": "/14202/0/", "n": "0", "v": state.reported.fg.v.SoC, "bt": state.reported.fg.ts },
+    {"n": "1", "v": state.reported.fg.v.V/1000 },
+    {"n": "2", "v": state.reported.fg.v.I },
+    {"n": "3", "v": state.reported.fg.v.T/10 },
+    {"n": "4", "v": state.reported.fg.v.TTF },
+    {"n": "5", "v": state.reported.fg.v.TTE }
 ]
 ```
 
@@ -50,13 +50,13 @@ $exists(state.reported.fg)
 ```json
 [
   {
-    "bn": 14202,
-    "n": 0,
+    "bn": "/14202/0/",
+    "n": "0",
     "v": 99,
     "bt": 1699049685992
   },
-  { "n": 1, "v": 4.179 },
-  { "n": 2, "v": 0 },
-  { "n": 3, "v": 25.7 }
+  { "n": "1", "v": 4.179 },
+  { "n": "2", "v": 0 },
+  { "n": "3", "v": 25.7 }
 ]
 ```

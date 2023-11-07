@@ -5,7 +5,7 @@
     <Description1><![CDATA[Information about the battery and power status of the device.]]></Description1>
     <ObjectID>14202</ObjectID>
     <ObjectURN>urn:oma:lwm2m:x:14202</ObjectURN>
-    <MultipleInstances>Single</MultipleInstances>
+    <MultipleInstances>Multiple</MultipleInstances>
     <Mandatory>Optional</Mandatory>
     <Resources>
       <Item ID="0">

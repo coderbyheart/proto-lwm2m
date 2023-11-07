@@ -36,11 +36,12 @@ meaningful way to users without the need for custom implementation.
 - The URN must have the prefix `urn:oma:lwm2m:x:`.
 - The `ObjectVersion` must be appended if it is not `1.0`, which is the default.
 - All objects must define one `Time` property.
-- Objects must be `Single` instance, and `Optional`
+- Objects must be `Multiple` instance.
+- Objects must be `Optional`.
 - Resources must be `Single` instance. `Multiple` could be useful in some cases,
   e.g. IP addresses, but until it is really needed, we do not support it.
 - Resources should only be marked as mandatory in case they must be published
-  together (e.g. latitude and longitued). This allows devices to only update the
+  together (e.g. latitude and longitude). This allows devices to only update the
   values that have changed.
 - `RangeEnumeration` is ignored, because there is no standard for the use of
   this field.
@@ -51,12 +52,12 @@ The conformity to the rules is checked using the script
 
 ## SenML rules
 
-- Use the LwM2M object ID as the **base name** `bn`, `urn:oma:lwm2m:x:` must be
-  omitted.
-- `bn` and `n` are joined using `:`, therefore `bn` should only contain the
-  object ID
-- The LwM2M object ID in `bn` and the resource ID in `n` are expressed as a
-  number.
+- The implementation follows the recommendation outline in section 7.4.5. of the
+  [LwM2M v1.1.1 Technical Specification](https://openmobilealliance.org/release/LightweightM2M/V1_1_1-20190617-A/OMA-TS-LightweightM2M_Core-V1_1_1-20190617-A.pdf):
+  `bn` and `n` fields are combined to form the unique identifier for a resource
+  in the form of `/<object ID>/<object instance ID>/<resource ID>/0`. The
+  resource instance ID `0` is always appended, because multiple resource
+  instances are not supported right now.
 - Use the custom property `blv` to specify the object version, `1.0` is the
   default and should not be specified.
 - Timestamps are to be expressed in the **base time** property `bt` and are

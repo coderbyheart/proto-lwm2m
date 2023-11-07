@@ -14,11 +14,11 @@ $exists(state.reported.dev)
 
 ```jsonata
 [
-    {"bn": 14204, "n": 0, "vs": state.reported.dev.v.imei, "bt": state.reported.dev.ts },
-    {"n": 1, "vs": state.reported.dev.v.iccid },
-    {"n": 2, "vs": state.reported.dev.v.modV },
-    {"n": 3, "vs": state.reported.dev.v.appV },
-    {"n": 4, "vs": state.reported.dev.v.brdV }
+    {"bn": "/14204/0/", "n": "0", "vs": state.reported.dev.v.imei, "bt": state.reported.dev.ts },
+    {"n": "1", "vs": state.reported.dev.v.iccid },
+    {"n": "2", "vs": state.reported.dev.v.modV },
+    {"n": "3", "vs": state.reported.dev.v.appV },
+    {"n": "4", "vs": state.reported.dev.v.brdV }
 ]
 ```
 
@@ -48,14 +48,14 @@ $exists(state.reported.dev)
 ```json
 [
   {
-    "bn": 14204,
-    "n": 0,
+    "bn": "/14204/0/",
+    "n": "0",
     "vs": "358299840016535",
     "bt": 1699284007851
   },
-  { "n": 1, "vs": "89450421180216254864" },
-  { "n": 2, "vs": "mfw_nrf91x1_2.0.0-77.beta" },
-  { "n": 3, "vs": "0.0.0-development" },
-  { "n": 4, "vs": "thingy91x_nrf9161" }
+  { "n": "1", "vs": "89450421180216254864" },
+  { "n": "2", "vs": "mfw_nrf91x1_2.0.0-77.beta" },
+  { "n": "3", "vs": "0.0.0-development" },
+  { "n": "4", "vs": "thingy91x_nrf9161" }
 ]
 ```

@@ -1,7 +1,11 @@
 import { Type, type Static } from '@sinclair/typebox'
 
-const ResourceID = Type.Integer({ minimum: 0, title: 'ResourceID' })
-const ObjectID = Type.Integer({ minimum: 0, title: 'ObjectID' })
+const ResourceIDPart = Type.RegExp(/^[0-9/]+$/, {
+	title: 'ResourceIDPart',
+	description:
+		'Combines `bn` and `n` to a fully qualified resource identifier in the form of `/<object ID>/<object instance ID>/<resource ID>/0`. (Multiple resource instances are not supported right now.).',
+	examples: ['/', '/14201/0/', '5'],
+})
 const BaseValue = Type.Number({ title: 'Base Value' })
 const Value = Type.Number({ title: 'Value' })
 const Time = Type.Integer({ minimum: 0, title: 'Time' })
@@ -15,16 +19,17 @@ export const Measurement = Type.Intersect(
 	[
 		Type.Union([
 			Type.Object({
-				n: ResourceID,
+				n: ResourceIDPart,
 			}),
 			Type.Object({
-				bn: ObjectID,
+				bn: ResourceIDPart,
+				n: ResourceIDPart,
 				blv: Type.String({
 					minLength: 1,
 					description: 'The LwM2M object version used',
+					default: '1.0',
 				}),
 				bt: Type.Optional(Time),
-				n: ResourceID,
 			}),
 		]),
 		// Value combinations

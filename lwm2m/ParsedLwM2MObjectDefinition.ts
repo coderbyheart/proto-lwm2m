@@ -5,7 +5,7 @@ export type ParsedLwM2MObjectDefinition = {
 	ObjectID: string // e.g. '14201'
 	ObjectURN: string // e.g. 'urn:oma:lwm2m:x:14201'
 	ObjectVersion?: string // e.g. '1.0'
-	MultipleInstances: 'Single'
+	MultipleInstances: 'Multiple'
 	Mandatory: 'Optional'
 	Resources: {
 		Item: {

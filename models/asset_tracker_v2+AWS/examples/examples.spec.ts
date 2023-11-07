@@ -1,5 +1,8 @@
 import { describe, it } from 'node:test'
-import { senMLtoLwM2M, type LwM2MObject } from '../../../senml/senMLtoLwM2M.js'
+import {
+	senMLtoLwM2M,
+	type LwM2MObjectInstance,
+} from '../../../senml/senMLtoLwM2M.js'
 import { TransformerType, type Transformer } from '../../types.js'
 import jsonata from 'jsonata'
 import { arrayContaining, check } from 'tsmatchers'
@@ -110,7 +113,7 @@ void describe('asset_tracker_v2+AWS examples', () => {
 				},
 			],
 		],
-	] as [string, Array<LwM2MObject>][]) {
+	] as [string, Array<LwM2MObjectInstance>][]) {
 		void it(input, async () => {
 			const result = await transformShadowUpdateToLwM2M(
 				(models['asset_tracker_v2+AWS']?.transforms ?? []).filter(
@@ -144,7 +147,7 @@ const transformShadowUpdateToLwM2M = (transformers: Transformer[]) => {
 			reported?: Record<string, unknown>
 			desired?: Record<string, unknown>
 		}
-	}): Promise<Array<LwM2MObject>> =>
+	}): Promise<Array<LwM2MObjectInstance>> =>
 		Promise.all(
 			transformerFns.map(async ({ match, transform }) => {
 				// Check if the `matched` JSONata returns `true`.
