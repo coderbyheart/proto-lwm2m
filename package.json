@@ -112,7 +112,7 @@
   ],
   "dependencies": {
     "@hello.nrfcloud.com/proto": "5.5.18",
-    "@sinclair/typebox": "0.31.22",
+    "@sinclair/typebox": "0.31.23",
     "ajv": "8.12.0",
     "jsonata": "2.0.3"
   }
