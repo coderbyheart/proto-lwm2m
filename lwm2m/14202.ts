@@ -1,10 +1,13 @@
+import type { LwM2MObjectID } from './LwM2MObjectID'
+import type { LwM2MObject } from './objects'
+
 /**
  * Battery and Power (14202)
  *
  * Information about the battery and power status of the device.
  */
-export type BatteryAndPower_14202 = {
-	ObjectID: 14202
+export type BatteryAndPower_14202 = LwM2MObject<{
+	ObjectID: LwM2MObjectID.BatteryAndPower_14202
 	ObjectVersion: '1.0'
 	Resources: {
 		/**
@@ -50,4 +53,4 @@ export type BatteryAndPower_14202 = {
 		 */
 		99: Date
 	}
-}
+}>

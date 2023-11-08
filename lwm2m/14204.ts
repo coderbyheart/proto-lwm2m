@@ -1,10 +1,13 @@
+import type { LwM2MObjectID } from './LwM2MObjectID'
+import type { LwM2MObject } from './objects'
+
 /**
  * Device information (14204)
  *
  * Details about the device's connection.
  */
-export type DeviceInformation_14204 = {
-	ObjectID: 14204
+export type DeviceInformation_14204 = LwM2MObject<{
+	ObjectID: LwM2MObjectID.BatteryAndPower_14202
 	ObjectVersion: '1.0'
 	Resources: {
 		/**
@@ -50,4 +53,4 @@ export type DeviceInformation_14204 = {
 		 */
 		99: Date
 	}
-}
+}>

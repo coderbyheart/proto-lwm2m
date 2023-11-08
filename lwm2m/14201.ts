@@ -1,10 +1,12 @@
+import type { LwM2MObjectID } from './LwM2MObjectID'
+
 /**
  * Geolocation (14201)
  *
  * Describes the geo location of a device
  */
 export type Geolocation_14201 = {
-	ObjectID: 14201
+	ObjectID: LwM2MObjectID.Geolocation_14201
 	ObjectVersion: '1.0'
 	Resources: {
 		/**

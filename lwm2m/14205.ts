@@ -1,10 +1,12 @@
+import type { LwM2MObject, LwM2MObjectID } from './objects'
+
 /**
  * Environment (14205)
  *
  * Environment information.
  */
-export type Environment_14205 = {
-	ObjectID: 14205
+export type Environment_14205 = LwM2MObject<{
+	ObjectID: LwM2MObjectID.Environment_14205
 	ObjectVersion: '1.0'
 	Resources: {
 		/**
@@ -39,4 +41,4 @@ export type Environment_14205 = {
 		 */
 		99: Date
 	}
-}
+}>

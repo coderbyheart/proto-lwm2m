@@ -1,10 +1,12 @@
+import type { LwM2MObject, LwM2MObjectID } from './objects'
+
 /**
  * Solar charge (14210)
  *
  * Measurements from the solar shield.
  */
-export type SolarCharge_14210 = {
-	ObjectID: 14210
+export type SolarCharge_14210 = LwM2MObject<{
+	ObjectID: LwM2MObjectID.SolarCharge_14210
 	ObjectVersion: '1.0'
 	Resources: {
 		/**
@@ -26,4 +28,4 @@ export type SolarCharge_14210 = {
 		 */
 		99: Date
 	}
-}
+}>

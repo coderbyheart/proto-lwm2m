@@ -1,10 +1,12 @@
+import type { LwM2MObject, LwM2MObjectID } from './objects'
+
 /**
  * Button press (14220)
  *
  * Describes a button press event.
  */
-export type ButtonPress_14220 = {
-	ObjectID: 14220
+export type ButtonPress_14220 = LwM2MObject<{
+	ObjectID: LwM2MObjectID.ButtonPress_14220
 	ObjectVersion: '1.0'
 	Resources: {
 		/**
@@ -20,4 +22,4 @@ export type ButtonPress_14220 = {
 		 */
 		99: Date
 	}
-}
+}>
