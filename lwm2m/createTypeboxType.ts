@@ -11,35 +11,48 @@ export const createTypeboxType = async (id: number): Promise<TSchema> => {
 	const obj = await fromXML2JSON(id)
 	console.log(obj.Resources[0].Item)
 
-	const objId = obj.ObjectID[0]
-	const name = obj.Name[0]
-	
+	const objId = obj.ObjectID[0]?.toString() ?? ''
+	const name = obj.Name[0]?.toString() ?? ''
+
 	let object = `Type.Object({
 		ObjectVersion: Type.String({ examples: ['${obj.ObjectVersion[0]}'] }),
 	})`
 
-	if (obj.MultipleInstances['0'] === 'Multiple') object = `Type.Array(
+	if (obj.MultipleInstances['0'] === 'Multiple')
+		object = `Type.Array(
 		${object}
 	)`
 
-	
-	if (obj.Mandatory['0'] === 'Optional') object = `Type.Optional(
+	if (obj.Mandatory['0'] === 'Optional')
+		object = `Type.Optional(
 		${object}
 	)`
 
-	await writeTypeboxDefinition(id, object)
+	await writeTypeboxDefinition({
+		objectId: objId,
+		name,
+		objectDefinition: object,
+	})
 
 	return definition
 }
 
 /**
  * Create new file with typebox definition
- * 
+ *
  * file created path: lwm2m/object-id.ts
  */
-const writeTypeboxDefinition = async (objectId: number, objectDefinition: string) => {
+const writeTypeboxDefinition = async ({
+	objectId,
+	name,
+	objectDefinition,
+}: {
+	objectId: string
+	name: string
+	objectDefinition: string
+}) => {
 	const importTypebox = `import { Type } from "@sinclair/typebox";`
-	const typeBoxDeclaration = `export const _${objectId} = ${objectDefinition}`
+	const typeBoxDeclaration = `export const ${name}_${objectId} = ${objectDefinition}`
 	const LwM2MType = `${importTypebox} ${typeBoxDeclaration}`
 	const baseDir = process.cwd()
 	const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
