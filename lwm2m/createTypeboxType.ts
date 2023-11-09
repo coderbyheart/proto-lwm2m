@@ -2,6 +2,7 @@ import { writeFile } from 'fs/promises'
 import { Type, type TSchema } from '@sinclair/typebox'
 import { fromXML2JSON } from './fromXML2JSON.js'
 import path from 'node:path'
+import { createResourceDefinition } from './createResourceDefinition.js'
 
 /**
  * Create Typebox definition for object 14201
@@ -35,35 +36,6 @@ export const createTypeboxType = async (id: number): Promise<TSchema> => {
 	})
 
 	return definition
-}
-
-/**
- * Create typebox defintion for resource
- */
-const createResourceDefinition = ({
-	name,
-	multiple,
-	mandatory,
-	description,
-}: {
-	name: string
-	multiple: string
-	mandatory: string
-	description: string
-}) => {
-	let typeDefinition = `Type.Object({},{description: '${description}',})`
-
-	if (multiple === 'Multiple')
-		typeDefinition = `Type.Array(
-        ${typeDefinition}
-    )`
-
-	if (mandatory === 'Optional')
-		typeDefinition = `Type.Optional(
-        ${typeDefinition}
-    )`
-
-	return `${name} : ${typeDefinition}`
 }
 
 /**
