@@ -16,7 +16,7 @@ export const createObjectDefinition = ({
 	resources: string[]
 	description: string
 }): string => {
-	let object = `Type.Object({ObjectID: ${objectId}, ObjectVersion: '${objectVersion}', ${resources}}, {description: '${description}'})`
+	let object = `Type.Object({ObjectVersion: Type.String(), ObjectID: Type.Number(), Resources: Type.Object({${resources}})}, {description: '${description}'})`
 
 	if (multiple === 'Multiple')
 		object = `Type.Array(
