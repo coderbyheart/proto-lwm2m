@@ -38,7 +38,7 @@ export const createTypeboxType = async (id: number): Promise<TSchema> => {
 }
 
 /**
- * Create typebox defintion for object
+ * Create typebox defintion for resource
  */
 const createResourceDefinition = ({
 	name,
