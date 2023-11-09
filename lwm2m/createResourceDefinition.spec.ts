@@ -8,21 +8,23 @@ import {
 void describe('createResourceDefinition', () => {
 	void it(`should create the typebox definition for a resource`, () => {
 		const resource = createResourceDefinition({
+			id: '0',
 			name: 'Latitude',
 			multiple: 'Multiple',
 			mandatory: 'Optional',
 			description: 'The decimal notation of latitude.',
-			type: LwM2MType.String,
+			type: LwM2MType.Float,
 		})
 
 		const expected =
-			"Latitude : Type.Optional(\n        Type.Array(\n        Type.String({description: 'The decimal notation of latitude.',})\n    )\n    )"
+			"0 : Type.Optional(\n        Type.Array(\n        Type.Number({$id: '0', title: 'Latitude', description: 'The decimal notation of latitude.',})\n    )\n    )"
 
 		assert.equal(resource, expected)
 	})
 
 	void it(`should create typebox def for a resource with DATE type`, () => {
 		const resource = createResourceDefinition({
+			id: '0',
 			name: 'Timestamp',
 			multiple: 'Single',
 			mandatory: 'Mandatory',
@@ -32,7 +34,7 @@ void describe('createResourceDefinition', () => {
 		})
 
 		const expected =
-			"Timestamp : Type.Date({description: 'The timestamp of when the location measurement was performed.',})"
+			"0 : Type.Date({$id: '0', title: 'Timestamp', description: 'The timestamp of when the location measurement was performed.',})"
 
 		assert.equal(resource, expected)
 	})

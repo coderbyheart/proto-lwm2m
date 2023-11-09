@@ -20,6 +20,7 @@ export const createTypeboxType = async (id: number): Promise<TSchema> => {
 
 	const resources = obj.Resources[0].Item.map((resource) => {
 		return createResourceDefinition({
+			id: resource.$.ID,
 			name: resource.Name[0] ?? '',
 			multiple: resource.MultipleInstances[0],
 			mandatory: resource.Mandatory[0],
