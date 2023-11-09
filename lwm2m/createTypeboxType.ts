@@ -75,8 +75,8 @@ const writeTypeboxDefinition = async ({
  */
 const definition = Type.Object(
 	{
-		ObjectVersion: Type.String(),
-		ObjectID: Type.Number(),
+		ObjectVersion: Type.String({ examples: ['1.0'] }),
+		ObjectID: Type.Number({ examples: [14201] }),
 		Resources: Type.Object({
 			0: Type.Number({
 				$id: '0',
