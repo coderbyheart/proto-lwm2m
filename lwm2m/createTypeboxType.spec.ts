@@ -1,10 +1,10 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { typeboxDefinition } from 'lwm2m/typeboxDefinition'
+import { createTypeboxType } from 'lwm2m/createTypeboxType'
 
-void describe('typeboxDefinition', () => {
+void describe('createTypeboxType', () => {
 	void it(`should create the typebox definition given an ID of a LwM2M object`, async () => {
-		const typeDefinition = await typeboxDefinition(14201)
+		const typeDefinition = await createTypeboxType(14201)
 
 		assert.deepEqual(
 			typeDefinition.properties.Resources.properties[0].title,

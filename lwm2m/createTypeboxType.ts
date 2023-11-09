@@ -6,7 +6,7 @@ import path from 'node:path'
 /**
  * Create Typebox definition for object 14201
  */
-export const typeboxDefinition = async (id: number): Promise<TSchema> => {
+export const createTypeboxType = async (id: number): Promise<TSchema> => {
 	// from xml to json
 	const obj = await fromXML2JSON(id)
 	console.log(obj.Resources[0].Item)
