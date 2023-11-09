@@ -1,6 +1,7 @@
 import xml2js from 'xml2js'
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
+import type { LwM2MType } from './createResourceDefinition'
 
 /**
  * JSON representation of an XML object
@@ -24,7 +25,7 @@ type Resource = {
 	Operations: string[]
 	MultipleInstances: ['Single'] | ['Multiple']
 	Mandatory: ['Optional'] | ['Mandatory']
-	Type: string[]
+	Type: LwM2MType[]
 	RangeEnumeration: string[]
 	Units: string[]
 	Description: string[]

@@ -2,7 +2,10 @@ import { writeFile } from 'fs/promises'
 import { Type, type TSchema } from '@sinclair/typebox'
 import { fromXML2JSON } from './fromXML2JSON.js'
 import path from 'node:path'
-import { createResourceDefinition } from './createResourceDefinition.js'
+import {
+	LwM2MType,
+	createResourceDefinition,
+} from './createResourceDefinition.js'
 import { createObjectDefinition } from './createObjectDefinition.js'
 
 /**
@@ -21,6 +24,7 @@ export const createTypeboxType = async (id: number): Promise<TSchema> => {
 			multiple: resource.MultipleInstances[0],
 			mandatory: resource.Mandatory[0],
 			description: resource.Description[0] ?? '',
+			type: resource.Type[0] ?? ('' as LwM2MType),
 		})
 	})
 
