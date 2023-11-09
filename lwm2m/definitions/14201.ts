@@ -1,4 +1,4 @@
-import type { LwM2MObject, LwM2MObjectID } from './objects'
+import type { LwM2MObject, LwM2MObjectID } from './objects.js'
 
 /**
  * Geolocation (14201)
