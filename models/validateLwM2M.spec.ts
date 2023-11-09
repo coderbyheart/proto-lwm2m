@@ -1,12 +1,12 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { validateWithTypeBox } from '@hello.nrfcloud.com/proto'
-import { createTypeboxType } from 'lwm2m/createTypeboxType.js'
-import type { Geolocation_14201 } from 'lwm2m/definitions/objects'
+import { Geolocation_14201 } from '../lwm2m/14201.js'
+import type { Static } from '@sinclair/typebox'
 
 void describe('validateLwM2M', () => {
 	void it(`should validate LwM2M object follows type  definition`, async () => {
-		const object: Geolocation_14201 = {
+		const object: Static<typeof Geolocation_14201> = {
 			ObjectID: 14201,
 			ObjectVersion: '1.0',
 			Resources: {
@@ -17,13 +17,13 @@ void describe('validateLwM2M', () => {
 				4: 26.376304626464844,
 				5: 359.1545715332,
 				6: 'GNSS',
-				99: new Date(1698155694999),
+				99: new Date(1698155694),
 			},
 		}
 
-		const typeDefinition = await createTypeboxType(14201)
-
-		const result = validateWithTypeBox(typeDefinition)(object) as unknown as {
+		const result = validateWithTypeBox(Geolocation_14201)(
+			object,
+		) as unknown as {
 			value: unknown
 		}
 
