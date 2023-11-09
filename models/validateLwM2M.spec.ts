@@ -17,7 +17,7 @@ void describe('validateLwM2M', () => {
 				4: 26.376304626464844,
 				5: 359.1545715332,
 				6: 'GNSS',
-				99: new Date(1698155694),
+				99: new Date(1698155694), // TODO validation fail in ajv.compile(schema). Fix it
 			},
 		}
 
