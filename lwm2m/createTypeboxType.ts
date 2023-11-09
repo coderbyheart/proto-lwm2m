@@ -9,14 +9,23 @@ import path from 'node:path'
 export const createTypeboxType = async (id: number): Promise<TSchema> => {
 	// from xml to json
 	const obj = await fromXML2JSON(id)
-	console.log(obj.Resources[0].Item)
 
 	const objId = obj.ObjectID[0]?.toString() ?? ''
 	const name = obj.Name[0]?.toString() ?? ''
 
+	const resources = obj.Resources[0].Item.map((resource) => {
+		return createResourceDefinition({
+			name: resource.Name[0] ?? '',
+			multiple: resource.MultipleInstances[0],
+			mandatory: resource.Mandatory[0],
+			description: resource.Description[0] ?? '',
+		})
+	})
+
 	const object = createObjectDefinition({
 		multiple: obj.MultipleInstances['0'],
 		mandatory: obj.Mandatory['0'],
+		resources,
 	})
 
 	await writeTypeboxDefinition({
@@ -31,14 +40,45 @@ export const createTypeboxType = async (id: number): Promise<TSchema> => {
 /**
  * Create typebox defintion for object
  */
+const createResourceDefinition = ({
+	name,
+	multiple,
+	mandatory,
+	description,
+}: {
+	name: string
+	multiple: string
+	mandatory: string
+	description: string
+}) => {
+	let typeDefinition = `Type.Object({},{description: '${description}',})`
+
+	if (multiple === 'Multiple')
+		typeDefinition = `Type.Array(
+        ${typeDefinition}
+    )`
+
+	if (mandatory === 'Optional')
+		typeDefinition = `Type.Optional(
+        ${typeDefinition}
+    )`
+
+	return `${name} : ${typeDefinition}`
+}
+
+/**
+ * Create typebox defintion for object
+ */
 const createObjectDefinition = ({
 	multiple,
 	mandatory,
+	resources,
 }: {
 	multiple: string
 	mandatory: string
+	resources: string[]
 }) => {
-	let object = `Type.Object({})`
+	let object = `Type.Object({${resources}})`
 
 	if (multiple === 'Multiple')
 		object = `Type.Array(

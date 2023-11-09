@@ -14,8 +14,20 @@ type jsonObject = {
 	ObjectVersion: string[]
 	MultipleInstances: ['Single'] | ['Multiple']
 	Mandatory: ['Optional'] | ['Mandatory']
-	Resources: [Record<string, unknown>]
+	Resources: [{ Item: Resource[] }]
 	Description2: string[]
+}
+
+type Resource = {
+	$: { ID: string }
+	Name: string[]
+	Operations: string[]
+	MultipleInstances: ['Single'] | ['Multiple']
+	Mandatory: ['Optional'] | ['Mandatory']
+	Type: string[]
+	RangeEnumeration: string[]
+	Units: string[]
+	Description: string[]
 }
 
 /**
