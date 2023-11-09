@@ -35,8 +35,6 @@ export const createTypeboxType = async (id: number): Promise<TSchema> => {
 			obj.ObjectVersion !== undefined
 				? (obj.ObjectVersion[0] as string)
 				: '1.0',
-		multiple: obj.MultipleInstances['0'],
-		mandatory: obj.Mandatory['0'],
 		resources,
 		description: obj.Description1[0] ?? '',
 	})
@@ -75,70 +73,66 @@ const writeTypeboxDefinition = async ({
 /**
  * expected result
  */
-const definition = Type.Optional(
-	Type.Array(
-		Type.Object(
-			{
-				ObjectVersion: Type.String(),
-				ObjectID: Type.Number(),
-				Resources: Type.Object({
-					0: Type.Number({
-						$id: '0',
-						title: 'Latitude',
-						description:
-							'The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].',
-					}),
-					1: Type.Number({
-						$id: '1',
-						title: 'Longitude',
-						description:
-							'The decimal notation of longitude, e.g. 153.21760 [World Geodetic System 1984].',
-					}),
-					2: Type.Optional(
-						Type.Number({
-							$id: '2',
-							title: 'Altitude',
-							description:
-								'The decimal notation of altitude in meters above sea level.',
-						}),
-					),
-					3: Type.Optional(
-						Type.Number({
-							$id: '3',
-							title: 'Radius',
-							description:
-								'The value in this resource indicates the radius of a circular area in meters. The circular area is used to describe uncertainty about a point for coordinates in a two-dimensional coordinate reference systems (CRS). The center point of a circular area is specified by using the Latitude and the Longitude Resources.',
-						}),
-					),
-					4: Type.Optional(
-						Type.Number({
-							$id: '4',
-							title: 'Speed',
-							description: 'Speed is the time rate of change in position.',
-						}),
-					),
-					5: Type.Optional(
-						Type.Number({
-							$id: '5',
-							title: 'Heading',
-							description: 'The angle of movement.',
-						}),
-					),
-					6: Type.String({
-						$id: '6',
-						title: 'Source',
-						description:
-							'The source of the geo location, e.g. GNSS, SCELL, MCELL, WIFI.',
-					}),
-					99: Type.Date({
-						$id: '99',
-						title: 'Timestamp',
-						description:
-							'The timestamp of when the location measurement was performed.',
-					}),
+const definition = Type.Object(
+	{
+		ObjectVersion: Type.String(),
+		ObjectID: Type.Number(),
+		Resources: Type.Object({
+			0: Type.Number({
+				$id: '0',
+				title: 'Latitude',
+				description:
+					'The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].',
+			}),
+			1: Type.Number({
+				$id: '1',
+				title: 'Longitude',
+				description:
+					'The decimal notation of longitude, e.g. 153.21760 [World Geodetic System 1984].',
+			}),
+			2: Type.Optional(
+				Type.Number({
+					$id: '2',
+					title: 'Altitude',
+					description:
+						'The decimal notation of altitude in meters above sea level.',
 				}),
-			},
-			{ description: 'Describes the geo location of a device' },
-		),
-	),
+			),
+			3: Type.Optional(
+				Type.Number({
+					$id: '3',
+					title: 'Radius',
+					description:
+						'The value in this resource indicates the radius of a circular area in meters. The circular area is used to describe uncertainty about a point for coordinates in a two-dimensional coordinate reference systems (CRS). The center point of a circular area is specified by using the Latitude and the Longitude Resources.',
+				}),
+			),
+			4: Type.Optional(
+				Type.Number({
+					$id: '4',
+					title: 'Speed',
+					description: 'Speed is the time rate of change in position.',
+				}),
+			),
+			5: Type.Optional(
+				Type.Number({
+					$id: '5',
+					title: 'Heading',
+					description: 'The angle of movement.',
+				}),
+			),
+			6: Type.String({
+				$id: '6',
+				title: 'Source',
+				description:
+					'The source of the geo location, e.g. GNSS, SCELL, MCELL, WIFI.',
+			}),
+			99: Type.Date({
+				$id: '99',
+				title: 'Timestamp',
+				description:
+					'The timestamp of when the location measurement was performed.',
+			}),
+		}),
+	},
+	{ description: 'Describes the geo location of a device' },
 )
