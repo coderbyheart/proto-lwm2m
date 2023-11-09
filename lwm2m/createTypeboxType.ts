@@ -33,6 +33,7 @@ export const createTypeboxType = async (id: number): Promise<TSchema> => {
 		multiple: obj.MultipleInstances['0'],
 		mandatory: obj.Mandatory['0'],
 		resources,
+		description: obj.Description1[0] ?? '',
 	})
 
 	await writeTypeboxDefinition({

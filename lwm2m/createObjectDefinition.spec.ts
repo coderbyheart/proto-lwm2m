@@ -10,9 +10,10 @@ void describe('createObjectDefinition', () => {
 			resources: [
 				"Latitude : Type.Optional(\n        Type.Array(\n        Type.Object({},{description: 'The decimal notation of latitude.',})\n    )\n    )",
 			],
+			description: 'Describes the geo location of a device',
 		})
 
-		const expected = `Type.Optional(\n\t\tType.Array(\n\t\tType.Object({Latitude : Type.Optional(\n        Type.Array(\n        Type.Object({},{description: 'The decimal notation of latitude.',})\n    )\n    )})\n\t)\n\t)`
+		const expected = `Type.Optional(\n\t\tType.Array(\n\t\tType.Object({Latitude : Type.Optional(\n        Type.Array(\n        Type.Object({},{description: 'The decimal notation of latitude.',})\n    )\n    )}, {description: 'Describes the geo location of a device'})\n\t)\n\t)`
 
 		assert.equal(resource, expected)
 	})
