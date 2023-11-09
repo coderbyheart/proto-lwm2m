@@ -1,5 +1,4 @@
-import type { LwM2MObjectID } from './LwM2MObjectID'
-import type { LwM2MObject } from './objects'
+import type { LwM2MObject, LwM2MObjectID } from './objects.js'
 
 /**
  * Battery and Power (14202)
