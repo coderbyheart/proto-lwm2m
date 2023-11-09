@@ -1,6 +1,6 @@
 import type { LwM2MResourceValue } from '../senml/senMLtoLwM2M.js'
 
-export * from './LwM2MObjectID.js'
+export * from 'lwm2m/LwM2MObjectID.js'
 export * from './14201.js'
 export * from './14203.js'
 export * from './14204.js'
