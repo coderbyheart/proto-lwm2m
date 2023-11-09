@@ -7,15 +7,13 @@ void describe('createObjectDefinition', () => {
 		const resource = createObjectDefinition({
 			objectId: '14201',
 			objectVersion: '1.0',
-			multiple: 'Multiple',
-			mandatory: 'Optional',
 			resources: [
 				"Latitude : Type.Optional(\n        Type.Array(\n        Type.Object({},{description: 'The decimal notation of latitude.',})\n    )\n    )",
 			],
 			description: 'Describes the geo location of a device',
 		})
 
-		const expected = `Type.Optional(\n\t\tType.Array(\n\t\tType.Object({ObjectVersion: Type.String(), ObjectID: Type.Number(), Resources: Type.Object({Latitude : Type.Optional(\n        Type.Array(\n        Type.Object({},{description: 'The decimal notation of latitude.',})\n    )\n    )})}, {description: 'Describes the geo location of a device'})\n\t)\n\t)`
+		const expected = `Type.Object({ObjectVersion: Type.String({examples:['1.0']}), ObjectID: Type.Number({examples:[14201]}), Resources: Type.Object({Latitude : Type.Optional(\n        Type.Array(\n        Type.Object({},{description: 'The decimal notation of latitude.',})\n    )\n    )})}, {description: 'Describes the geo location of a device'})`
 
 		assert.equal(resource, expected)
 	})
