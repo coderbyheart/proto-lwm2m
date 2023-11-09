@@ -14,19 +14,10 @@ export const createTypeboxType = async (id: number): Promise<TSchema> => {
 	const objId = obj.ObjectID[0]?.toString() ?? ''
 	const name = obj.Name[0]?.toString() ?? ''
 
-	let object = `Type.Object({
-		ObjectVersion: Type.String({ examples: ['${obj.ObjectVersion[0]}'] }),
-	})`
-
-	if (obj.MultipleInstances['0'] === 'Multiple')
-		object = `Type.Array(
-		${object}
-	)`
-
-	if (obj.Mandatory['0'] === 'Optional')
-		object = `Type.Optional(
-		${object}
-	)`
+	const object = createObjectDefinition({
+		multiple: obj.MultipleInstances['0'],
+		mandatory: obj.Mandatory['0'],
+	})
 
 	await writeTypeboxDefinition({
 		objectId: objId,
@@ -35,6 +26,31 @@ export const createTypeboxType = async (id: number): Promise<TSchema> => {
 	})
 
 	return definition
+}
+
+/**
+ * Create typebox defintion for object
+ */
+const createObjectDefinition = ({
+	multiple,
+	mandatory,
+}: {
+	multiple: string
+	mandatory: string
+}) => {
+	let object = `Type.Object({})`
+
+	if (multiple === 'Multiple')
+		object = `Type.Array(
+		${object}
+	)`
+
+	if (mandatory === 'Optional')
+		object = `Type.Optional(
+		${object}
+	)`
+
+	return object
 }
 
 /**
