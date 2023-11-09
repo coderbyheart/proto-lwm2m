@@ -2,3 +2,4 @@ node_modules/
 dist/
 models/models.ts
 lwm2m/timestampResources.ts
+lwm2m/14201.ts
