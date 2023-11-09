@@ -1,12 +1,12 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import type { LwM2MObject } from 'senml/senMLtoLwM2M'
+import type { LwM2MObjectInstance } from 'senml/senMLtoLwM2M.js'
 import { validateWithTypeBox } from '@hello.nrfcloud.com/proto'
-import { typeboxDefinition } from 'lwm2m/typeboxDefinition'
+import { createTypeboxType } from 'lwm2m/createTypeboxType.js'
 
 void describe('validateLwM2M', () => {
 	void it(`should validate LwM2M object follows type  definition`, async () => {
-		const object: LwM2MObject = {
+		const object: LwM2MObjectInstance = {
 			ObjectID: 14201,
 			ObjectVersion: '1.1',
 			Resources: {
@@ -20,7 +20,7 @@ void describe('validateLwM2M', () => {
 			},
 		}
 
-		const typeDefinition = await typeboxDefinition(14201)
+		const typeDefinition = await createTypeboxType(14201)
 
 		const result = validateWithTypeBox(typeDefinition)(object) as unknown as {
 			value: unknown
