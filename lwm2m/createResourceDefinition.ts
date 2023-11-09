@@ -42,12 +42,14 @@ const resourceType = (type: LwM2MType) => {
  * Create typebox defintion for resource
  */
 export const createResourceDefinition = ({
+	id,
 	name,
 	multiple,
 	mandatory,
 	description,
 	type,
 }: {
+	id: string
 	name: string
 	multiple: string
 	mandatory: string
@@ -56,7 +58,7 @@ export const createResourceDefinition = ({
 }): string => {
 	let typeDefinition = `Type.${resourceType(
 		type,
-	)}({description: '${description}',})`
+	)}({$id: '${id}', title: '${name}', description: '${description}',})`
 
 	if (multiple === 'Multiple')
 		typeDefinition = `Type.Array(
@@ -68,5 +70,5 @@ export const createResourceDefinition = ({
         ${typeDefinition}
     )`
 
-	return `${name} : ${typeDefinition}`
+	return `${id} : ${typeDefinition}`
 }
