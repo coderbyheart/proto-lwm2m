@@ -17,7 +17,7 @@ void describe('createResourceDefinition', () => {
 		})
 
 		const expected =
-			"0 : Type.Optional(\n        Type.Array(\n        Type.Number({$id: '0', title: 'Latitude', description: 'The decimal notation of latitude.',})\n    )\n    )"
+			"0 : Type.Optional(\n        Type.Array(\n        Type.Number({title: 'Latitude', description: 'The decimal notation of latitude.',})\n    )\n    )"
 
 		assert.equal(resource, expected)
 	})
@@ -34,7 +34,7 @@ void describe('createResourceDefinition', () => {
 		})
 
 		const expected =
-			"0 : Type.Date({$id: '0', title: 'Timestamp', description: 'The timestamp of when the location measurement was performed.',})"
+			"0 : Type.Date({title: 'Timestamp', description: 'The timestamp of when the location measurement was performed.',})"
 
 		assert.equal(resource, expected)
 	})
