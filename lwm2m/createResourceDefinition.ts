@@ -58,7 +58,7 @@ export const createResourceDefinition = ({
 }): string => {
 	let typeDefinition = `Type.${resourceType(
 		type,
-	)}({$id: '${id}', title: '${name}', description: '${description}',})`
+	)}({title: '${name}', description: '${description}',})`
 
 	if (multiple === 'Multiple')
 		typeDefinition = `Type.Array(
