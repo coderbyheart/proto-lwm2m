@@ -67,7 +67,7 @@ const writeTypeboxDefinition = async ({
 	const LwM2MType = `${importTypebox} ${typeBoxDeclaration}`
 	const baseDir = process.cwd()
 	const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
-	await writeFile(subDir('lwm2m', `${objectId}.ts`), LwM2MType)
+	await writeFile(subDir('lwm2m', `${objectId}-expected.ts`), LwM2MType)
 }
 
 /**

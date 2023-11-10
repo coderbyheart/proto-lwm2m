@@ -2,4 +2,11 @@ node_modules/
 dist/
 models/models.ts
 lwm2m/timestampResources.ts
-lwm2m/14201.ts
+lwm2m/typebox/Geolocation_14201.ts
+lwm2m/typebox/BatteryandPower_14202.ts
+lwm2m/typebox/Connectioninformation_14203.ts
+lwm2m/typebox/Deviceinformation_14204.ts
+lwm2m/typebox/Environment_14205.ts
+lwm2m/typebox/Solarcharge_14210.ts
+lwm2m/typebox/Buttonpress_14220.ts
+lwm2m/14201-expected.ts
