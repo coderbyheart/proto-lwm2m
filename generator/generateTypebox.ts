@@ -2,6 +2,10 @@ import ts from 'typescript'
 import { addDocBlock } from './addDocBlock.js'
 import { typeName } from './typebox.js'
 
+/**
+ * uses src/type-generation/createLwM2MObjectType.ts from lwm2m-types-js as a ref
+ */
+
 export const generateTypebox = ({
 	timestampResources,
 	name,
@@ -20,12 +24,7 @@ export const generateTypebox = ({
 				ts.factory.createVariableDeclaration(
 					ts.factory.createIdentifier(`${typeName(`${id}`, name)}`),
 					undefined,
-					ts.factory.createTypeReferenceNode('Readonly', [
-						ts.factory.createTypeReferenceNode('Record', [
-							ts.factory.createTypeReferenceNode('number'),
-							ts.factory.createTypeReferenceNode('number'),
-						]),
-					]),
+					undefined,
 					ts.factory.createObjectLiteralExpression(
 						Object.entries(timestampResources).map(([k, v]) =>
 							ts.factory.createPropertyAssignment(
