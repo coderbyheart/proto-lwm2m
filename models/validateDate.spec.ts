@@ -17,6 +17,9 @@ export const test_99 = Type.Object({
 
 /**
  * @see node_modules/@hello.nrfcloud.com/proto/validator/validateWithTypeBox.ts
+ *
+ * ajv compilation check is not longer supported in Typebox
+ * @see https://github.com/sinclairzx81/typebox/blob/master/test/runtime/compiler-ajv/date.ts
  */
 export const validateWithTypeBox = <T extends TSchema>(
 	schema: T,
@@ -49,6 +52,8 @@ void describe('validateDate', () => {
 		const object: Static<typeof test_99> = {
 			99: new Date(1698155694),
 		}
+
+		assert.deepEqual(new Date(1698155694), object[99])
 
 		const result = validateWithTypeBox(test_99)(object) as unknown as {
 			value: unknown
