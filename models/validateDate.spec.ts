@@ -36,15 +36,8 @@ const schemaOf = (schemaOf: string, value: unknown, schema: unknown) => {
  * @see https://github.com/sinclairzx81/typebox/blob/a770b94c737d7771ca249fb645aad8e915032c60/test/runtime/compiler-ajv/validate.ts 
  */
 const createAjv = (references: AnySchema[]) =>  {
-  return addFormats(new Ajv({}), ['date-time', 'time', 'date', 'email', 'hostname', 'ipv4', 'ipv6', 'uri', 'uri-reference', 'uuid', 'uri-template', 'json-pointer', 'relative-json-pointer', 'regex'])
+  return addFormats(new Ajv({}), ['date-time', 'time', 'date'])
     .addKeyword({ type: 'object', keyword: 'instanceOf', validate: schemaOf })
-    .addKeyword({ type: 'null', keyword: 'typeOf', validate: schemaOf })
-    .addKeyword('exclusiveMinimumTimestamp')
-    .addKeyword('exclusiveMaximumTimestamp')
-    .addKeyword('minimumTimestamp')
-    .addKeyword('maximumTimestamp')
-    .addKeyword('minByteLength')
-    .addKeyword('maxByteLength')
     .addSchema(references)
 }
 
