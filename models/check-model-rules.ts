@@ -6,9 +6,9 @@ import path from 'node:path'
 import { FrontMatter, ModelIDRegExp } from './types.js'
 import { senMLtoLwM2M } from '../senml/senMLtoLwM2M.js'
 import { getCodeBlock } from '../markdown/getCodeBlock.js'
-import { getFrontMatter } from 'markdown/getFrontMatter.js'
-import { validateSenML } from 'senml/validateSenML.js'
-import { stripEmptyValues } from 'senml/stripEmptyValues.js'
+import { getFrontMatter } from '../markdown/getFrontMatter.js'
+import { validateSenML } from '../senml/validateSenML.js'
+import { stripEmptyValues } from '../senml/stripEmptyValues.js'
 
 console.log(chalk.gray('Models rules check'))
 console.log('')
