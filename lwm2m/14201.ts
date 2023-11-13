@@ -1,11 +1,12 @@
 import type { LwM2MObjectID } from './LwM2MObjectID'
+import type { LwM2MObject } from './objects'
 
 /**
  * Geolocation (14201)
  *
  * Describes the geo location of a device
  */
-export type Geolocation_14201 = {
+export type Geolocation_14201 = LwM2MObject<{
 	ObjectID: LwM2MObjectID.Geolocation_14201
 	ObjectVersion: '1.0'
 	Resources: {
@@ -64,4 +65,4 @@ export type Geolocation_14201 = {
 		 */
 		99: Date
 	}
-}
+}>
