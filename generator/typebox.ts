@@ -16,7 +16,6 @@ import { tokenizeName } from './tokenizeName.js'
 export const typeName = (objectId: string, objectName: string): string =>
 	`${tokenizeName(objectName)}_${objectId}`
 
-
 const baseDir = process.cwd()
 const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
 
@@ -40,19 +39,19 @@ for (const objectDefinitionFile of (
 		) as any
 	).LWM2M.Object as ParsedLwM2MObjectDefinition
 	const ObjectID = parseInt(definition.ObjectID, 10)
-	
-	
-	const file = subDir('lwm2m/typebox', `${typeName(`${ObjectID}`, definition.Name)}.ts`)
-	console.log(
-		chalk.green('Writing'),
-		chalk.blue(file.replace(baseDir, '')),
+
+	const file = subDir(
+		'lwm2m/typebox',
+		`${typeName(`${ObjectID}`, definition.Name)}.ts`,
 	)
+	console.log(chalk.green('Writing'), chalk.blue(file.replace(baseDir, '')))
 	await writeFile(
 		file,
-		generateTypebox({timestampResources,
+		generateTypebox({
+			timestampResources,
 			name: definition.Name,
 			id: ObjectID,
-			description: definition.Description1
+			description: definition.Description1,
 		})
 			.map(printNode)
 			.join(os.EOL),
