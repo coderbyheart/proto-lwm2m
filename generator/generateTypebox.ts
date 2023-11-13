@@ -21,7 +21,7 @@ export const generateTypebox = ({
 	/**
 	 * import { Type } from '@sinclair/typebox'
 	 */
-	const importNode = ts.factory.createImportDeclaration(
+	const importTypebox = ts.factory.createImportDeclaration(
 		undefined,
 		ts.factory.createImportClause(
 			false,
@@ -60,5 +60,5 @@ export const generateTypebox = ({
 	)
 	addDocBlock([`${name}: ${description}`], type)
 
-	return [importNode, type]
+	return [importTypebox, type]
 }
