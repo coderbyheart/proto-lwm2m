@@ -59,7 +59,8 @@
     "tsmatchers": "5.0.0",
     "tsx": "4.1.1",
     "typescript": "5.2.2",
-    "xml2js": "0.6.2"
+    "xml2js": "0.6.2",
+    "yaml": "2.3.4"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
