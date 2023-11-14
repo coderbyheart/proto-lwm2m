@@ -39,7 +39,7 @@ export const generateTypebox = ({
 	/**
 	 * Type.Object({...}, {description: ...});
 	 */
-	const objectExpression = ts.factory.createCallExpression(
+	const typeboxObject = ts.factory.createCallExpression(
 		ts.factory.createPropertyAccessExpression(
 			ts.factory.createIdentifier('Type'),
 			ts.factory.createIdentifier('Object'),
@@ -61,7 +61,7 @@ export const generateTypebox = ({
 	/**
 	 * export const XXXX =
 	 */
-	const typeboxDefinition = ts.factory.createVariableStatement(
+	const variableDeclaration = ts.factory.createVariableStatement(
 		[ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
 		ts.factory.createVariableDeclarationList(
 			[
@@ -69,13 +69,13 @@ export const generateTypebox = ({
 					ts.factory.createIdentifier(`${typeName(`${id}`, name)}`),
 					undefined,
 					undefined,
-					objectExpression,
+					typeboxObject,
 				),
 			],
 			ts.NodeFlags.Const,
 		),
 	)
-	addDocBlock([`${name}: ${description}`], typeboxDefinition)
+	addDocBlock([`${name}: ${description}`], variableDeclaration)
 
-	return [importTypebox, typeboxDefinition]
+	return [importTypebox, variableDeclaration]
 }
