@@ -3,7 +3,10 @@ import { readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { unwrapNestedArray } from '../lwm2m/unwrapNestedArray.js'
 import xml2js from 'xml2js'
-import type { ParsedLwM2MObjectDefinition, Resource } from '../lwm2m/ParsedLwM2MObjectDefinition.js'
+import type {
+	ParsedLwM2MObjectDefinition,
+	Resource,
+} from '../lwm2m/ParsedLwM2MObjectDefinition.js'
 
 import { printNode } from './printNode.js'
 import os from 'node:os'
@@ -51,7 +54,7 @@ for (const objectDefinitionFile of (
 			id: ObjectID,
 			description: definition.Description1,
 			objectVersion: definition.ObjectVersion ?? '1.0',
-			resources: definition.Resources.Item as Resource[]
+			resources: definition.Resources.Item as Resource[],
 		})
 			.map(printNode)
 			.join(os.EOL),
