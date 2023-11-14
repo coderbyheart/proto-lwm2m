@@ -36,6 +36,21 @@ export const generateTypebox = ({
 		ts.factory.createStringLiteral('@sinclair/typebox'),
 	)
 
+	/**
+	 * Type.Object({...});
+	 */
+	const objectExpression = ts.factory.createCallExpression(
+		ts.factory.createPropertyAccessExpression(
+			ts.factory.createIdentifier('Type'),
+			ts.factory.createIdentifier('Object'),
+		),
+		undefined,
+		[ts.factory.createObjectLiteralExpression()], // {}
+	)
+
+	/**
+	 * export const XXXX =
+	 */
 	const typeboxDefinition = ts.factory.createVariableStatement(
 		[ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
 		ts.factory.createVariableDeclarationList(
@@ -44,14 +59,7 @@ export const generateTypebox = ({
 					ts.factory.createIdentifier(`${typeName(`${id}`, name)}`),
 					undefined,
 					undefined,
-					ts.factory.createObjectLiteralExpression(
-						Object.entries(timestampResources).map(([k, v]) =>
-							ts.factory.createPropertyAssignment(
-								k,
-								ts.factory.createNumericLiteral(v),
-							),
-						),
-					),
+					objectExpression,
 				),
 			],
 			ts.NodeFlags.Const,
