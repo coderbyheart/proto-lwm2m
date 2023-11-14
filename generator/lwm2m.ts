@@ -14,13 +14,13 @@ const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
 console.log(chalk.gray('LwM2M'))
 console.log(chalk.gray('', '·'), chalk.gray('timestamp resources map'))
 const timestampResources: Record<number, number> = {}
-for (const objectDefinitionFile of (await readdir(subDir('lwm2m/definitions'))).filter(
+for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
 	(s) => s.endsWith('.xml'),
 )) {
 	const definition = (
 		unwrapNestedArray(
 			await xml2js.parseStringPromise(
-				await readFile(subDir('lwm2m/definitions', objectDefinitionFile), 'utf-8'),
+				await readFile(subDir('lwm2m', objectDefinitionFile), 'utf-8'),
 			),
 		) as any
 	).LWM2M.Object as ParsedLwM2MObjectDefinition
