@@ -37,7 +37,7 @@ export const generateTypebox = ({
 	)
 
 	/**
-	 * Type.Object({ObjectVersion: ..., ObjectID: ..., ...}, {description: ...});
+	 * Type.Object({ObjectVersion: ..., ObjectID: ..., Resources:...}, {description: ...});
 	 */
 	const typeboxObject = ts.factory.createCallExpression(
 		ts.factory.createPropertyAccessExpression(
@@ -94,6 +94,21 @@ export const generateTypebox = ({
 								],
 								undefined,
 							),
+						],
+					),
+				),
+
+				// Resources
+				ts.factory.createPropertyAssignment(
+					ts.factory.createIdentifier('Resources'),
+					ts.factory.createCallExpression(
+						ts.factory.createPropertyAccessExpression(
+							ts.factory.createIdentifier('Type'),
+							ts.factory.createIdentifier('Object'),
+						),
+						undefined,
+						[
+							// Resources here
 						],
 					),
 				),
