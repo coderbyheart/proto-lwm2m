@@ -48,30 +48,69 @@ export const generateTypebox = ({
 	const resourcesDef = resources.map((resource) => {
 		return ts.factory.createPropertyAssignment(
 			ts.factory.createIdentifier(`${resource.$.ID}`),
-			ts.factory.createCallExpression(
-				ts.factory.createPropertyAccessExpression(
-					ts.factory.createIdentifier('Type'),
-					ts.factory.createIdentifier(
-						`${resourceType(resource.Type as LwM2MType)}`,
-					),
-				),
-				undefined,
-				[
-					ts.factory.createObjectLiteralExpression(
-						[
-							ts.factory.createPropertyAssignment(
-								ts.factory.createIdentifier('title'),
-								ts.factory.createStringLiteral(`${resource.Name}`),
+			// TODO: refactor this
+			resource.Mandatory === 'Mandatory'
+				? ts.factory.createCallExpression(
+						ts.factory.createPropertyAccessExpression(
+							ts.factory.createIdentifier('Type'),
+							ts.factory.createIdentifier(
+								`${resourceType(resource.Type as LwM2MType)}`,
 							),
-							ts.factory.createPropertyAssignment(
-								ts.factory.createIdentifier('description'),
-								ts.factory.createStringLiteral(`${resource.Description}`),
+						),
+						undefined,
+						[
+							ts.factory.createObjectLiteralExpression(
+								[
+									ts.factory.createPropertyAssignment(
+										ts.factory.createIdentifier('title'),
+										ts.factory.createStringLiteral(`${resource.Name}`),
+									),
+									ts.factory.createPropertyAssignment(
+										ts.factory.createIdentifier('description'),
+										ts.factory.createStringLiteral(`${resource.Description}`),
+									),
+								],
+								undefined,
 							),
 						],
+				  )
+				: // optional
+				  ts.factory.createCallExpression(
+						ts.factory.createPropertyAccessExpression(
+							ts.factory.createIdentifier('Type'),
+							ts.factory.createIdentifier('Optional'),
+						),
 						undefined,
-					),
-				],
-			),
+						[
+							ts.factory.createCallExpression(
+								ts.factory.createPropertyAccessExpression(
+									ts.factory.createIdentifier('Type'),
+									ts.factory.createIdentifier(
+										`${resourceType(resource.Type as LwM2MType)}`,
+									),
+								),
+								undefined,
+								[
+									ts.factory.createObjectLiteralExpression(
+										[
+											ts.factory.createPropertyAssignment(
+												ts.factory.createIdentifier('title'),
+												ts.factory.createStringLiteral(`${resource.Name}`),
+											),
+											ts.factory.createPropertyAssignment(
+												ts.factory.createIdentifier('description'),
+												ts.factory.createStringLiteral(
+													`${resource.Description}`,
+												),
+											),
+										],
+										undefined,
+									),
+								],
+							),
+						],
+				  ),
+			// TODO: refactor this
 		)
 	})
 
