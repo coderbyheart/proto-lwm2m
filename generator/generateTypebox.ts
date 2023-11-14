@@ -40,38 +40,40 @@ export const generateTypebox = ({
 		ts.factory.createStringLiteral('@sinclair/typebox'),
 	)
 
+	const resourceTypeboxDefiniton = (resource: Resource) =>
+		ts.factory.createCallExpression(
+			ts.factory.createPropertyAccessExpression(
+				ts.factory.createIdentifier('Type'),
+				ts.factory.createIdentifier(
+					`${resourceType(resource.Type as LwM2MType)}`,
+				),
+			),
+			undefined,
+			[
+				ts.factory.createObjectLiteralExpression(
+					[
+						ts.factory.createPropertyAssignment(
+							ts.factory.createIdentifier('title'),
+							ts.factory.createStringLiteral(`${resource.Name}`),
+						),
+						ts.factory.createPropertyAssignment(
+							ts.factory.createIdentifier('description'),
+							ts.factory.createStringLiteral(`${resource.Description}`),
+						),
+					],
+					undefined,
+				),
+			],
+		)
+
 	/**
 	 * Typebox definition for all the resources
 	 */
 	const resourcesDef = resources.map((resource) => {
 		return ts.factory.createPropertyAssignment(
 			ts.factory.createIdentifier(`${resource.$.ID}`),
-			// TODO: refactor this
 			resource.Mandatory === 'Mandatory'
-				? ts.factory.createCallExpression(
-						ts.factory.createPropertyAccessExpression(
-							ts.factory.createIdentifier('Type'),
-							ts.factory.createIdentifier(
-								`${resourceType(resource.Type as LwM2MType)}`,
-							),
-						),
-						undefined,
-						[
-							ts.factory.createObjectLiteralExpression(
-								[
-									ts.factory.createPropertyAssignment(
-										ts.factory.createIdentifier('title'),
-										ts.factory.createStringLiteral(`${resource.Name}`),
-									),
-									ts.factory.createPropertyAssignment(
-										ts.factory.createIdentifier('description'),
-										ts.factory.createStringLiteral(`${resource.Description}`),
-									),
-								],
-								undefined,
-							),
-						],
-				  )
+				? resourceTypeboxDefiniton(resource)
 				: // optional
 				  ts.factory.createCallExpression(
 						ts.factory.createPropertyAccessExpression(
@@ -79,36 +81,8 @@ export const generateTypebox = ({
 							ts.factory.createIdentifier('Optional'),
 						),
 						undefined,
-						[
-							ts.factory.createCallExpression(
-								ts.factory.createPropertyAccessExpression(
-									ts.factory.createIdentifier('Type'),
-									ts.factory.createIdentifier(
-										`${resourceType(resource.Type as LwM2MType)}`,
-									),
-								),
-								undefined,
-								[
-									ts.factory.createObjectLiteralExpression(
-										[
-											ts.factory.createPropertyAssignment(
-												ts.factory.createIdentifier('title'),
-												ts.factory.createStringLiteral(`${resource.Name}`),
-											),
-											ts.factory.createPropertyAssignment(
-												ts.factory.createIdentifier('description'),
-												ts.factory.createStringLiteral(
-													`${resource.Description}`,
-												),
-											),
-										],
-										undefined,
-									),
-								],
-							),
-						],
+						[resourceTypeboxDefiniton(resource)],
 				  ),
-			// TODO: refactor this
 		)
 	})
 
