@@ -1,6 +1,8 @@
 import ts from 'typescript'
 import { addDocBlock } from './addDocBlock.js'
 import { typeName } from './typebox.js'
+import type { Resource } from 'lwm2m/ParsedLwM2MObjectDefinition.js'
+import { LwM2MType, resourceType } from 'lwm2m/resourceType.js'
 
 /**
  * uses src/type-generation/createLwM2MObjectType.ts from lwm2m-types-js as a ref
@@ -11,13 +13,15 @@ export const generateTypebox = ({
 	name,
 	id,
 	description,
-	objectVersion
+	objectVersion,
+	resources,
 }: {
 	timestampResources: Record<number, number>
 	name: string
 	id: number
 	description: string
 	objectVersion: string
+	resources: Resource[]
 }): ts.Node[] => {
 	/**
 	 * import { Type } from '@sinclair/typebox'
@@ -39,6 +43,39 @@ export const generateTypebox = ({
 	)
 
 	/**
+	 * Typebox definition for all the resources
+	 */
+	const resourcesDef = resources.map((resource) => {
+		return ts.factory.createPropertyAssignment(
+			ts.factory.createIdentifier(`${resource.$.ID}`),
+			ts.factory.createCallExpression(
+				ts.factory.createPropertyAccessExpression(
+					ts.factory.createIdentifier('Type'),
+					ts.factory.createIdentifier(
+						`${resourceType(resource.Type as LwM2MType)}`,
+					),
+				),
+				undefined,
+				[
+					ts.factory.createObjectLiteralExpression(
+						[
+							ts.factory.createPropertyAssignment(
+								ts.factory.createIdentifier('title'),
+								ts.factory.createStringLiteral(`${resource.Name}`),
+							),
+							ts.factory.createPropertyAssignment(
+								ts.factory.createIdentifier('description'),
+								ts.factory.createStringLiteral(`${resource.Description}`),
+							),
+						],
+						undefined,
+					),
+				],
+			),
+		)
+	})
+
+	/**
 	 * Type.Object({ObjectVersion: ..., ObjectID: ..., Resources:...}, {description: ...});
 	 */
 	const typeboxObject = ts.factory.createCallExpression(
@@ -49,7 +86,6 @@ export const generateTypebox = ({
 		undefined,
 		[
 			ts.factory.createObjectLiteralExpression([
-
 				// Object Version
 				ts.factory.createPropertyAssignment(
 					ts.factory.createIdentifier('ObjectVersion'),
@@ -109,9 +145,7 @@ export const generateTypebox = ({
 							ts.factory.createIdentifier('Object'),
 						),
 						undefined,
-						[
-							// Resources here
-						],
+						[ts.factory.createObjectLiteralExpression(resourcesDef)],
 					),
 				),
 			]),

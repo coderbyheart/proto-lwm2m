@@ -3,10 +3,10 @@ import { Type, type TSchema } from '@sinclair/typebox'
 import { fromXML2JSON } from './fromXML2JSON.js'
 import path from 'node:path'
 import {
-	LwM2MType,
 	createResourceDefinition,
 } from './createResourceDefinition.js'
 import { createObjectDefinition } from './createObjectDefinition.js'
+import type { LwM2MType } from './resourceType.js'
 
 /**
  * Create Typebox definition for object 14201
