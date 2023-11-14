@@ -9,14 +9,12 @@ import { LwM2MType, resourceType } from 'lwm2m/resourceType.js'
  */
 
 export const generateTypebox = ({
-	timestampResources,
 	name,
 	id,
 	description,
 	objectVersion,
 	resources,
 }: {
-	timestampResources: Record<number, number>
 	name: string
 	id: number
 	description: string
