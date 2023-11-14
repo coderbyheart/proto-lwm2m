@@ -17,7 +17,6 @@ export const generateTypebox = ({
 	id: number
 	description: string
 }): ts.Node[] => {
-	
 	/**
 	 * import { Type } from '@sinclair/typebox'
 	 */
@@ -32,12 +31,12 @@ export const generateTypebox = ({
 					undefined,
 					ts.factory.createIdentifier(`Type`),
 				),
-			])
+			]),
 		),
-		ts.factory.createStringLiteral('@sinclair/typebox')
-	);
-	
-	const type = ts.factory.createVariableStatement(
+		ts.factory.createStringLiteral('@sinclair/typebox'),
+	)
+
+	const typeboxDefinition = ts.factory.createVariableStatement(
 		[ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
 		ts.factory.createVariableDeclarationList(
 			[
@@ -58,7 +57,7 @@ export const generateTypebox = ({
 			ts.NodeFlags.Const,
 		),
 	)
-	addDocBlock([`${name}: ${description}`], type)
+	addDocBlock([`${name}: ${description}`], typeboxDefinition)
 
-	return [importTypebox, type]
+	return [importTypebox, typeboxDefinition]
 }
