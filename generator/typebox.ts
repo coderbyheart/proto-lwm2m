@@ -28,13 +28,13 @@ console.log(
 	chalk.gray('Create Typebox definition for LwM2M objects'),
 )
 for (const objectDefinitionFile of (
-	await readdir(subDir('lwm2m/definitions'))
+	await readdir(subDir('lwm2m'))
 ).filter((s) => s.endsWith('.xml'))) {
 	const definition = (
 		unwrapNestedArray(
 			await xml2js.parseStringPromise(
 				await readFile(
-					subDir('lwm2m/definitions', objectDefinitionFile),
+					subDir('lwm2m', objectDefinitionFile),
 					'utf-8',
 				),
 			),

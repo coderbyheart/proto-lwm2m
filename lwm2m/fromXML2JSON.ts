@@ -38,7 +38,7 @@ export const fromXML2JSON = async (id: number): Promise<jsonObject> => {
 	const baseDir = process.cwd()
 	const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
 	const jsonObject = await xml2js.parseStringPromise(
-		await readFile(subDir('lwm2m/definitions', `${id}.xml`), 'utf-8'),
+		await readFile(subDir('lwm2m', `${id}.xml`), 'utf-8'),
 	)
 	return jsonObject.LWM2M.Object[0]
 }
