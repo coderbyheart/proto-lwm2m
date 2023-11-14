@@ -1,7 +1,7 @@
 import xml2js from 'xml2js'
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import type { LwM2MType } from './createResourceDefinition'
+import type { LwM2MType } from './resourceType.js'
 
 /**
  * JSON representation of an XML object
