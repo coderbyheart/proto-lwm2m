@@ -24,7 +24,6 @@ console.log(
 	chalk.gray('', '·'),
 	chalk.gray('Create Typebox definition for LwM2M objects'),
 )
-const timestampResources: Record<number, number> = {}
 for (const objectDefinitionFile of (
 	await readdir(subDir('lwm2m/definitions'))
 ).filter((s) => s.endsWith('.xml'))) {
@@ -48,7 +47,6 @@ for (const objectDefinitionFile of (
 	await writeFile(
 		file,
 		generateTypebox({
-			timestampResources,
 			name: definition.Name,
 			id: ObjectID,
 			description: definition.Description1,
