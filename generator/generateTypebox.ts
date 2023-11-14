@@ -45,7 +45,17 @@ export const generateTypebox = ({
 			ts.factory.createIdentifier('Object'),
 		),
 		undefined,
-		[ts.factory.createObjectLiteralExpression()], // {}
+		[
+			ts.factory.createObjectLiteralExpression([]),
+			ts.factory.createObjectLiteralExpression([
+				ts.factory.createPropertyAssignment(
+					ts.factory.createIdentifier('description'),
+					ts.factory.createStringLiteral(
+						description,
+					),
+				),
+			]),
+		], // {}
 	)
 
 	/**
