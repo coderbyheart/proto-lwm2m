@@ -37,7 +37,7 @@ export const generateTypebox = ({
 	)
 
 	/**
-	 * Type.Object({...});
+	 * Type.Object({...}, {description: ...});
 	 */
 	const objectExpression = ts.factory.createCallExpression(
 		ts.factory.createPropertyAccessExpression(
@@ -55,7 +55,7 @@ export const generateTypebox = ({
 					),
 				),
 			]),
-		], // {}
+		],
 	)
 
 	/**
