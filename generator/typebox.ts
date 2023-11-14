@@ -52,6 +52,7 @@ for (const objectDefinitionFile of (
 			name: definition.Name,
 			id: ObjectID,
 			description: definition.Description1,
+			objectVersion: definition.ObjectVersion ?? '1.0'
 		})
 			.map(printNode)
 			.join(os.EOL),

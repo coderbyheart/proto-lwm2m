@@ -11,11 +11,13 @@ export const generateTypebox = ({
 	name,
 	id,
 	description,
+	objectVersion
 }: {
 	timestampResources: Record<number, number>
 	name: string
 	id: number
 	description: string
+	objectVersion: string
 }): ts.Node[] => {
 	/**
 	 * import { Type } from '@sinclair/typebox'
@@ -63,7 +65,7 @@ export const generateTypebox = ({
 									ts.factory.createPropertyAssignment(
 										ts.factory.createIdentifier('examples'),
 										ts.factory.createArrayLiteralExpression([
-											ts.factory.createStringLiteral('1.0'),
+											ts.factory.createStringLiteral(`${objectVersion}`),
 										]),
 									),
 								],
