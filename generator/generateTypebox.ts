@@ -37,7 +37,7 @@ export const generateTypebox = ({
 	)
 
 	/**
-	 * Type.Object({...}, {description: ...});
+	 * Type.Object({ObjectVersion: ..., ObjectID: ..., ...}, {description: ...});
 	 */
 	const typeboxObject = ts.factory.createCallExpression(
 		ts.factory.createPropertyAccessExpression(
@@ -46,13 +46,62 @@ export const generateTypebox = ({
 		),
 		undefined,
 		[
-			ts.factory.createObjectLiteralExpression([]),
+			ts.factory.createObjectLiteralExpression([
+
+				// Object Version
+				ts.factory.createPropertyAssignment(
+					ts.factory.createIdentifier('ObjectVersion'),
+					ts.factory.createCallExpression(
+						ts.factory.createPropertyAccessExpression(
+							ts.factory.createIdentifier('Type'),
+							ts.factory.createIdentifier('String'),
+						),
+						undefined,
+						[
+							ts.factory.createObjectLiteralExpression(
+								[
+									ts.factory.createPropertyAssignment(
+										ts.factory.createIdentifier('examples'),
+										ts.factory.createArrayLiteralExpression([
+											ts.factory.createStringLiteral('1.0'),
+										]),
+									),
+								],
+								undefined,
+							),
+						],
+					),
+				),
+
+				// Object ID
+				ts.factory.createPropertyAssignment(
+					ts.factory.createIdentifier('ObjectID'),
+					ts.factory.createCallExpression(
+						ts.factory.createPropertyAccessExpression(
+							ts.factory.createIdentifier('Type'),
+							ts.factory.createIdentifier('Number'),
+						),
+						undefined,
+						[
+							ts.factory.createObjectLiteralExpression(
+								[
+									ts.factory.createPropertyAssignment(
+										ts.factory.createIdentifier('examples'),
+										ts.factory.createArrayLiteralExpression([
+											ts.factory.createNumericLiteral(id),
+										]),
+									),
+								],
+								undefined,
+							),
+						],
+					),
+				),
+			]),
 			ts.factory.createObjectLiteralExpression([
 				ts.factory.createPropertyAssignment(
 					ts.factory.createIdentifier('description'),
-					ts.factory.createStringLiteral(
-						description,
-					),
+					ts.factory.createStringLiteral(description),
 				),
 			]),
 		],
