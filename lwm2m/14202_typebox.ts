@@ -4,7 +4,7 @@ import { Type } from '@sinclair/typebox'
  */
 export const BatteryandPower_14202 = Type.Object(
 	{
-		ObjectVersion: Type.String({ examples: ['1.0'] }),
+		ObjectVersion: Type.Optional(Type.String({ examples: ['1.0'] })),
 		ObjectID: Type.Number({ examples: [14202] }),
 		Resources: Type.Object({
 			0: Type.Optional(

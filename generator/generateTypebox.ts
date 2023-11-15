@@ -103,20 +103,29 @@ export const generateTypebox = ({
 					ts.factory.createCallExpression(
 						ts.factory.createPropertyAccessExpression(
 							ts.factory.createIdentifier('Type'),
-							ts.factory.createIdentifier('String'),
+							ts.factory.createIdentifier('Optional'),
 						),
 						undefined,
 						[
-							ts.factory.createObjectLiteralExpression(
+							ts.factory.createCallExpression(
+								ts.factory.createPropertyAccessExpression(
+									ts.factory.createIdentifier('Type'),
+									ts.factory.createIdentifier('String'),
+								),
+								undefined,
 								[
-									ts.factory.createPropertyAssignment(
-										ts.factory.createIdentifier('examples'),
-										ts.factory.createArrayLiteralExpression([
-											ts.factory.createStringLiteral(`${objectVersion}`),
-										]),
+									ts.factory.createObjectLiteralExpression(
+										[
+											ts.factory.createPropertyAssignment(
+												ts.factory.createIdentifier('examples'),
+												ts.factory.createArrayLiteralExpression([
+													ts.factory.createStringLiteral(`${objectVersion}`),
+												]),
+											),
+										],
+										undefined,
 									),
 								],
-								undefined,
 							),
 						],
 					),
