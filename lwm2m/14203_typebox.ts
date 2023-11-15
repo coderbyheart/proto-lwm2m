@@ -4,7 +4,7 @@ import { Type } from '@sinclair/typebox'
  */
 export const Connectioninformation_14203 = Type.Object(
 	{
-		ObjectVersion: Type.String({ examples: ['1.0'] }),
+		ObjectVersion: Type.Optional(Type.String({ examples: ['1.0'] })),
 		ObjectID: Type.Number({ examples: [14203] }),
 		Resources: Type.Object({
 			0: Type.Optional(
