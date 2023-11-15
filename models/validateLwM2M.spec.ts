@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { Geolocation_14201 } from '../lwm2m/14201-expected.js'
+import { Geolocation_14201 } from '../lwm2m/14201_typebox.js'
 import type { Static } from '@sinclair/typebox'
 import { validateWithTypeBox } from './validateWithTypebox.js'
 
