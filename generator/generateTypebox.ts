@@ -1,8 +1,8 @@
 import ts from 'typescript'
 import { addDocBlock } from './addDocBlock.js'
-import { typeName } from './typebox.js'
 import type { Resource } from 'lwm2m/ParsedLwM2MObjectDefinition.js'
 import { LwM2MType, resourceType } from 'lwm2m/resourceType.js'
+import { tokenizeName } from './tokenizeName.js'
 
 /**
  * uses src/type-generation/createLwM2MObjectType.ts from lwm2m-types-js as a ref
@@ -177,7 +177,7 @@ export const generateTypebox = ({
 		ts.factory.createVariableDeclarationList(
 			[
 				ts.factory.createVariableDeclaration(
-					ts.factory.createIdentifier(`${typeName(`${id}`, name)}`),
+					ts.factory.createIdentifier(`${tokenizeName(name)}_${id}`),
 					undefined,
 					undefined,
 					typeboxObject,
