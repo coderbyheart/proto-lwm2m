@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { Geolocation_14201 } from '../lwm2m/14201_typebox.js'
 import type { Static } from '@sinclair/typebox'
-import { validateWithTypeBox } from './validateWithTypebox.js'
+import { validateLwM2M } from './validateLwM2M.js'
 
 void describe('validateLwM2M', () => {
 	void it(`should validate LwM2M object follows type  definition`, async () => {
@@ -21,9 +21,7 @@ void describe('validateLwM2M', () => {
 			},
 		}
 
-		const result = validateWithTypeBox(Geolocation_14201)(
-			object,
-		) as unknown as {
+		const result = validateLwM2M(Geolocation_14201)(object) as unknown as {
 			value: unknown
 		}
 
