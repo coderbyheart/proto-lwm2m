@@ -1,13 +1,15 @@
-import { Type } from '@sinclair/typebox'
+import { Type, type Static } from '@sinclair/typebox'
+import type { LwM2MObject } from './objects.js'
+import { LwM2MObjectID } from './LwM2MObjectID.js'
 /**
  * Device information (14204)
  *
  * Details about the device's connection.
  */
-export const Deviceinformation_14204 = Type.Object(
+export const DeviceInformation_14204 = Type.Object(
 	{
-		ObjectVersion: Type.Optional(Type.String({ examples: ['1.0'] })),
-		ObjectID: Type.Number({ examples: [14204] }),
+		ObjectID: Type.Literal(LwM2MObjectID.DeviceInformation_14204),
+		ObjectVersion: Type.Literal('1.0'),
 		Resources: Type.Object({
 			0: Type.String({
 				title: 'IMEI',
@@ -45,3 +47,6 @@ export const Deviceinformation_14204 = Type.Object(
 	},
 	{ description: "Details about the device's connection." },
 )
+export type DeviceInformation_14204_Type = LwM2MObject<
+	Static<typeof DeviceInformation_14204>
+>

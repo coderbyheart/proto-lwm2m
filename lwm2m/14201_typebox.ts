@@ -1,4 +1,6 @@
-import { Type } from '@sinclair/typebox'
+import { Type, type Static } from '@sinclair/typebox'
+import type { LwM2MObject } from './objects.js'
+import { LwM2MObjectID } from './LwM2MObjectID.js'
 /**
  * Geolocation (14201)
  *
@@ -6,8 +8,8 @@ import { Type } from '@sinclair/typebox'
  */
 export const Geolocation_14201 = Type.Object(
 	{
-		ObjectVersion: Type.Optional(Type.String({ examples: ['1.0'] })),
-		ObjectID: Type.Number({ examples: [14201] }),
+		ObjectID: Type.Literal(LwM2MObjectID.Geolocation_14201),
+		ObjectVersion: Type.Literal('1.0'),
 		Resources: Type.Object({
 			0: Type.Number({
 				title: 'Latitude (lat)',
@@ -59,3 +61,6 @@ export const Geolocation_14201 = Type.Object(
 	},
 	{ description: 'Describes the geo location of a device' },
 )
+export type Geolocation_14201_Type = LwM2MObject<
+	Static<typeof Geolocation_14201>
+>

@@ -1,7 +1,7 @@
 import type { LwM2MObject, LwM2MObjectID } from './objects'
 
 /**
- * Solar charge (14210)
+ * Solar Charge (14210)
  *
  * Measurements from the solar shield.
  */

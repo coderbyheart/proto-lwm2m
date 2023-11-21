@@ -1,7 +1,7 @@
 import type { LwM2MObject, LwM2MObjectID } from './objects'
 
 /**
- * Button press (14220)
+ * Button Press (14220)
  *
  * Describes a button press event.
  */

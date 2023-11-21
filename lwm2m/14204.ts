@@ -2,7 +2,7 @@ import type { LwM2MObjectID } from './LwM2MObjectID'
 import type { LwM2MObject } from './objects'
 
 /**
- * Device information (14204)
+ * Device Information (14204)
  *
  * Details about the device's connection.
  */

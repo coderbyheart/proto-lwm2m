@@ -1,13 +1,15 @@
-import { Type } from '@sinclair/typebox'
+import { Type, type Static } from '@sinclair/typebox'
+import type { LwM2MObject } from './objects.js'
+import { LwM2MObjectID } from './LwM2MObjectID.js'
 /**
  * Solar charge (14210)
  *
  * Measurements from the solar shield.
  */
-export const Solarcharge_14210 = Type.Object(
+export const SolarCharge_14210 = Type.Object(
 	{
-		ObjectVersion: Type.Optional(Type.String({ examples: ['1.0'] })),
-		ObjectID: Type.Number({ examples: [14210] }),
+		ObjectID: Type.Literal(LwM2MObjectID.SolarCharge_14210),
+		ObjectVersion: Type.Literal('1.0'),
 		Resources: Type.Object({
 			0: Type.Number({
 				title: 'Gain (mA)',
@@ -28,3 +30,6 @@ export const Solarcharge_14210 = Type.Object(
 	},
 	{ description: 'Measurements from the solar shield.' },
 )
+export type SolarCharge_14210_Type = LwM2MObject<
+	Static<typeof SolarCharge_14210>
+>

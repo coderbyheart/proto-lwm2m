@@ -14,7 +14,7 @@ export const generateTypeBox = ({
 	Description1,
 	Resources,
 }: ParsedLwM2MObjectDefinition): ts.Node[] => {
-	const name = `${tokenizeName(Name)}_${ObjectID}`
+	const name = generateName({ Name, ObjectID })
 	/**
 	 * import { Type } from '@sinclair/typebox'
 	 */
@@ -29,9 +29,44 @@ export const generateTypeBox = ({
 					undefined,
 					ts.factory.createIdentifier(`Type`),
 				),
+				ts.factory.createImportSpecifier(
+					true,
+					undefined,
+					ts.factory.createIdentifier(`Static`),
+				),
 			]),
 		),
 		ts.factory.createStringLiteral('@sinclair/typebox'),
+	)
+	const importLwM2MObject = ts.factory.createImportDeclaration(
+		undefined,
+		ts.factory.createImportClause(
+			true,
+			undefined,
+			ts.factory.createNamedImports([
+				ts.factory.createImportSpecifier(
+					false,
+					undefined,
+					ts.factory.createIdentifier(`LwM2MObject`),
+				),
+			]),
+		),
+		ts.factory.createStringLiteral('./objects.js'),
+	)
+	const importLwM2MObjectID = ts.factory.createImportDeclaration(
+		undefined,
+		ts.factory.createImportClause(
+			false,
+			undefined,
+			ts.factory.createNamedImports([
+				ts.factory.createImportSpecifier(
+					false,
+					undefined,
+					ts.factory.createIdentifier(`LwM2MObjectID`),
+				),
+			]),
+		),
+		ts.factory.createStringLiteral('./LwM2MObjectID.js'),
 	)
 
 	const resourceTypeBoxDefiniton = (resource: Resource) =>
@@ -151,12 +186,12 @@ export const generateTypeBox = ({
 	/**
 	 * export const XXXX =
 	 */
-	const variableDeclaration = ts.factory.createVariableStatement(
+	const exportTypeBoxDef = ts.factory.createVariableStatement(
 		[ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
 		ts.factory.createVariableDeclarationList(
 			[
 				ts.factory.createVariableDeclaration(
-					ts.factory.createIdentifier(`${tokenizeName(Name)}_${ObjectID}`),
+					ts.factory.createIdentifier(name),
 					undefined,
 					undefined,
 					typeBoxObject,
@@ -165,7 +200,29 @@ export const generateTypeBox = ({
 			ts.NodeFlags.Const,
 		),
 	)
-	addDocBlock([`${Name} (${ObjectID})`, '', Description1], variableDeclaration)
+	addDocBlock([`${Name} (${ObjectID})`, '', Description1], exportTypeBoxDef)
 
-	return [importTypeBox, variableDeclaration]
+	const exportTypeBoxType = ts.factory.createTypeAliasDeclaration(
+		[ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
+		ts.factory.createIdentifier(`${tokenizeName(Name)}_${ObjectID}_Type`),
+		undefined,
+		ts.factory.createTypeReferenceNode('LwM2MObject', [
+			ts.factory.createTypeReferenceNode('Static', [
+				ts.factory.createTypeQueryNode(ts.factory.createIdentifier(name)),
+			]),
+		]),
+	)
+
+	return [
+		importTypeBox,
+		importLwM2MObject,
+		importLwM2MObjectID,
+		exportTypeBoxDef,
+		exportTypeBoxType,
+	]
 }
+export const generateName = ({
+	Name,
+	ObjectID,
+}: Pick<ParsedLwM2MObjectDefinition, 'Name' | 'ObjectID'>): string =>
+	`${tokenizeName(Name)}_${ObjectID}`

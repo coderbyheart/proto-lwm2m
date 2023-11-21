@@ -1,13 +1,15 @@
-import { Type } from '@sinclair/typebox'
+import { Type, type Static } from '@sinclair/typebox'
+import type { LwM2MObject } from './objects.js'
+import { LwM2MObjectID } from './LwM2MObjectID.js'
 /**
  * Battery and Power (14202)
  *
  * Information about the battery and power status of the device.
  */
-export const BatteryandPower_14202 = Type.Object(
+export const BatteryAndPower_14202 = Type.Object(
 	{
-		ObjectVersion: Type.Optional(Type.String({ examples: ['1.0'] })),
-		ObjectID: Type.Number({ examples: [14202] }),
+		ObjectID: Type.Literal(LwM2MObjectID.BatteryAndPower_14202),
+		ObjectVersion: Type.Literal('1.0'),
 		Resources: Type.Object({
 			0: Type.Optional(
 				Type.Integer({
@@ -57,3 +59,6 @@ export const BatteryandPower_14202 = Type.Object(
 			'Information about the battery and power status of the device.',
 	},
 )
+export type BatteryAndPower_14202_Type = LwM2MObject<
+	Static<typeof BatteryAndPower_14202>
+>

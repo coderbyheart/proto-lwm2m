@@ -1,4 +1,6 @@
-import { Type } from '@sinclair/typebox'
+import { Type, type Static } from '@sinclair/typebox'
+import type { LwM2MObject } from './objects.js'
+import { LwM2MObjectID } from './LwM2MObjectID.js'
 /**
  * Environment (14205)
  *
@@ -6,8 +8,8 @@ import { Type } from '@sinclair/typebox'
  */
 export const Environment_14205 = Type.Object(
 	{
-		ObjectVersion: Type.Optional(Type.String({ examples: ['1.0'] })),
-		ObjectID: Type.Number({ examples: [14205] }),
+		ObjectID: Type.Literal(LwM2MObjectID.Environment_14205),
+		ObjectVersion: Type.Literal('1.0'),
 		Resources: Type.Object({
 			0: Type.Optional(
 				Type.Number({
@@ -43,3 +45,6 @@ export const Environment_14205 = Type.Object(
 	},
 	{ description: 'Environment information.' },
 )
+export type Environment_14205_Type = LwM2MObject<
+	Static<typeof Environment_14205>
+>

@@ -2,7 +2,7 @@
 type: messages
 ---
 
-# Button press
+# Button Press
 
 Describes a button press.
 

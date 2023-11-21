@@ -2,7 +2,7 @@
 type: messages
 ---
 
-# Solar charge gain
+# Solar Charge gain
 
 The gain measured from the solar shield.
 

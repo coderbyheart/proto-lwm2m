@@ -1,13 +1,15 @@
-import { Type } from '@sinclair/typebox'
+import { Type, type Static } from '@sinclair/typebox'
+import type { LwM2MObject } from './objects.js'
+import { LwM2MObjectID } from './LwM2MObjectID.js'
 /**
  * Button press (14220)
  *
  * Describes a button press event.
  */
-export const Buttonpress_14220 = Type.Object(
+export const ButtonPress_14220 = Type.Object(
 	{
-		ObjectVersion: Type.Optional(Type.String({ examples: ['1.0'] })),
-		ObjectID: Type.Number({ examples: [14220] }),
+		ObjectID: Type.Literal(LwM2MObjectID.ButtonPress_14220),
+		ObjectVersion: Type.Literal('1.0'),
 		Resources: Type.Object({
 			0: Type.Integer({
 				title: 'Button ID',
@@ -21,3 +23,6 @@ export const Buttonpress_14220 = Type.Object(
 	},
 	{ description: 'Describes a button press event.' },
 )
+export type ButtonPress_14220_Type = LwM2MObject<
+	Static<typeof ButtonPress_14220>
+>
