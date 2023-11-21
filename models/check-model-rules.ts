@@ -10,7 +10,7 @@ import { getFrontMatter } from '../markdown/getFrontMatter.js'
 import { validateSenML } from '../senml/validateSenML.js'
 import { stripEmptyValues } from '../senml/stripEmptyValues.js'
 import { validateLwM2M } from './validateLwM2M.js'
-import { Geolocation_14201 } from 'lwm2m/14201_typebox.js'
+import { Geolocation_14201_Schema } from 'lwm2m/14201_typebox.js'
 
 console.log(chalk.gray('Models rules check'))
 console.log('')
@@ -103,7 +103,7 @@ for (const model of await readdir(modelsDir)) {
 			// WIP: implementation in progress
 			// TODO: make it generic
 			if (senMLtoLwM2M(maybeValidSenML.value)[0]?.ObjectID === 14201) {
-				const maybeValidLwM2M = validateLwM2M(Geolocation_14201)(
+				const maybeValidLwM2M = validateLwM2M(Geolocation_14201_Schema)(
 					senMLtoLwM2M(maybeValidSenML.value)[0],
 				)
 				if ('errors' in maybeValidLwM2M) {

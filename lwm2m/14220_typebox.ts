@@ -6,7 +6,7 @@ import { LwM2MObjectID } from './LwM2MObjectID.js'
  *
  * Describes a button press event.
  */
-export const ButtonPress_14220 = Type.Object(
+export const ButtonPress_14220_Schema = Type.Object(
 	{
 		ObjectID: Type.Literal(LwM2MObjectID.ButtonPress_14220),
 		ObjectVersion: Type.Literal('1.0'),
@@ -23,6 +23,6 @@ export const ButtonPress_14220 = Type.Object(
 	},
 	{ description: 'Describes a button press event.' },
 )
-export type ButtonPress_14220_Type = LwM2MObject<
-	Static<typeof ButtonPress_14220>
+export type ButtonPress_14220 = LwM2MObject<
+	Static<typeof ButtonPress_14220_Schema>
 >

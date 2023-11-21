@@ -6,7 +6,7 @@ import { LwM2MObjectID } from './LwM2MObjectID.js'
  *
  * Environment information.
  */
-export const Environment_14205 = Type.Object(
+export const Environment_14205_Schema = Type.Object(
 	{
 		ObjectID: Type.Literal(LwM2MObjectID.Environment_14205),
 		ObjectVersion: Type.Literal('1.0'),
@@ -45,6 +45,6 @@ export const Environment_14205 = Type.Object(
 	},
 	{ description: 'Environment information.' },
 )
-export type Environment_14205_Type = LwM2MObject<
-	Static<typeof Environment_14205>
+export type Environment_14205 = LwM2MObject<
+	Static<typeof Environment_14205_Schema>
 >

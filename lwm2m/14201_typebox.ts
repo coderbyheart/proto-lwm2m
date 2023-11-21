@@ -6,7 +6,7 @@ import { LwM2MObjectID } from './LwM2MObjectID.js'
  *
  * Describes the geo location of a device
  */
-export const Geolocation_14201 = Type.Object(
+export const Geolocation_14201_Schema = Type.Object(
 	{
 		ObjectID: Type.Literal(LwM2MObjectID.Geolocation_14201),
 		ObjectVersion: Type.Literal('1.0'),
@@ -61,6 +61,6 @@ export const Geolocation_14201 = Type.Object(
 	},
 	{ description: 'Describes the geo location of a device' },
 )
-export type Geolocation_14201_Type = LwM2MObject<
-	Static<typeof Geolocation_14201>
+export type Geolocation_14201 = LwM2MObject<
+	Static<typeof Geolocation_14201_Schema>
 >

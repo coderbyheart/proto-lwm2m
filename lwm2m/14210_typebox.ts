@@ -6,7 +6,7 @@ import { LwM2MObjectID } from './LwM2MObjectID.js'
  *
  * Measurements from the solar shield.
  */
-export const SolarCharge_14210 = Type.Object(
+export const SolarCharge_14210_Schema = Type.Object(
 	{
 		ObjectID: Type.Literal(LwM2MObjectID.SolarCharge_14210),
 		ObjectVersion: Type.Literal('1.0'),
@@ -30,6 +30,6 @@ export const SolarCharge_14210 = Type.Object(
 	},
 	{ description: 'Measurements from the solar shield.' },
 )
-export type SolarCharge_14210_Type = LwM2MObject<
-	Static<typeof SolarCharge_14210>
+export type SolarCharge_14210 = LwM2MObject<
+	Static<typeof SolarCharge_14210_Schema>
 >

@@ -72,27 +72,26 @@ console.log(
 await writeFile(
 	objectsFile,
 	objects
-		.map(({ ObjectID, Name }) =>
-			ts.factory.createExportDeclaration(
+		.map(({ ObjectID, Name }) => {
+			const name = generateName({ ObjectID, Name })
+			return ts.factory.createExportDeclaration(
 				[],
 				false,
 				ts.factory.createNamedExports([
 					ts.factory.createExportSpecifier(
 						false,
 						undefined,
-						ts.factory.createIdentifier(generateName({ ObjectID, Name })),
+						ts.factory.createIdentifier(`${name}_Schema`),
 					),
 					ts.factory.createExportSpecifier(
 						true,
 						undefined,
-						ts.factory.createIdentifier(
-							`${generateName({ ObjectID, Name })}_Type`,
-						),
+						ts.factory.createIdentifier(name),
 					),
 				]),
 				ts.factory.createStringLiteral(`./${ObjectID}_typebox.js`),
-			),
-		)
+			)
+		})
 		.map(printNode)
 		.join(os.EOL),
 	'utf-8',

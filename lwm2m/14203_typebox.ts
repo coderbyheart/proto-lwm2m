@@ -6,7 +6,7 @@ import { LwM2MObjectID } from './LwM2MObjectID.js'
  *
  * Details about the device's connection.
  */
-export const ConnectionInformation_14203 = Type.Object(
+export const ConnectionInformation_14203_Schema = Type.Object(
 	{
 		ObjectID: Type.Literal(LwM2MObjectID.ConnectionInformation_14203),
 		ObjectVersion: Type.Literal('1.0'),
@@ -69,6 +69,6 @@ export const ConnectionInformation_14203 = Type.Object(
 	},
 	{ description: "Details about the device's connection." },
 )
-export type ConnectionInformation_14203_Type = LwM2MObject<
-	Static<typeof ConnectionInformation_14203>
+export type ConnectionInformation_14203 = LwM2MObject<
+	Static<typeof ConnectionInformation_14203_Schema>
 >

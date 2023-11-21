@@ -191,7 +191,7 @@ export const generateTypeBox = ({
 		ts.factory.createVariableDeclarationList(
 			[
 				ts.factory.createVariableDeclaration(
-					ts.factory.createIdentifier(name),
+					ts.factory.createIdentifier(`${name}_Schema`),
 					undefined,
 					undefined,
 					typeBoxObject,
@@ -204,11 +204,13 @@ export const generateTypeBox = ({
 
 	const exportTypeBoxType = ts.factory.createTypeAliasDeclaration(
 		[ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
-		ts.factory.createIdentifier(`${tokenizeName(Name)}_${ObjectID}_Type`),
+		ts.factory.createIdentifier(name),
 		undefined,
 		ts.factory.createTypeReferenceNode('LwM2MObject', [
 			ts.factory.createTypeReferenceNode('Static', [
-				ts.factory.createTypeQueryNode(ts.factory.createIdentifier(name)),
+				ts.factory.createTypeQueryNode(
+					ts.factory.createIdentifier(`${name}_Schema`),
+				),
 			]),
 		]),
 	)
