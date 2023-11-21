@@ -14,6 +14,7 @@ export const generateTypeBox = ({
 	Description1,
 	Resources,
 }: ParsedLwM2MObjectDefinition): ts.Node[] => {
+	const name = `${tokenizeName(Name)}_${ObjectID}`
 	/**
 	 * import { Type } from '@sinclair/typebox'
 	 */
@@ -94,64 +95,34 @@ export const generateTypeBox = ({
 		undefined,
 		[
 			ts.factory.createObjectLiteralExpression([
-				// Object Version
-				ts.factory.createPropertyAssignment(
-					ts.factory.createIdentifier('ObjectVersion'),
-					ts.factory.createCallExpression(
-						ts.factory.createPropertyAccessExpression(
-							ts.factory.createIdentifier('Type'),
-							ts.factory.createIdentifier('Optional'),
-						),
-						undefined,
-						[
-							ts.factory.createCallExpression(
-								ts.factory.createPropertyAccessExpression(
-									ts.factory.createIdentifier('Type'),
-									ts.factory.createIdentifier('String'),
-								),
-								undefined,
-								[
-									ts.factory.createObjectLiteralExpression(
-										[
-											ts.factory.createPropertyAssignment(
-												ts.factory.createIdentifier('examples'),
-												ts.factory.createArrayLiteralExpression([
-													ts.factory.createStringLiteral(
-														`${ObjectVersion ?? '1.0'}`,
-													),
-												]),
-											),
-										],
-										undefined,
-									),
-								],
-							),
-						],
-					),
-				),
-
 				// Object ID
 				ts.factory.createPropertyAssignment(
 					ts.factory.createIdentifier('ObjectID'),
 					ts.factory.createCallExpression(
 						ts.factory.createPropertyAccessExpression(
 							ts.factory.createIdentifier('Type'),
-							ts.factory.createIdentifier('Number'),
+							ts.factory.createIdentifier('Literal'),
 						),
 						undefined,
 						[
-							ts.factory.createObjectLiteralExpression(
-								[
-									ts.factory.createPropertyAssignment(
-										ts.factory.createIdentifier('examples'),
-										ts.factory.createArrayLiteralExpression([
-											ts.factory.createNumericLiteral(ObjectID),
-										]),
-									),
-								],
-								undefined,
+							ts.factory.createPropertyAccessExpression(
+								ts.factory.createIdentifier('LwM2MObjectID'),
+								ts.factory.createIdentifier(name),
 							),
 						],
+					),
+				),
+
+				// Object Version
+				ts.factory.createPropertyAssignment(
+					ts.factory.createIdentifier('ObjectVersion'),
+					ts.factory.createCallExpression(
+						ts.factory.createPropertyAccessExpression(
+							ts.factory.createIdentifier('Type'),
+							ts.factory.createIdentifier('Literal'),
+						),
+						undefined,
+						[ts.factory.createStringLiteral(`${ObjectVersion ?? '1.0'}`)],
 					),
 				),
 
