@@ -117,7 +117,7 @@ export const generateTypeBox = ({
 						undefined,
 						[
 							ts.factory.createObjectLiteralExpression(
-								Resources.Item.map((resource) =>
+								byImportance(Resources.Item).map((resource) =>
 									ts.factory.createPropertyAssignment(
 										ts.factory.createIdentifier(`${resource.$.ID}`),
 										resourceTypeBoxDefinition(resource),
@@ -189,7 +189,7 @@ export const generateTypeBox = ({
 					ts.factory.createIdentifier('Resources'),
 					undefined,
 					ts.factory.createTypeLiteralNode(
-						Resources.Item.map((resource) => {
+						byImportance(Resources.Item).map((resource) => {
 							const res = ts.factory.createPropertySignature(
 								undefined,
 								ts.factory.createIdentifier(`${resource.$.ID}`),
@@ -311,3 +311,18 @@ const typeScriptResourceType = (type: string): ts.TypeNode => {
 			throw new Error(`Unexpected resource type: ${type}`)
 	}
 }
+
+const byImportance = (resources: Resource[]): Resource[] =>
+	resources
+
+		// sort by id
+		.sort(
+			({ $: { ID: id1 } }, { $: { ID: id2 } }) =>
+				parseInt(id1, 10) - parseInt(id2, 10),
+		)
+		// sort mandatory up
+		.sort(({ Mandatory: m1 }, { Mandatory: m2 }) => {
+			if (m1 === 'Mandatory' && m2 === 'Mandatory') return 0
+			if (m1 === 'Mandatory') return -1
+			return 1
+		})
