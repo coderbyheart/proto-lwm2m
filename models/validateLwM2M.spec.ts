@@ -3,7 +3,7 @@ import assert from 'node:assert'
 import {
 	Geolocation_14201_Schema,
 	type Geolocation_14201,
-} from '../lwm2m/14201_typebox.js'
+} from '../lwm2m/objects.js'
 import { validateLwM2M } from './validateLwM2M.js'
 
 void describe('validateLwM2M', () => {

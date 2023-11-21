@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import { readFile, readdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { unwrapNestedArray } from '../lwm2m/unwrapNestedArray.js'
 import xml2js from 'xml2js'
@@ -41,7 +41,13 @@ for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
 	)
 	idMembers.push(member)
 
-	const file = subDir('lwm2m', `${ObjectID}_typebox.ts`)
+	try {
+		await mkdir(subDir('lwm2m', `object`))
+	} catch {
+		// pass
+	}
+
+	const file = subDir('lwm2m', `object`, `${ObjectID}.ts`)
 	console.log(chalk.green('Writing'), chalk.blue(file.replace(baseDir, '')))
 	await writeFile(
 		file,
@@ -89,7 +95,7 @@ await writeFile(
 						ts.factory.createIdentifier(name),
 					),
 				]),
-				ts.factory.createStringLiteral(`./${ObjectID}_typebox.js`),
+				ts.factory.createStringLiteral(`./object/${ObjectID}.js`),
 			)
 		})
 		.map(printNode)

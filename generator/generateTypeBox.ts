@@ -4,7 +4,7 @@ import type {
 	ParsedLwM2MObjectDefinition,
 	Resource,
 } from '../lwm2m/ParsedLwM2MObjectDefinition.js'
-import { LwM2MType, resourceType } from '../lwm2m/resourceType.js'
+import { LwM2MType } from '../lwm2m/resourceType.js'
 import { tokenizeName } from './tokenizeName.js'
 
 export const generateTypeBox = ({
@@ -29,11 +29,6 @@ export const generateTypeBox = ({
 					undefined,
 					ts.factory.createIdentifier(`Type`),
 				),
-				ts.factory.createImportSpecifier(
-					true,
-					undefined,
-					ts.factory.createIdentifier(`Static`),
-				),
 			]),
 		),
 		ts.factory.createStringLiteral('@sinclair/typebox'),
@@ -51,7 +46,7 @@ export const generateTypeBox = ({
 				),
 			]),
 		),
-		ts.factory.createStringLiteral('./LwM2MObject.js'),
+		ts.factory.createStringLiteral('../LwM2MObject.js'),
 	)
 	const importLwM2MObjectID = ts.factory.createImportDeclaration(
 		undefined,
@@ -66,58 +61,8 @@ export const generateTypeBox = ({
 				),
 			]),
 		),
-		ts.factory.createStringLiteral('./LwM2MObjectID.js'),
+		ts.factory.createStringLiteral('../LwM2MObjectID.js'),
 	)
-
-	const resourceTypeBoxDefiniton = (resource: Resource) =>
-		ts.factory.createCallExpression(
-			ts.factory.createPropertyAccessExpression(
-				ts.factory.createIdentifier('Type'),
-				ts.factory.createIdentifier(
-					`${resourceType(resource.Type as LwM2MType)}`,
-				),
-			),
-			undefined,
-			[
-				ts.factory.createObjectLiteralExpression(
-					[
-						ts.factory.createPropertyAssignment(
-							ts.factory.createIdentifier('title'),
-							ts.factory.createStringLiteral(
-								`${resource.Name}${
-									resource.Units.length > 0 ? ` (${resource.Units})` : ''
-								}`,
-							),
-						),
-						ts.factory.createPropertyAssignment(
-							ts.factory.createIdentifier('description'),
-							ts.factory.createStringLiteral(`${resource.Description}`),
-						),
-					],
-					undefined,
-				),
-			],
-		)
-
-	/**
-	 * TypeBox definition for all the resources
-	 */
-	const resourcesDef = Resources.Item.map((resource) => {
-		return ts.factory.createPropertyAssignment(
-			ts.factory.createIdentifier(`${resource.$.ID}`),
-			resource.Mandatory === 'Mandatory'
-				? resourceTypeBoxDefiniton(resource)
-				: // optional
-				  ts.factory.createCallExpression(
-						ts.factory.createPropertyAccessExpression(
-							ts.factory.createIdentifier('Type'),
-							ts.factory.createIdentifier('Optional'),
-						),
-						undefined,
-						[resourceTypeBoxDefiniton(resource)],
-				  ),
-		)
-	})
 
 	/**
 	 * Type.Object({ObjectVersion: ..., ObjectID: ..., Resources:...}, {description: ...});
@@ -170,11 +115,24 @@ export const generateTypeBox = ({
 							ts.factory.createIdentifier('Object'),
 						),
 						undefined,
-						[ts.factory.createObjectLiteralExpression(resourcesDef)],
+						[
+							ts.factory.createObjectLiteralExpression(
+								Resources.Item.map((resource) =>
+									ts.factory.createPropertyAssignment(
+										ts.factory.createIdentifier(`${resource.$.ID}`),
+										resourceTypeBoxDefinition(resource),
+									),
+								),
+							),
+						],
 					),
 				),
 			]),
 			ts.factory.createObjectLiteralExpression([
+				ts.factory.createPropertyAssignment(
+					ts.factory.createIdentifier('title'),
+					ts.factory.createStringLiteral(`${Name} (${ObjectID})`),
+				),
 				ts.factory.createPropertyAssignment(
 					ts.factory.createIdentifier('description'),
 					ts.factory.createStringLiteral(Description1),
@@ -202,18 +160,62 @@ export const generateTypeBox = ({
 	)
 	addDocBlock([`${Name} (${ObjectID})`, '', Description1], exportTypeBoxDef)
 
+	// We can't use typebox's Static<typeof ...> because the resulting type has no docstrings
 	const exportTypeBoxType = ts.factory.createTypeAliasDeclaration(
 		[ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
 		ts.factory.createIdentifier(name),
 		undefined,
 		ts.factory.createTypeReferenceNode('LwM2MObject', [
-			ts.factory.createTypeReferenceNode('Static', [
-				ts.factory.createTypeQueryNode(
-					ts.factory.createIdentifier(`${name}_Schema`),
+			ts.factory.createTypeLiteralNode([
+				ts.factory.createPropertySignature(
+					undefined,
+					ts.factory.createIdentifier('ObjectID'),
+					undefined,
+					ts.factory.createTypeReferenceNode(
+						`LwM2MObjectID.${name}`,
+						undefined,
+					),
+				),
+				ts.factory.createPropertySignature(
+					undefined,
+					ts.factory.createIdentifier('ObjectVersion'),
+					undefined,
+					ts.factory.createLiteralTypeNode(
+						ts.factory.createStringLiteral(ObjectVersion ?? '1.0'),
+					),
+				),
+				ts.factory.createPropertySignature(
+					undefined,
+					ts.factory.createIdentifier('Resources'),
+					undefined,
+					ts.factory.createTypeLiteralNode(
+						Resources.Item.map((resource) => {
+							const res = ts.factory.createPropertySignature(
+								undefined,
+								ts.factory.createIdentifier(`${resource.$.ID}`),
+								resource.Mandatory === 'Mandatory'
+									? undefined
+									: ts.factory.createToken(ts.SyntaxKind.QuestionToken),
+								typeScriptResourceType(resource.Type),
+							)
+							addDocBlock(
+								[
+									`${resource.Name}${
+										resource.Units.length > 0 ? ` (${resource.Units})` : ''
+									}`,
+									``,
+									resource.Description,
+								],
+								res,
+							)
+							return res
+						}),
+					),
 				),
 			]),
 		]),
 	)
+	addDocBlock([`${Name} (${ObjectID})`, '', Description1], exportTypeBoxType)
 
 	return [
 		importTypeBox,
@@ -228,3 +230,84 @@ export const generateName = ({
 	ObjectID,
 }: Pick<ParsedLwM2MObjectDefinition, 'Name' | 'ObjectID'>): string =>
 	`${tokenizeName(Name)}_${ObjectID}`
+
+const typeBoxResourceType = (type: string): string => {
+	switch (type) {
+		case LwM2MType.Float:
+			return 'Number'
+		case LwM2MType.Integer:
+		case LwM2MType.UnsignedInteger:
+			return 'Integer'
+		case LwM2MType.Boolean:
+			return 'Boolean'
+		case LwM2MType.String:
+		case LwM2MType.Opaque:
+		case LwM2MType.Corelnk:
+		case LwM2MType.Objlnk:
+			return 'String'
+		case LwM2MType.Time:
+			return 'Date'
+		default:
+			throw new Error(`Unexpected resource type: ${type}`)
+	}
+}
+
+const resourceTypeBoxDefinition = (resource: Resource) => {
+	const resourceDef = ts.factory.createCallExpression(
+		ts.factory.createPropertyAccessExpression(
+			ts.factory.createIdentifier('Type'),
+			ts.factory.createIdentifier(`${typeBoxResourceType(resource.Type)}`),
+		),
+		undefined,
+		[
+			ts.factory.createObjectLiteralExpression(
+				[
+					ts.factory.createPropertyAssignment(
+						ts.factory.createIdentifier('title'),
+						ts.factory.createStringLiteral(
+							`${resource.Name}${
+								resource.Units.length > 0 ? ` (${resource.Units})` : ''
+							}`,
+						),
+					),
+					ts.factory.createPropertyAssignment(
+						ts.factory.createIdentifier('description'),
+						ts.factory.createStringLiteral(`${resource.Description}`),
+					),
+				],
+				undefined,
+			),
+		],
+	)
+
+	return resource.Mandatory === 'Mandatory'
+		? resourceDef
+		: ts.factory.createCallExpression(
+				ts.factory.createPropertyAccessExpression(
+					ts.factory.createIdentifier('Type'),
+					ts.factory.createIdentifier('Optional'),
+				),
+				undefined,
+				[resourceDef],
+		  )
+}
+
+const typeScriptResourceType = (type: string): ts.TypeNode => {
+	switch (type) {
+		case LwM2MType.Float:
+		case LwM2MType.Integer:
+		case LwM2MType.UnsignedInteger:
+			return ts.factory.createTypeReferenceNode('number')
+		case LwM2MType.Boolean:
+			return ts.factory.createTypeReferenceNode('boolean')
+		case LwM2MType.String:
+		case LwM2MType.Opaque:
+		case LwM2MType.Corelnk:
+		case LwM2MType.Objlnk:
+			return ts.factory.createTypeReferenceNode('string')
+		case LwM2MType.Time:
+			return ts.factory.createTypeReferenceNode('Date')
+		default:
+			throw new Error(`Unexpected resource type: ${type}`)
+	}
+}

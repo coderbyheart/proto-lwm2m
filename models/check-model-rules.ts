@@ -10,7 +10,7 @@ import { getFrontMatter } from '../markdown/getFrontMatter.js'
 import { validateSenML } from '../senml/validateSenML.js'
 import { stripEmptyValues } from '../senml/stripEmptyValues.js'
 import { validateLwM2M } from './validateLwM2M.js'
-import { Geolocation_14201_Schema } from 'lwm2m/14201_typebox.js'
+import { Geolocation_14201_Schema } from '../lwm2m/objects.js'
 
 console.log(chalk.gray('Models rules check'))
 console.log('')
