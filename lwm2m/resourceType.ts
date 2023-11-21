@@ -10,7 +10,7 @@ export enum LwM2MType {
 	Time = 'Time',
 }
 /**
- * Transform from LwM2M type to Typebox type
+ * Transform from LwM2M type to TypeBox type
  */
 export const resourceType = (type: LwM2MType): string => {
 	let typeSpecification = ''

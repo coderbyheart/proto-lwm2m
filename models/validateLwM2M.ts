@@ -2,7 +2,7 @@ import { TypeCompiler, type ValueError } from '@sinclair/typebox/compiler'
 import type { TSchema, Static } from '@sinclair/typebox'
 
 /**
- * validate object against definiton using Typebox
+ * validate object against definiton using TypeBox
  */
 export const validateLwM2M = <T extends TSchema>(
 	schema: T,

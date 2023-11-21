@@ -7,16 +7,12 @@ import type { ParsedLwM2MObjectDefinition } from '../lwm2m/ParsedLwM2MObjectDefi
 
 import { printNode } from './printNode.js'
 import os from 'node:os'
-import { generateTypebox } from './generateTypebox.js'
+import { generateTypeBox } from './generateTypeBox.js'
 
 const baseDir = process.cwd()
 const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
 
-console.log(chalk.gray('Typebox'))
-console.log(
-	chalk.gray('', '·'),
-	chalk.gray('Create Typebox definition for LwM2M objects'),
-)
+console.log(chalk.gray('Creating TypeBox definition for LwM2M objects'))
 for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
 	(s) => s.endsWith('.xml'),
 )) {
@@ -33,7 +29,7 @@ for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
 	console.log(chalk.green('Writing'), chalk.blue(file.replace(baseDir, '')))
 	await writeFile(
 		file,
-		generateTypebox({
+		generateTypeBox({
 			name: definition.Name,
 			id: ObjectID,
 			description: definition.Description1,

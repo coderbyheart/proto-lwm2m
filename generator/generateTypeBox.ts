@@ -8,7 +8,7 @@ import { tokenizeName } from './tokenizeName.js'
  * uses src/type-generation/createLwM2MObjectType.ts from lwm2m-types-js as a ref
  */
 
-export const generateTypebox = ({
+export const generateTypeBox = ({
 	name,
 	id,
 	description,
@@ -24,7 +24,7 @@ export const generateTypebox = ({
 	/**
 	 * import { Type } from '@sinclair/typebox'
 	 */
-	const importTypebox = ts.factory.createImportDeclaration(
+	const importTypeBox = ts.factory.createImportDeclaration(
 		undefined,
 		ts.factory.createImportClause(
 			false,
@@ -40,7 +40,7 @@ export const generateTypebox = ({
 		ts.factory.createStringLiteral('@sinclair/typebox'),
 	)
 
-	const resourceTypeboxDefiniton = (resource: Resource) =>
+	const resourceTypeBoxDefiniton = (resource: Resource) =>
 		ts.factory.createCallExpression(
 			ts.factory.createPropertyAccessExpression(
 				ts.factory.createIdentifier('Type'),
@@ -67,13 +67,13 @@ export const generateTypebox = ({
 		)
 
 	/**
-	 * Typebox definition for all the resources
+	 * TypeBox definition for all the resources
 	 */
 	const resourcesDef = resources.map((resource) => {
 		return ts.factory.createPropertyAssignment(
 			ts.factory.createIdentifier(`${resource.$.ID}`),
 			resource.Mandatory === 'Mandatory'
-				? resourceTypeboxDefiniton(resource)
+				? resourceTypeBoxDefiniton(resource)
 				: // optional
 				  ts.factory.createCallExpression(
 						ts.factory.createPropertyAccessExpression(
@@ -81,7 +81,7 @@ export const generateTypebox = ({
 							ts.factory.createIdentifier('Optional'),
 						),
 						undefined,
-						[resourceTypeboxDefiniton(resource)],
+						[resourceTypeBoxDefiniton(resource)],
 				  ),
 		)
 	})
@@ -197,5 +197,5 @@ export const generateTypebox = ({
 	)
 	addDocBlock([`${name}: ${description}`], variableDeclaration)
 
-	return [importTypebox, variableDeclaration]
+	return [importTypeBox, variableDeclaration]
 }
