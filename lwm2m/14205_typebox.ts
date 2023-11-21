@@ -1,6 +1,8 @@
 import { Type } from '@sinclair/typebox'
 /**
- * Environment: Environment information.
+ * Environment (14205)
+ *
+ * Environment information.
  */
 export const Environment_14205 = Type.Object(
 	{
@@ -9,20 +11,20 @@ export const Environment_14205 = Type.Object(
 		Resources: Type.Object({
 			0: Type.Optional(
 				Type.Number({
-					title: 'Temperature',
+					title: 'Temperature (C)',
 					description:
 						'Environmental temperature in Celsius. Examples: 23.5, -10.2.',
 				}),
 			),
 			1: Type.Optional(
 				Type.Number({
-					title: 'Humidity',
+					title: 'Humidity (%)',
 					description: 'Environmental humidity in percent. Examples: 44.2, 72.',
 				}),
 			),
 			2: Type.Optional(
 				Type.Number({
-					title: 'Atmoshperic pressure',
+					title: 'Atmoshperic pressure (Pa)',
 					description: 'Atmoshperic pressure in pascal. Examples: 1003.6, 977.',
 				}),
 			),

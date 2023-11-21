@@ -1,6 +1,8 @@
 import { Type } from '@sinclair/typebox'
 /**
- * Button press: Describes a button press event.
+ * Button press (14220)
+ *
+ * Describes a button press event.
  */
 export const Buttonpress_14220 = Type.Object(
 	{

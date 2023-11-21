@@ -4,6 +4,7 @@ import path from 'node:path'
 import { unwrapNestedArray } from '../lwm2m/unwrapNestedArray.js'
 import xml2js from 'xml2js'
 import type { ParsedLwM2MObjectDefinition } from '../lwm2m/ParsedLwM2MObjectDefinition.js'
+import prettier from 'prettier'
 
 import { printNode } from './printNode.js'
 import os from 'node:os'
@@ -29,15 +30,12 @@ for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
 	console.log(chalk.green('Writing'), chalk.blue(file.replace(baseDir, '')))
 	await writeFile(
 		file,
-		generateTypeBox({
-			name: definition.Name,
-			id: ObjectID,
-			description: definition.Description1,
-			objectVersion: definition.ObjectVersion ?? '1.0',
-			resources: definition.Resources.Item,
-		})
-			.map(printNode)
-			.join(os.EOL),
+		await prettier.format(
+			generateTypeBox(definition).map(printNode).join(os.EOL),
+			{
+				parser: 'typescript',
+			},
+		),
 		'utf-8',
 	)
 }

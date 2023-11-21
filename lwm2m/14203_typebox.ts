@@ -1,6 +1,8 @@
 import { Type } from '@sinclair/typebox'
 /**
- * Connection information: Details about the device's connection.
+ * Connection information (14203)
+ *
+ * Details about the device's connection.
  */
 export const Connectioninformation_14203 = Type.Object(
 	{
@@ -22,7 +24,7 @@ export const Connectioninformation_14203 = Type.Object(
 			),
 			2: Type.Optional(
 				Type.Integer({
-					title: 'RSRP',
+					title: 'RSRP (dBm)',
 					description:
 						'Reference Signal Received Power (RSRP). The average power level in dBm received from a single reference signal in an LTE (Long-term Evolution) network. Typically this value ranges from -140 to -40 dBm. Examples: -97, -104.',
 				}),

@@ -1,26 +1,19 @@
 import ts from 'typescript'
 import { addDocBlock } from './addDocBlock.js'
-import type { Resource } from 'lwm2m/ParsedLwM2MObjectDefinition.js'
-import { LwM2MType, resourceType } from 'lwm2m/resourceType.js'
+import type {
+	ParsedLwM2MObjectDefinition,
+	Resource,
+} from '../lwm2m/ParsedLwM2MObjectDefinition.js'
+import { LwM2MType, resourceType } from '../lwm2m/resourceType.js'
 import { tokenizeName } from './tokenizeName.js'
 
-/**
- * uses src/type-generation/createLwM2MObjectType.ts from lwm2m-types-js as a ref
- */
-
 export const generateTypeBox = ({
-	name,
-	id,
-	description,
-	objectVersion,
-	resources,
-}: {
-	name: string
-	id: number
-	description: string
-	objectVersion: string
-	resources: Resource[]
-}): ts.Node[] => {
+	ObjectID,
+	ObjectVersion,
+	Name,
+	Description1,
+	Resources,
+}: ParsedLwM2MObjectDefinition): ts.Node[] => {
 	/**
 	 * import { Type } from '@sinclair/typebox'
 	 */
@@ -54,7 +47,11 @@ export const generateTypeBox = ({
 					[
 						ts.factory.createPropertyAssignment(
 							ts.factory.createIdentifier('title'),
-							ts.factory.createStringLiteral(`${resource.Name}`),
+							ts.factory.createStringLiteral(
+								`${resource.Name}${
+									resource.Units.length > 0 ? ` (${resource.Units})` : ''
+								}`,
+							),
 						),
 						ts.factory.createPropertyAssignment(
 							ts.factory.createIdentifier('description'),
@@ -69,7 +66,7 @@ export const generateTypeBox = ({
 	/**
 	 * TypeBox definition for all the resources
 	 */
-	const resourcesDef = resources.map((resource) => {
+	const resourcesDef = Resources.Item.map((resource) => {
 		return ts.factory.createPropertyAssignment(
 			ts.factory.createIdentifier(`${resource.$.ID}`),
 			resource.Mandatory === 'Mandatory'
@@ -89,7 +86,7 @@ export const generateTypeBox = ({
 	/**
 	 * Type.Object({ObjectVersion: ..., ObjectID: ..., Resources:...}, {description: ...});
 	 */
-	const typeboxObject = ts.factory.createCallExpression(
+	const typeBoxObject = ts.factory.createCallExpression(
 		ts.factory.createPropertyAccessExpression(
 			ts.factory.createIdentifier('Type'),
 			ts.factory.createIdentifier('Object'),
@@ -119,7 +116,9 @@ export const generateTypeBox = ({
 											ts.factory.createPropertyAssignment(
 												ts.factory.createIdentifier('examples'),
 												ts.factory.createArrayLiteralExpression([
-													ts.factory.createStringLiteral(`${objectVersion}`),
+													ts.factory.createStringLiteral(
+														`${ObjectVersion ?? '1.0'}`,
+													),
 												]),
 											),
 										],
@@ -146,7 +145,7 @@ export const generateTypeBox = ({
 									ts.factory.createPropertyAssignment(
 										ts.factory.createIdentifier('examples'),
 										ts.factory.createArrayLiteralExpression([
-											ts.factory.createNumericLiteral(id),
+											ts.factory.createNumericLiteral(ObjectID),
 										]),
 									),
 								],
@@ -172,7 +171,7 @@ export const generateTypeBox = ({
 			ts.factory.createObjectLiteralExpression([
 				ts.factory.createPropertyAssignment(
 					ts.factory.createIdentifier('description'),
-					ts.factory.createStringLiteral(description),
+					ts.factory.createStringLiteral(Description1),
 				),
 			]),
 		],
@@ -186,16 +185,16 @@ export const generateTypeBox = ({
 		ts.factory.createVariableDeclarationList(
 			[
 				ts.factory.createVariableDeclaration(
-					ts.factory.createIdentifier(`${tokenizeName(name)}_${id}`),
+					ts.factory.createIdentifier(`${tokenizeName(Name)}_${ObjectID}`),
 					undefined,
 					undefined,
-					typeboxObject,
+					typeBoxObject,
 				),
 			],
 			ts.NodeFlags.Const,
 		),
 	)
-	addDocBlock([`${name}: ${description}`], variableDeclaration)
+	addDocBlock([`${Name} (${ObjectID})`, '', Description1], variableDeclaration)
 
 	return [importTypeBox, variableDeclaration]
 }

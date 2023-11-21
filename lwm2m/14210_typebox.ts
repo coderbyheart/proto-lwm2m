@@ -1,6 +1,8 @@
 import { Type } from '@sinclair/typebox'
 /**
- * Solar charge: Measurements from the solar shield.
+ * Solar charge (14210)
+ *
+ * Measurements from the solar shield.
  */
 export const Solarcharge_14210 = Type.Object(
 	{
@@ -8,13 +10,13 @@ export const Solarcharge_14210 = Type.Object(
 		ObjectID: Type.Number({ examples: [14210] }),
 		Resources: Type.Object({
 			0: Type.Number({
-				title: 'Gain',
+				title: 'Gain (mA)',
 				description:
 					'The current gain from the solar shield, measured in mA. Example: 3.123, -0.0032.',
 			}),
 			1: Type.Optional(
 				Type.Number({
-					title: 'Voltage',
+					title: 'Voltage (V)',
 					description: 'Battery voltage in Volt. Examples: 2.754, 3.3.',
 				}),
 			),

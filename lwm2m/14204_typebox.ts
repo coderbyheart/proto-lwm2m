@@ -1,6 +1,8 @@
 import { Type } from '@sinclair/typebox'
 /**
- * Device information: Details about the device's connection.
+ * Device information (14204)
+ *
+ * Details about the device's connection.
  */
 export const Deviceinformation_14204 = Type.Object(
 	{
