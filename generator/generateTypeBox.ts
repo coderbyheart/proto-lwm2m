@@ -51,7 +51,7 @@ export const generateTypeBox = ({
 				),
 			]),
 		),
-		ts.factory.createStringLiteral('./objects.js'),
+		ts.factory.createStringLiteral('./LwM2MObject.js'),
 	)
 	const importLwM2MObjectID = ts.factory.createImportDeclaration(
 		undefined,

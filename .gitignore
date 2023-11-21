@@ -3,3 +3,4 @@ dist/
 models/models.ts
 lwm2m/timestampResources.ts
 lwm2m/LwM2MObjectID.ts
+lwm2m/objects.ts

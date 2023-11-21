@@ -1,5 +1,5 @@
 import { Type, type Static } from '@sinclair/typebox'
-import type { LwM2MObject } from './objects.js'
+import type { LwM2MObject } from './LwM2MObject.js'
 import { LwM2MObjectID } from './LwM2MObjectID.js'
 /**
  * Environment (14205)

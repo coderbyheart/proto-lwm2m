@@ -16,6 +16,7 @@ const baseDir = process.cwd()
 const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
 
 const idMembers: ts.EnumMember[] = []
+const objects: ParsedLwM2MObjectDefinition[] = []
 
 console.log(chalk.gray('Creating TypeBox definition for LwM2M objects'))
 for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
@@ -48,6 +49,8 @@ for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
 
 		'utf-8',
 	)
+
+	objects.push(definition)
 }
 
 const idFile = subDir('lwm2m', `LwM2MObjectID.ts`)
@@ -60,3 +63,37 @@ const enumNode = ts.factory.createEnumDeclaration(
 addDocBlock(['The LwM2M Object IDs defined in this repo.'], enumNode)
 
 await writeFile(idFile, [enumNode].map(printNode).join(os.EOL), 'utf-8')
+
+const objectsFile = subDir('lwm2m', `objects.ts`)
+console.log(
+	chalk.green('Writing'),
+	chalk.blue(objectsFile.replace(baseDir, '')),
+)
+await writeFile(
+	objectsFile,
+	objects
+		.map(({ ObjectID, Name }) =>
+			ts.factory.createExportDeclaration(
+				[],
+				false,
+				ts.factory.createNamedExports([
+					ts.factory.createExportSpecifier(
+						false,
+						undefined,
+						ts.factory.createIdentifier(generateName({ ObjectID, Name })),
+					),
+					ts.factory.createExportSpecifier(
+						true,
+						undefined,
+						ts.factory.createIdentifier(
+							`${generateName({ ObjectID, Name })}_Type`,
+						),
+					),
+				]),
+				ts.factory.createStringLiteral(`./${ObjectID}_typebox.js`),
+			),
+		)
+		.map(printNode)
+		.join(os.EOL),
+	'utf-8',
+)
