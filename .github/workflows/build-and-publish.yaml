@@ -48,6 +48,9 @@ jobs:
       - name: Generate code
         run: npx tsx generator/models.ts
 
+      - name: Generate TypeBox types
+        run: npx tsx generator/typebox.ts
+
       - name: Compile TypeScript
         run: npx tsc
 
