@@ -1,17 +1,13 @@
 import type { LwM2MResourceValue } from '../senml/senMLtoLwM2M.js'
 
-export * from './LwM2MObjectID.js'
-export * from './14201.js'
-export * from './14203.js'
-export * from './14204.js'
-export * from './14205.js'
-export * from './14210.js'
-export * from './14220.js'
-export * from './14202.js'
-
 export type LwM2MObject<
 	ObjectDef extends {
 		ObjectID: number
+		/**
+		 * The Object Version of an Object is composed of 2 digits separated by a dot '.'
+		 *
+		 * @see https://www.openmobilealliance.org/release/LightweightM2M/V1_1_1-20190617-A/OMA-TS-LightweightM2M_Core-V1_1_1-20190617-A.pdf Section 7.2.2
+		 */
 		ObjectVersion: string
 		Resources: Record<number, LwM2MResourceValue | undefined>
 	},

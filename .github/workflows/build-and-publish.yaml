@@ -42,20 +42,23 @@ jobs:
       - name: Generate LwM2M code
         run: npx tsx generator/lwm2m.ts
 
-      - name: Check model data
-        run: npx tsx models/check-model-rules.ts
-
-      - name: Generate code
+      - name: Generate model code
         run: npx tsx generator/models.ts
 
-      - name: Compile TypeScript
-        run: npx tsc
+      - name: Generate types and validation code
+        run: npx tsx generator/types.ts
 
-      - name: Check source code with eslint
-        run: npx eslint --fix --ext .js,.ts,.jsx,.tsx ./
+      - name: Make sure TypeScript compiles
+        run: npx tsc
 
       - name: Run tests
         run: npm test
+
+      - name: Check model data
+        run: npx tsx models/check-model-rules.ts
+
+      - name: Check source code with eslint
+        run: npx eslint --fix --ext .js,.ts,.jsx,.tsx ./
 
       - name: Semantic release
         run: npx semantic-release

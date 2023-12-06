@@ -9,6 +9,7 @@ import { getCodeBlock } from '../markdown/getCodeBlock.js'
 import { getFrontMatter } from '../markdown/getFrontMatter.js'
 import { validateSenML } from '../senml/validateSenML.js'
 import { stripEmptyValues } from '../senml/stripEmptyValues.js'
+import { isRegisteredLwM2MObject } from '../lwm2m/isRegisteredLwM2MObject.js'
 
 console.log(chalk.gray('Models rules check'))
 console.log('')
@@ -98,8 +99,19 @@ for (const model of await readdir(modelsDir)) {
 				chalk.gray('The transformation result matches the example'),
 			)
 
-			senMLtoLwM2M(maybeValidSenML.value)
-			// FIXME: validate LwM2M (see #)
+			// Validate
+			for (const object of senMLtoLwM2M(maybeValidSenML.value)) {
+				if (!isRegisteredLwM2MObject(object, console.error)) {
+					throw new Error(
+						'The LwM2M object must follow LwM2M schema definition',
+					)
+				}
+				console.log(
+					' ',
+					chalk.green('✔'),
+					chalk.gray('SenML object is valid LwM2M'),
+				)
+			}
 		}
 	}
 }
