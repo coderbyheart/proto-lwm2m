@@ -8,8 +8,8 @@ import { senMLtoLwM2M } from '../senml/senMLtoLwM2M.js'
 import { getCodeBlock } from '../markdown/getCodeBlock.js'
 import { getFrontMatter } from '../markdown/getFrontMatter.js'
 import { validateSenML } from '../senml/validateSenML.js'
-import { stripEmptyValues } from '../senml/stripEmptyValues.js'
 import { isRegisteredLwM2MObject } from '../lwm2m/isRegisteredLwM2MObject.js'
+import { hasValue } from '../senml/hasValue.js'
 
 console.log(chalk.gray('Models rules check'))
 console.log('')
@@ -79,7 +79,7 @@ for (const model of await readdir(modelsDir)) {
 				transformExpression.replace('$millis()', '1699999999999'),
 			).evaluate(inputExample)
 
-			const maybeValidSenML = validateSenML(stripEmptyValues(transformResult))
+			const maybeValidSenML = validateSenML(transformResult.filter(hasValue))
 			if ('errors' in maybeValidSenML) {
 				console.error(maybeValidSenML.errors)
 				throw new Error('The JSONata expression must produce valid SenML')

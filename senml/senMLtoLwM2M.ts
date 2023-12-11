@@ -1,7 +1,7 @@
 import type { MeasurementType, SenMLType } from './SenMLSchema'
 import { timestampResources } from '../lwm2m/timestampResources.js'
-import { stripEmptyValues } from './stripEmptyValues.js'
 import { parseResourceId, type ResourceID } from './parseResourceId.js'
+import { hasValue } from './hasValue.js'
 
 export type LwM2MResourceValue = string | number | boolean | Date
 export type LwM2MObjectInstance = {
@@ -58,9 +58,10 @@ export const senMLtoLwM2M = (senML: SenMLType): Array<LwM2MObjectInstance> => {
 	let currentObject: LwM2MObjectInstance | undefined = undefined
 	const items: LwM2MObjectInstance[] = []
 
-	for (const item of stripEmptyValues(senML)) {
+	for (const item of senML) {
 		if ('bn' in item && item.bn !== undefined) currentBaseName = item.bn
 		if ('bt' in item && item.bt !== undefined) currentBaseTime = item.bt
+		if (!hasValue(item)) continue
 		const itemResourceId = `${currentBaseName}${item.n ?? ''}/0`
 		const resourceId = parseResourceId(itemResourceId)
 		if (resourceId === null)
