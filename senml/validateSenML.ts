@@ -1,7 +1,7 @@
-import { validateWithTypeBox } from '@hello.nrfcloud.com/proto'
 import { SenML } from '../senml/SenMLSchema.js'
+import { validate } from '../validate.js'
 
-const validator = validateWithTypeBox(SenML)
+const validator = validate(SenML)
 
 export const validateSenML = (
 	maybeSenML: unknown,

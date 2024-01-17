@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test'
-import { validateWithTypeBox } from '@hello.nrfcloud.com/proto'
 import { SenML, type SenMLType } from './SenMLSchema.js'
 import assert from 'node:assert/strict'
+import { validate } from '../validate.js'
 
 void describe('SenMLType', () => {
 	void it('it should validate a SenML payload', () => {
@@ -14,7 +14,7 @@ void describe('SenMLType', () => {
 			},
 			{ n: '1', v: -84.506132079174634 },
 		]
-		const res = validateWithTypeBox(SenML)(example)
+		const res = validate(SenML)(example)
 		assert.equal('errors' in res, false)
 		assert.deepEqual('value' in res && res.value, example)
 	})

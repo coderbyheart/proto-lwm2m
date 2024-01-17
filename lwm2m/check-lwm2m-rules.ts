@@ -9,10 +9,10 @@ import {
 	LWM2MObjectDefinition,
 	type LWM2MObjectDefinitionType,
 } from './LWM2MObjectDefinition.js'
-import { validateWithTypeBox } from '@hello.nrfcloud.com/proto'
 import type { ParsedLwM2MObjectDefinition } from './ParsedLwM2MObjectDefinition.js'
+import { validate } from '../validate.js'
 
-const v = validateWithTypeBox(LWM2MObjectDefinition)
+const v = validate(LWM2MObjectDefinition)
 
 const listLwm2mDefinitions = async (
 	modelDir: string,
