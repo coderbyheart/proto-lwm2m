@@ -7,13 +7,15 @@ import type { ParsedLwM2MObjectDefinition } from '../lwm2m/ParsedLwM2MObjectDefi
 import { generateLwm2mTimestampResources } from './generateLwm2mTimestampResources.js'
 import { printNode } from './printNode.js'
 import os from 'node:os'
+import { generateLwM2MDefinitions } from './generateLwM2MDefinitions.js'
 
 const baseDir = process.cwd()
 const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
 
 console.log(chalk.gray('LwM2M'))
-console.log(chalk.gray('', '·'), chalk.gray('timestamp resources map'))
-const timestampResources: Record<number, number> = {}
+
+// Load definitions
+const definitions: ParsedLwM2MObjectDefinition[] = []
 for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
 	(s) => s.endsWith('.xml'),
 )) {
@@ -24,6 +26,12 @@ for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
 			),
 		) as any
 	).LWM2M.Object as ParsedLwM2MObjectDefinition
+	definitions.push(definition)
+}
+
+console.log(chalk.gray('', '·'), chalk.gray('timestamp resources map'))
+const timestampResources: Record<number, number> = {}
+for (const definition of definitions) {
 	const ObjectID = parseInt(definition.ObjectID, 10)
 	const ResourceId = parseInt(
 		definition.Resources.Item.find(({ Type }) => Type === 'Time')?.$
@@ -37,6 +45,7 @@ for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
 		`${chalk.white(ObjectID)}${chalk.gray('.')}${chalk.white(ResourceId)}`,
 	)
 }
+
 const timestampResourcesFile = subDir('lwm2m', 'timestampResources.ts')
 console.log(
 	chalk.green('Writing'),
@@ -47,5 +56,17 @@ await writeFile(
 	generateLwm2mTimestampResources(timestampResources)
 		.map(printNode)
 		.join(os.EOL),
+	'utf-8',
+)
+
+console.log(chalk.gray('', '·'), chalk.gray('static object information'))
+const definitionsFile = subDir('lwm2m', 'definitions.ts')
+console.log(
+	chalk.green('Writing'),
+	chalk.blue(definitionsFile.replace(baseDir, '')),
+)
+await writeFile(
+	definitionsFile,
+	generateLwM2MDefinitions(definitions).map(printNode).join(os.EOL),
 	'utf-8',
 )
