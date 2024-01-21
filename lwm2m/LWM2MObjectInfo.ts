@@ -8,18 +8,17 @@ export type LWM2MObjectInfo = {
 	ObjectVersion: string
 	Name: string
 	Description: string
-	Resources: Record<
-		number,
-		{
-			ResourceID: number
-			Name: string
-			Mandatory: boolean
-			Type: ResourceType
-			Description: string // e.g. 'The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].'
-			RangeEnumeration?: string // e.g. ''
-			Units?: string // e.g. 'lat'
-		}
-	>
+	Resources: Record<number, LwM2MResourceInfo>
+}
+
+export type LwM2MResourceInfo = {
+	ResourceID: number
+	Name: string
+	Mandatory: boolean
+	Type: ResourceType
+	Description: string // e.g. 'The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].'
+	RangeEnumeration?: string // e.g. ''
+	Units?: string // e.g. 'lat'
 }
 
 export enum ResourceType {
