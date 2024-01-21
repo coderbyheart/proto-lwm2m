@@ -18,8 +18,8 @@ void describe('generateLwM2MDefinitions()', () => {
 					Mandatory: true,
 					Type: ResourceType.Float,
 					Description:
-						'The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].',
-					Units: 'lat',
+						'The decimal notation of latitude in degrees, e.g. -43.5723 [World Geodetic System 1984].',
+					Units: '°',
 				},
 				1: {
 					ResourceID: 1,
@@ -27,8 +27,8 @@ void describe('generateLwM2MDefinitions()', () => {
 					Mandatory: true,
 					Type: ResourceType.Float,
 					Description:
-						'The decimal notation of longitude, e.g. 153.21760 [World Geodetic System 1984].',
-					Units: 'lon',
+						'The decimal notation of longitude in degrees, e.g. 153.21760 [World Geodetic System 1984].',
+					Units: '°',
 				},
 				2: {
 					ResourceID: 2,
@@ -61,8 +61,8 @@ void describe('generateLwM2MDefinitions()', () => {
 					Name: 'Heading',
 					Mandatory: false,
 					Type: ResourceType.Float,
-					Description: 'The angle of movement.',
-					Units: 'degrees',
+					Description: 'The angle of movement in degrees.',
+					Units: '°',
 				},
 				6: {
 					ResourceID: 6,

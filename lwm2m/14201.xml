@@ -15,8 +15,8 @@
         <Mandatory>Mandatory</Mandatory>
         <Type>Float</Type>
         <RangeEnumeration/>
-        <Units>lat</Units>
-        <Description><![CDATA[The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].]]></Description>
+        <Units>°</Units>
+        <Description><![CDATA[The decimal notation of latitude in degrees, e.g. -43.5723 [World Geodetic System 1984].]]></Description>
       </Item>
       <Item ID="1">
         <Name>Longitude</Name>
@@ -25,8 +25,8 @@
         <Mandatory>Mandatory</Mandatory>
         <Type>Float</Type>
         <RangeEnumeration/>
-        <Units>lon</Units>
-        <Description><![CDATA[The decimal notation of longitude, e.g. 153.21760 [World Geodetic System 1984].]]></Description>
+        <Units>°</Units>
+        <Description><![CDATA[The decimal notation of longitude in degrees, e.g. 153.21760 [World Geodetic System 1984].]]></Description>
       </Item>
       <Item ID="2">
         <Name>Altitude</Name>
@@ -65,8 +65,8 @@
         <Mandatory>Optional</Mandatory>
         <Type>Float</Type>
         <RangeEnumeration/>
-        <Units>degrees</Units>
-        <Description><![CDATA[The angle of movement.]]></Description>
+        <Units>°</Units>
+        <Description><![CDATA[The angle of movement in degrees.]]></Description>
       </Item>
       <Item ID="6">
         <Name>Source</Name>
