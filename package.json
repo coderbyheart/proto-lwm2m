@@ -31,7 +31,7 @@
     "npm": ">=9.0.0"
   },
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "find ./ -type f -name \\*.spec.ts -not -path './node_modules/*' | xargs npx tsx --test --test-reporter spec",
     "prepublishOnly": "./compile.sh"
   },
@@ -50,7 +50,7 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "eslint-plugin-unicorn": "50.0.1",
-    "husky": "8.0.3",
+    "husky": "9.0.7",
     "lint-staged": "15.2.0",
     "prettier": "3.2.4",
     "prettier-plugin-organize-imports": "3.2.4",
