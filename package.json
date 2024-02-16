@@ -74,7 +74,7 @@
       "./lwm2m/format.sh"
     ]
   },
-  "prettier": "@nordicsemiconductor/asset-tracker-cloud-code-style/.prettierrc",
+  "prettier": "@bifravst/prettier-config",
   "release": {
     "branches": [
       "saga",
