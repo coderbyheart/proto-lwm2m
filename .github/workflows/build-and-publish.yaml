@@ -58,7 +58,7 @@ jobs:
         run: npx tsx models/check-model-rules.ts
 
       - name: Check source code with eslint
-        run: npx eslint --fix --ext .js,.ts,.jsx,.tsx ./
+        run: npx eslint ./
 
       - name: Semantic release
         run: npx semantic-release

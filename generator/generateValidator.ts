@@ -222,7 +222,7 @@ const typeToValidator = (Type: Resource['Type']): string => {
 		case 'Time':
 			return 'DateResource'
 		default:
-			throw new Error(`Unsupported Resource type ${Type}!`)
+			throw new Error(`Unsupported Resource type ${Type as string}!`)
 	}
 }
 

@@ -29,9 +29,11 @@ export const isLwM2MObject = (
 		typeof object.ObjectID !== 'number' ||
 		object.ObjectID < 14200 ||
 		object.ObjectID > 15000 ||
-		!LwM2MObjectIDs.includes(object.ObjectID)
+		LwM2MObjectIDs.includes(object.ObjectID) === false
 	)
-		return error(`Not an valid Object ID`)
+		return error(
+			`Not an valid Object ID: ${JSON.stringify((object as any).ObjectID)}`,
+		)
 	// ObjectVersion must be valid
 	if ('ObjectVersion' in object) {
 		if (

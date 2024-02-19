@@ -13,7 +13,7 @@ void describe('hasValue() should determine whether an object has a value', () =>
 	]) {
 		void it(`should determine that ${JSON.stringify(
 			record,
-		)} has a value: ${expected}`, () =>
+		)} has a value: ${JSON.stringify(expected)}`, () =>
 			assert.equal(hasValue(record), expected))
 	}
 })

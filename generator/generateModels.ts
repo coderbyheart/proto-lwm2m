@@ -98,10 +98,10 @@ export const generateModels = (
 															transform.type === 'messages'
 																? ts.factory.createIdentifier(
 																		'TransformerType.Messages',
-																  )
+																	)
 																: ts.factory.createIdentifier(
 																		'TransformerType.Shadow',
-																  ),
+																	),
 														),
 														// match
 														ts.factory.createPropertyAssignment(
