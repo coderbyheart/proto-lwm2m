@@ -52,7 +52,7 @@
     "tsmatchers": "5.0.2",
     "tsx": "4.7.1",
     "xml2js": "0.6.2",
-    "yaml": "2.3.4"
+    "yaml": "2.4.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
