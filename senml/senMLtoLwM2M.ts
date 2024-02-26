@@ -2,10 +2,11 @@ import type { MeasurementType, SenMLType } from './SenMLSchema'
 import { timestampResources } from '../lwm2m/timestampResources.js'
 import { parseResourceId, type ResourceID } from './parseResourceId.js'
 import { hasValue } from './hasValue.js'
+import type { LwM2MObjectID } from 'lwm2m/LwM2MObjectID'
 
 export type LwM2MResourceValue = string | number | boolean | Date
 export type LwM2MObjectInstance = {
-	ObjectID: number
+	ObjectID: LwM2MObjectID
 	/**
 	 * @default 0
 	 */

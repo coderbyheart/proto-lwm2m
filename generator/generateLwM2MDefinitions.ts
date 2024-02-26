@@ -49,11 +49,9 @@ export const generateLwM2MDefinitions = (
 				ts.factory.createVariableDeclaration(
 					ts.factory.createIdentifier(`definitions`),
 					undefined,
-					ts.factory.createTypeReferenceNode('Readonly', [
-						ts.factory.createTypeReferenceNode('Record', [
-							ts.factory.createTypeReferenceNode('LwM2MObjectID'),
-							ts.factory.createTypeReferenceNode('LWM2MObjectInfo'),
-						]),
+					ts.factory.createTypeReferenceNode('Record', [
+						ts.factory.createTypeReferenceNode('LwM2MObjectID'),
+						ts.factory.createTypeReferenceNode('LWM2MObjectInfo'),
 					]),
 					ts.factory.createObjectLiteralExpression(
 						definitions.map((definition) => {

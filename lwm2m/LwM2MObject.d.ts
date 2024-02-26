@@ -1,8 +1,9 @@
 import type { LwM2MResourceValue } from '../senml/senMLtoLwM2M.js'
+import type { LwM2MObjectID } from './LwM2MObjectID.js'
 
 export type LwM2MObject<
 	ObjectDef extends {
-		ObjectID: number
+		ObjectID: LwM2MObjectID
 		/**
 		 * The Object Version of an Object is composed of 2 digits separated by a dot '.'
 		 *
