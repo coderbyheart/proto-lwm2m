@@ -15,7 +15,7 @@
         <Mandatory>Optional</Mandatory>
         <Type>Float</Type>
         <RangeEnumeration/>
-        <Units>C</Units>
+        <Units>°C</Units>
         <Description><![CDATA[Environmental temperature in Celsius. Examples: 23.5, -10.2.]]></Description>
       </Item>
       <Item ID="1">
