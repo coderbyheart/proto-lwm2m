@@ -32,7 +32,7 @@
   },
   "scripts": {
     "prepare": "husky",
-    "test": "find ./ -type f -name *.spec.ts -not -path './node_modules/*' | xargs npx tsx --test --test-reporter spec",
+    "test": "find ./ -type f -name \\*.spec.ts -not -path './node_modules/*' | xargs npx tsx --test --test-reporter spec",
     "prepublishOnly": "./compile.sh"
   },
   "devDependencies": {
