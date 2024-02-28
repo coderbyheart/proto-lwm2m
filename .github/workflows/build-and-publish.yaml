@@ -36,6 +36,7 @@ jobs:
 
       - name: Check LwM2M definitions
         run: |
+          sudo apt-get update
           sudo apt-get install -y libxml2-utils
           npx tsx lwm2m/check-lwm2m-rules.ts
 
