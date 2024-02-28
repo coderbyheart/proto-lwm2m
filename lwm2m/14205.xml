@@ -29,14 +29,14 @@
         <Description><![CDATA[Environmental humidity in percent. Examples: 44.2, 72.]]></Description>
       </Item>
       <Item ID="2">
-        <Name>Atmoshperic pressure</Name>
+        <Name>Atmospheric pressure</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
         <Type>Float</Type>
         <RangeEnumeration/>
         <Units>Pa</Units>
-        <Description><![CDATA[Atmoshperic pressure in pascal. Examples: 1003.6, 977.]]></Description>
+        <Description><![CDATA[Atmospheric pressure in pascal. Examples: 1003.6, 977.]]></Description>
       </Item>
       <Item ID="10">
         <Name>Air Quality Index</Name>
