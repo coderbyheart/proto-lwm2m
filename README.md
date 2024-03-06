@@ -79,7 +79,7 @@ published by the devices to the SenML data format used to describe LwM2M objects
   describes the model
 - transforms may define transforms that convert the data sent by the device
   using JSONata for JSON payloads in one or more Markdown files
-  ([Example](./models/PCA20035+solar/transformers/geolocation.md)):
+  ([Example](./models/PCA20035+solar/transformers/geolocationFromGroundfix.md)):
   - The `Match Expression` the must evaluate to `true` for the
     `Transform Expression` to be applied to the input message
   - an `Input Example` and a `Result Example` must be supplied to validate the
