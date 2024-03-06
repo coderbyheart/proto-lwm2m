@@ -10,6 +10,7 @@ import { getFrontMatter } from '../markdown/getFrontMatter.js'
 import { validateSenML } from '../senml/validateSenML.js'
 import { isRegisteredLwM2MObject } from '../lwm2m/isRegisteredLwM2MObject.js'
 import { hasValue } from '../senml/hasValue.js'
+import { parseREADME } from 'markdown/parseREADME.js'
 
 console.log(chalk.gray('Models rules check'))
 console.log('')
@@ -32,6 +33,13 @@ for (const model of await readdir(modelsDir)) {
 		throw new Error(`No README.md defined for model ${model}!`)
 	}
 	console.log(chalk.green('✔'), chalk.gray(`README.md exists`))
+	try {
+		parseREADME(await readFile(path.join(modelDir, 'README.md'), 'utf-8'))
+	} catch (err) {
+		console.error(err)
+		throw new Error(`README is not valid for ${model}!`)
+	}
+	console.log(chalk.green('✔'), chalk.gray(`README.md is valid`))
 
 	// Validate jsonata expressions
 	let hasTransformers = false

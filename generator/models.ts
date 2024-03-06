@@ -64,6 +64,10 @@ const models = await Promise.all(
 			return {
 				id: model.name,
 				transforms: await loadModelTransforms(model.name),
+				readmeMarkdown: await readFile(
+					path.join(subDir('models'), model.name, 'README.md'),
+					'utf-8',
+				),
 			}
 		}),
 )
