@@ -11,6 +11,7 @@ import { getFrontMatter } from '../markdown/getFrontMatter.js'
 import { generateModels } from './generateModels.js'
 import { printNode } from './printNode.js'
 import { FrontMatter } from '../models/types.js'
+import { isDir } from './isDir.js'
 
 const baseDir = process.cwd()
 const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
@@ -25,8 +26,10 @@ const loadModelTransforms = async (
 		match: string
 		transform: string
 	}[]
-> =>
-	Promise.all(await readdir(subDir('models', model, 'transformers')))
+> => {
+	const transformersDir = subDir('models', model, 'transformers')
+	if (!(await isDir(transformersDir))) return []
+	return Promise.all(await readdir(transformersDir))
 		.then((entries) => entries.filter((e) => e.endsWith('.md')))
 		.then(async (expressions) =>
 			Promise.all(
@@ -48,6 +51,7 @@ const loadModelTransforms = async (
 				}
 			}),
 		)
+}
 
 const models = await Promise.all(
 	(
