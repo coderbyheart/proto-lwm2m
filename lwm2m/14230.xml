@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
   <Object ObjectType="MODefinition">
-    <Name>Button press</Name>
-    <Description1><![CDATA[Describes a button press event.]]></Description1>
+    <Name>Sea Water Level</Name>
+    <Description1><![CDATA[Describes observed sea water level.]]></Description1>
     <ObjectID>14230</ObjectID>
     <ObjectURN>urn:oma:lwm2m:x:14230</ObjectURN>
     <MultipleInstances>Multiple</MultipleInstances>
