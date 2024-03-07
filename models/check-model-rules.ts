@@ -42,22 +42,22 @@ for (const model of await readdir(modelsDir)) {
 	console.log(chalk.green('✔'), chalk.gray(`README.md is valid`))
 
 	// Validate jsonata expressions
-	let hasTransformers = false
-	const transformsFolder = path.join(modelDir, 'transformers')
+	let hasTransforms = false
+	const transformsFolder = path.join(modelDir, 'transforms')
 	try {
 		await stat(transformsFolder)
-		hasTransformers = true
-		console.log(' ', chalk.gray('Transformers:'))
+		hasTransforms = true
+		console.log(' ', chalk.gray('Transforms:'))
 	} catch {
-		console.log(' ', chalk.gray('No transformers found.'))
+		console.log(' ', chalk.gray('No transforms found.'))
 	}
-	if (hasTransformers) {
-		for (const transformer of (await readdir(transformsFolder)).filter((f) =>
+	if (hasTransforms) {
+		for (const transform of (await readdir(transformsFolder)).filter((f) =>
 			f.endsWith('.md'),
 		)) {
-			console.log(' ', chalk.white('·'), chalk.white.bold(transformer))
+			console.log(' ', chalk.white('·'), chalk.white.bold(transform))
 			const markdown = await readFile(
-				path.join(modelDir, 'transformers', transformer),
+				path.join(modelDir, 'transforms', transform),
 				'utf-8',
 			)
 

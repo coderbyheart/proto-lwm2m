@@ -27,17 +27,14 @@ const loadModelTransforms = async (
 		transform: string
 	}[]
 > => {
-	const transformersDir = subDir('models', model, 'transformers')
+	const transformersDir = subDir('models', model, 'transforms')
 	if (!(await isDir(transformersDir))) return []
 	return Promise.all(await readdir(transformersDir))
 		.then((entries) => entries.filter((e) => e.endsWith('.md')))
 		.then(async (expressions) =>
 			Promise.all(
 				expressions.map(async (expression) =>
-					readFile(
-						subDir('models', model, 'transformers', expression),
-						'utf-8',
-					),
+					readFile(subDir('models', model, 'transforms', expression), 'utf-8'),
 				),
 			),
 		)

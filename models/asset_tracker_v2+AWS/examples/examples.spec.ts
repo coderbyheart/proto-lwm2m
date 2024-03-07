@@ -3,7 +3,7 @@ import {
 	senMLtoLwM2M,
 	type LwM2MObjectInstance,
 } from '../../../senml/senMLtoLwM2M.js'
-import { TransformerType, type Transformer } from '../../types.js'
+import { TransformType, type Transform } from '../../types.js'
 import jsonata from 'jsonata'
 import { arrayContaining, check } from 'tsmatchers'
 import { models } from '../../../models/models.js'
@@ -130,7 +130,7 @@ void describe('asset_tracker_v2+AWS examples', () => {
 		void it(input, async () => {
 			const result = await transformShadowUpdateToLwM2M(
 				(models['asset_tracker_v2+AWS']?.transforms ?? []).filter(
-					({ type }) => type === TransformerType.Shadow,
+					({ type }) => type === TransformType.Shadow,
 				),
 			)(
 				await import(input, {
@@ -148,9 +148,9 @@ void describe('asset_tracker_v2+AWS examples', () => {
 /**
  * Very simple implementation of a converter.
  */
-const transformShadowUpdateToLwM2M = (transformers: Transformer[]) => {
-	// Turn the JSONata in the transformers into executable functions
-	const transformerFns: Array<{
+const transformShadowUpdateToLwM2M = (transforms: Transform[]) => {
+	// Turn the JSONata in the transforms into executable functions
+	const transformFns: Array<{
 		match: ReturnType<typeof jsonata>
 		matchExpression: string
 		transform: ReturnType<typeof jsonata>
@@ -160,7 +160,7 @@ const transformShadowUpdateToLwM2M = (transformers: Transformer[]) => {
 	for (const {
 		match: matchExpression,
 		transform: transformExpression,
-	} of transformers) {
+	} of transforms) {
 		let match: ReturnType<typeof jsonata>
 		let transform: ReturnType<typeof jsonata>
 		try {
@@ -175,7 +175,7 @@ const transformShadowUpdateToLwM2M = (transformers: Transformer[]) => {
 				`Failed to parse match expression '${transformExpression}'`,
 			)
 		}
-		transformerFns.push({
+		transformFns.push({
 			match,
 			matchExpression,
 			transform,
@@ -190,7 +190,7 @@ const transformShadowUpdateToLwM2M = (transformers: Transformer[]) => {
 		}
 	}): Promise<Array<LwM2MObjectInstance>> =>
 		Promise.all(
-			transformerFns.map(
+			transformFns.map(
 				async ({ match, matchExpression, transform, transformExpression }) => {
 					// Check if the `matched` JSONata returns `true`.
 					try {
@@ -222,7 +222,7 @@ const transformShadowUpdateToLwM2M = (transformers: Transformer[]) => {
 			),
 		)
 			.then((result) => result.flat())
-			// Ignore unmatched transformers
+			// Ignore unmatched transforms
 			.then((result) => result.filter((item) => item !== null))
 			// Convert it to LwM2M
 			.then(senMLtoLwM2M)

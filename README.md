@@ -64,12 +64,12 @@ The conformity to the rules is checked using the script
   mapped to the LwM2M object's timestamp property and must not be send as a
   property.
 
-## Model transformer definitions
+## Model transform definitions
 
 Optionally, a set of [JSONata](https://jsonata.org/) expression can be defined
 [per model](./models/) which allows to convert from the data format that is
 published by the devices to the SenML data format used to describe LwM2M objects
-([example mapping](./models/PCA20035+solar/transformers/geolocation.md).
+([example mapping](./models/PCA20035+solar/transforms/geolocation.md).
 
 ### Model definition rules
 
@@ -79,7 +79,7 @@ published by the devices to the SenML data format used to describe LwM2M objects
   describes the model
 - transforms may define transforms that convert the data sent by the device
   using JSONata for JSON payloads in one or more Markdown files
-  ([Example](./models/PCA20035+solar/transformers/geolocationFromGroundfix.md)):
+  ([Example](./models/PCA20035+solar/transforms/geolocationFromGroundfix.md)):
   - The `Match Expression` the must evaluate to `true` for the
     `Transform Expression` to be applied to the input message
   - an `Input Example` and a `Result Example` must be supplied to validate the

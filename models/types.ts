@@ -2,12 +2,12 @@ import { Type } from '@sinclair/typebox'
 
 export const ModelIDRegExp = /^[A-Za-z0-9+_-]+$/
 
-export enum TransformerType {
+export enum TransformType {
 	Shadow = 'shadow',
 	Messages = 'messages',
 }
-export type Transformer = {
-	type: TransformerType
+export type Transform = {
+	type: TransformType
 	match: string
 	transform: string
 }

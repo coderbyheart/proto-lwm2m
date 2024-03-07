@@ -26,12 +26,12 @@ export const generateModels = (
 					ts.factory.createImportSpecifier(
 						true,
 						undefined,
-						ts.factory.createIdentifier('Transformer'),
+						ts.factory.createIdentifier('Transform'),
 					),
 					ts.factory.createImportSpecifier(
 						false,
 						undefined,
-						ts.factory.createIdentifier('TransformerType'),
+						ts.factory.createIdentifier('TransformType'),
 					),
 				]),
 			),
@@ -71,13 +71,13 @@ export const generateModels = (
 					),
 				),
 				addDocBlock(
-					['The transformers defined for this model.'],
+					['The transforms defined for this model.'],
 					ts.factory.createPropertySignature(
 						undefined,
 						ts.factory.createStringLiteral('transforms'),
 						undefined,
 						ts.factory.createTypeReferenceNode('Array', [
-							ts.factory.createTypeReferenceNode('Transformer'),
+							ts.factory.createTypeReferenceNode('Transform'),
 						]),
 					),
 				),
@@ -161,10 +161,10 @@ export const generateModels = (
 																	ts.factory.createStringLiteral('type'),
 																	transform.type === 'messages'
 																		? ts.factory.createIdentifier(
-																				'TransformerType.Messages',
+																				'TransformType.Messages',
 																			)
 																		: ts.factory.createIdentifier(
-																				'TransformerType.Shadow',
+																				'TransformType.Shadow',
 																			),
 																),
 																// match
