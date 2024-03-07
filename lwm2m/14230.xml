@@ -13,7 +13,7 @@
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
-        <Type>Integer</Type>
+        <Type>Float</Type>
         <RangeEnumeration/>
         <Units>cm</Units>
         <Description><![CDATA[The observed sea water level relative the the sea level elevation of the sea map. Examples: 134.2, 104.5.]]></Description>
