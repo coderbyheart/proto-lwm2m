@@ -1,5 +1,6 @@
 export * from './dist/senml/SenMLSchema.js'
 export * from './dist/senml/senMLtoLwM2M.js'
+export * from './dist/senml/lwm2mToSenML.js'
 export * from './dist/models/models.js'
 export * from './dist/models/types.js'
 export * from './dist/lwm2m/timestampResources.js'
