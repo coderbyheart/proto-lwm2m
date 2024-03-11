@@ -18,7 +18,7 @@ type GenericLwM2MObjectInstance = {
 	/**
 	 * Key range: 0..65534
 	 */
-	Resources: Record<number, LwM2MResourceValue | undefined>
+	Resources: Partial<Record<number, LwM2MResourceValue>>
 }
 export type LwM2MObjectInstance<
 	Instance extends GenericLwM2MObjectInstance = GenericLwM2MObjectInstance,
