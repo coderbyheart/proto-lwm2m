@@ -1,14 +1,14 @@
-# `hello.nrfcloud.com` LwM2M Protocols [![npm version](https://img.shields.io/npm/v/@hello.nrfcloud.com/proto-lwm2m.svg)](https://www.npmjs.com/package/@hello.nrfcloud.com/proto-lwm2m)
+# `hello.nrfcloud.com/map` Protocols [![npm version](https://img.shields.io/npm/v/@hello.nrfcloud.com/proto-map.svg)](https://www.npmjs.com/package/@hello.nrfcloud.com/proto-map)
 
-[![GitHub Actions](https://github.com/hello-nrfcloud/proto-lwm2m/actions/workflows/build-and-publish.yaml/badge.svg)](https://github.com/hello-nrfcloud/proto-lwm2m/actions/workflows/build-and-publish.yaml)
+[![GitHub Actions](https://github.com/hello-nrfcloud/proto-map/actions/workflows/build-and-publish.yaml/badge.svg)](https://github.com/hello-nrfcloud/proto-map/actions/workflows/build-and-publish.yaml)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
 [![@commitlint/config-conventional](https://img.shields.io/badge/%40commitlint-config--conventional-brightgreen)](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier/)
 [![ESLint: TypeScript](https://img.shields.io/badge/ESLint-TypeScript-blue.svg)](https://github.com/typescript-eslint/typescript-eslint)
 
-Documents the LwM2M communication protocol between devices, the
-`hello.nrfcloud.com` backend and the web application.
+Documents the communication protocol between devices, the
+`hello.nrfcloud.com/map` backend and web application.
 
 The [`lwm2m`](./lwm2m/) folder contains the LwM2M objects that devices publish.
 
@@ -25,8 +25,8 @@ The SenML payload will be [expanded](./senml/senMLtoLwM2M.spec.ts] to fully
 qualified LwM2M object representations which can then be processed further, e.g.
 stored in a database.
 
-This allows the `hello.nrfcloud.com` web application to visualize this data in a
-meaningful way to users without the need for custom implementation.
+This allows the `hello.nrfcloud.com/map` web application to visualize this data
+in a meaningful way to users without the need for custom implementation.
 
 ## LwM2M rules
 
@@ -94,7 +94,7 @@ The conformity to the rules is checked using the script
 ## Usage
 
 ```bash
-npm i --save-exact @hello.nrfcloud.com/proto-lwm2m
+npm i --save-exact @hello.nrfcloud.com/proto-map
 ```
 
 ## Setup

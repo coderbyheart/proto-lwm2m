@@ -1,7 +1,7 @@
 {
-  "name": "@hello.nrfcloud.com/proto-lwm2m",
+  "name": "@hello.nrfcloud.com/proto-map",
   "version": "0.0.0-development",
-  "description": "Documents the LwM2M communication protocol between devices, the hello.nrfcloud.com backend and the web application",
+  "description": "Documents the communication protocol between devices, the hello.nrfcloud.com/map backend and web application",
   "type": "module",
   "types": "./index.d.ts",
   "exports": {
@@ -12,17 +12,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hello-nrfcloud/proto-lwm2m.git"
+    "url": "git+https://github.com/hello-nrfcloud/proto-map.git"
   },
   "bugs": {
-    "url": "https://github.com/hello-nrfcloud/proto-lwm2m/issues"
+    "url": "https://github.com/hello-nrfcloud/proto-map/issues"
   },
   "homepage": "https://hello.nrfcloud.com",
   "keywords": [
     "nordicsemiconductor",
     "cellular-iot",
     "hello-nrfcloud",
-    "lwm2m"
+    "hello-nrfcloud-map"
   ],
   "author": "Nordic Semiconductor ASA | nordicsemi.no",
   "license": "BSD-3-Clause",
