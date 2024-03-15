@@ -15,11 +15,16 @@ void describe('generateLwM2MDefinitions()', () => {
 				0: {
 					ResourceID: 0,
 					Name: 'Latitude',
+
 					Mandatory: true,
 					Type: ResourceType.Float,
 					Description:
 						'The decimal notation of latitude in degrees, e.g. -43.5723 [World Geodetic System 1984].',
 					Units: '°',
+					RangeEnumeration: {
+						max: 90,
+						min: -90,
+					},
 				},
 				1: {
 					ResourceID: 1,
@@ -29,6 +34,10 @@ void describe('generateLwM2MDefinitions()', () => {
 					Description:
 						'The decimal notation of longitude in degrees, e.g. 153.21760 [World Geodetic System 1984].',
 					Units: '°',
+					RangeEnumeration: {
+						max: 180,
+						min: -180,
+					},
 				},
 				2: {
 					ResourceID: 2,
@@ -63,6 +72,10 @@ void describe('generateLwM2MDefinitions()', () => {
 					Type: ResourceType.Float,
 					Description: 'The angle of movement in degrees.',
 					Units: '°',
+					RangeEnumeration: {
+						min: 0,
+						max: 360,
+					},
 				},
 				6: {
 					ResourceID: 6,
@@ -71,7 +84,6 @@ void describe('generateLwM2MDefinitions()', () => {
 					Type: ResourceType.String,
 					Description:
 						'The source of the geo location, e.g. GNSS, SCELL, MCELL, WIFI.',
-					RangeEnumeration: 'GNSS,SCELL,MCELL,WIFI',
 				},
 				99: {
 					ResourceID: 99,

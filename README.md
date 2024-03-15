@@ -43,8 +43,9 @@ meaningful way to users without the need for custom implementation.
 - Resources should only be marked as mandatory in case they must be published
   together (e.g. latitude and longitude). This allows devices to only update the
   values that have changed.
-- `RangeEnumeration` is ignored, because there is no standard for the use of
-  this field.
+- `RangeEnumeration` is only supported for `Float` and `Integer` and must be
+  specified as `<min>..<max>`, where `min` must be smaller than `max` and both
+  must be a number.
 - `Objlnk` resource type is not supported
 
 The conformity to the rules is checked using the script
