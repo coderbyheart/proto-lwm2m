@@ -14,7 +14,7 @@
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
         <Type>Integer</Type>
-        <RangeEnumeration>0-100</RangeEnumeration>
+        <RangeEnumeration>0..100</RangeEnumeration>
         <Units>%</Units>
         <Description><![CDATA[State of charge in percent. Examples: 23, 1, 100.]]></Description>
       </Item>

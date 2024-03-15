@@ -7,7 +7,7 @@ export type Resource = {
 	MultipleInstances: 'Single'
 	Mandatory: 'Optional' | 'Mandatory'
 	Type: 'String' | 'Integer' | 'Float' | 'Boolean' | 'Opaque' | 'Time'
-	RangeEnumeration: string // e.g. ''
+	RangeEnumeration: string // e.g. -10..10
 	Units: string // e.g. 'lat'
 	Description: string // e.g. 'The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].'
 }

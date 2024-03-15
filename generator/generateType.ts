@@ -6,6 +6,7 @@ import type {
 } from '../lwm2m/ParsedLwM2MObjectDefinition.js'
 import { LwM2MType } from '../lwm2m/resourceType.js'
 import { tokenizeName } from './tokenizeName.js'
+import { parseRangeEnumeration } from 'lwm2m/parseRangeEnumeration.js'
 
 export const generateType = ({
 	ObjectID,
@@ -95,6 +96,19 @@ export const generateType = ({
 								],
 								res,
 							)
+							if (resource.RangeEnumeration.length > 0) {
+								const maybeRange = parseRangeEnumeration(
+									resource.RangeEnumeration,
+								)
+								if ('error' in maybeRange) throw maybeRange.error
+								addDocBlock(
+									[
+										`Minimum: ${maybeRange.range.min}`,
+										`Maximum: ${maybeRange.range.max}`,
+									],
+									res,
+								)
+							}
 							return res
 						}),
 					),

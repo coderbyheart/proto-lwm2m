@@ -8,6 +8,13 @@ const ResourceType = Type.Union([
 	Type.Literal('Opaque'),
 	Type.Literal('Time'),
 ])
+
+export const RangeEnumerationRegExp =
+	/^(?<min>-?[0-9]+(?:\.[0-9]+)?)\.\.(?<max>-?[0-9]+(?:\.[0-9]+)?)$/
+const RangeEnumeration = Type.RegExp(RangeEnumerationRegExp, {
+	title: 'RangeEnumeration',
+})
+
 export const LWM2MObjectDefinition = Type.Object(
 	{
 		Name: Type.String({ minLength: 1, examples: ['Location'] }),
@@ -46,10 +53,10 @@ export const LWM2MObjectDefinition = Type.Object(
 					Type.Literal('Mandatory'),
 				]),
 				Type: ResourceType,
-				RangeEnumeration: Type.String({
-					title: 'RangeEnumeration',
-					description: 'This is ignored.',
-				}),
+				RangeEnumeration: Type.Union([
+					Type.String({ maxLength: 0, title: 'an empty string' }),
+					RangeEnumeration,
+				]),
 				Units: Type.String({
 					examples: ['lat'],
 					title: 'Units',

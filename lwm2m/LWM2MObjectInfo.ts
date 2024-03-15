@@ -17,8 +17,19 @@ export type LwM2MResourceInfo = {
 	Mandatory: boolean
 	Type: ResourceType
 	Description: string // e.g. 'The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].'
-	RangeEnumeration?: string // e.g. ''
+	RangeEnumeration?: Range
 	Units?: string // e.g. 'lat'
+}
+
+export type Range = {
+	/**
+	 * The minimum inclusive value of the range. Always smaller than max.
+	 */
+	min: number
+	/**
+	 * The maximum inclusive value of the range. Always larger than min.
+	 */
+	max: number
 }
 
 export enum ResourceType {

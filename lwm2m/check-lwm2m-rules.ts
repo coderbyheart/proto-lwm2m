@@ -11,6 +11,7 @@ import {
 } from './LWM2MObjectDefinition.js'
 import type { ParsedLwM2MObjectDefinition } from './ParsedLwM2MObjectDefinition.js'
 import { validate } from '../validate.js'
+import { parseRangeEnumeration } from './parseRangeEnumeration.js'
 
 const v = validate(LWM2MObjectDefinition)
 
@@ -90,6 +91,10 @@ const listLwm2mDefinitions = async (
 				(resources, { $, ...item }) => {
 					if (resources[$.ID] !== undefined)
 						throw new Error(`Duplicate resource ID: ${$.ID}`)
+					if (item.RangeEnumeration.length > 0) {
+						const maybeRange = parseRangeEnumeration(item.RangeEnumeration)
+						if ('error' in maybeRange) throw maybeRange.error
+					}
 					return {
 						...resources,
 						[$.ID]: item,
@@ -105,10 +110,7 @@ const listLwm2mDefinitions = async (
 			throw new Error(`The definition should be valid!`)
 		}
 
-		console.log(
-			chalk.green('✔'),
-			chalk.gray('hello.nrfcloud.com/map limitations are honored'),
-		)
+		console.log(chalk.green('✔'), chalk.gray('LwM2M limitations are honored'))
 
 		defs.push(maybeValid.value)
 

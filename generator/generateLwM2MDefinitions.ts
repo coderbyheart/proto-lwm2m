@@ -2,6 +2,8 @@ import ts, { type ObjectLiteralElementLike } from 'typescript'
 import { addDocBlock } from './addDocBlock.js'
 import type { ParsedLwM2MObjectDefinition } from '../lwm2m/ParsedLwM2MObjectDefinition.js'
 import { generateName } from './generateType.js'
+import { parseRangeEnumeration } from '../lwm2m/parseRangeEnumeration.js'
+import type { Range } from '../lwm2m/LWM2MObjectInfo.js'
 
 export const generateLwM2MDefinitions = (
 	definitions: ParsedLwM2MObjectDefinition[],
@@ -88,6 +90,15 @@ export const generateLwM2MDefinitions = (
 										'Resources',
 										ts.factory.createObjectLiteralExpression(
 											definition.Resources.Item.map((Resource) => {
+												let range: Range | undefined = undefined
+												if (Resource.RangeEnumeration.length > 0) {
+													const maybeRange = parseRangeEnumeration(
+														Resource.RangeEnumeration,
+													)
+													if ('error' in maybeRange) throw maybeRange.error
+													range = maybeRange.range
+												}
+
 												const props: ObjectLiteralElementLike[] = [
 													ts.factory.createPropertyAssignment(
 														'ResourceID',
@@ -120,15 +131,29 @@ export const generateLwM2MDefinitions = (
 													),
 												]
 
-												if (Resource.RangeEnumeration.length > 0)
+												if (Resource.RangeEnumeration.length > 0) {
+													const maybeRange = parseRangeEnumeration(
+														Resource.RangeEnumeration,
+													)
+													if ('error' in maybeRange) throw maybeRange.error
+													const { min, max } = maybeRange.range
 													props.push(
 														ts.factory.createPropertyAssignment(
 															'RangeEnumeration',
-															ts.factory.createStringLiteral(
-																Resource.RangeEnumeration,
-															),
+
+															ts.factory.createObjectLiteralExpression([
+																ts.factory.createPropertyAssignment(
+																	'min',
+																	createNumber(min),
+																),
+																ts.factory.createPropertyAssignment(
+																	'max',
+																	createNumber(max),
+																),
+															]),
 														),
 													)
+												}
 
 												if (Resource.Units.length > 0)
 													props.push(
@@ -143,14 +168,19 @@ export const generateLwM2MDefinitions = (
 													ts.factory.createObjectLiteralExpression(props),
 												)
 
-												addDocBlock(
-													[
-														`${Resource.Name} (${Resource.Type})`,
+												const docStrings: string[] = [
+													`${Resource.Name} (${Resource.Type})`,
+													``,
+													Resource.Description,
+												]
+												if (range !== undefined) {
+													docStrings.push(
 														``,
-														Resource.Description,
-													],
-													resourceDef,
-												)
+														`Minimum: ${range.min}`,
+														`Maximum: ${range.max}`,
+													)
+												}
+												addDocBlock(docStrings, resourceDef)
 
 												return resourceDef
 											}),
@@ -185,3 +215,11 @@ export const generateLwM2MDefinitions = (
 
 	return [importLWM2MObjectInfo, importLwM2MObjectID, type]
 }
+
+const createNumber = (n: number): ts.Expression =>
+	n < 0
+		? ts.factory.createPrefixUnaryExpression(
+				ts.SyntaxKind.MinusToken,
+				ts.factory.createNumericLiteral(-n),
+			)
+		: ts.factory.createNumericLiteral(n)

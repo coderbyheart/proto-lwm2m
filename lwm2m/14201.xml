@@ -14,7 +14,7 @@
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
         <Type>Float</Type>
-        <RangeEnumeration/>
+        <RangeEnumeration>-90..90</RangeEnumeration>
         <Units>°</Units>
         <Description><![CDATA[The decimal notation of latitude in degrees, e.g. -43.5723 [World Geodetic System 1984].]]></Description>
       </Item>
@@ -24,7 +24,7 @@
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
         <Type>Float</Type>
-        <RangeEnumeration/>
+        <RangeEnumeration>-180..180</RangeEnumeration>
         <Units>°</Units>
         <Description><![CDATA[The decimal notation of longitude in degrees, e.g. 153.21760 [World Geodetic System 1984].]]></Description>
       </Item>
@@ -64,7 +64,7 @@
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
         <Type>Float</Type>
-        <RangeEnumeration/>
+        <RangeEnumeration>0..360</RangeEnumeration>
         <Units>°</Units>
         <Description><![CDATA[The angle of movement in degrees.]]></Description>
       </Item>
@@ -74,7 +74,7 @@
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
         <Type>String</Type>
-        <RangeEnumeration>GNSS,SCELL,MCELL,WIFI</RangeEnumeration>
+        <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[The source of the geo location, e.g. GNSS, SCELL, MCELL, WIFI.]]></Description>
       </Item>
