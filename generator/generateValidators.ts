@@ -1,4 +1,4 @@
-import type { ParsedLwM2MObjectDefinition } from 'lwm2m/ParsedLwM2MObjectDefinition'
+import type { ParsedLwM2MObjectDefinition } from '../lwm2m/ParsedLwM2MObjectDefinition.js'
 import ts from 'typescript'
 import { generateName } from './generateType.js'
 import { addDocBlock } from './addDocBlock.js'

@@ -1,4 +1,4 @@
-import type { MeasurementType, SenMLType } from './SenMLSchema'
+import type { MeasurementType, SenMLType } from './SenMLSchema.js'
 import { timestampResources } from '../lwm2m/timestampResources.js'
 import { parseResourceId, type ResourceID } from './parseResourceId.js'
 import { hasValue } from './hasValue.js'
