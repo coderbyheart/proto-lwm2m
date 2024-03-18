@@ -3,11 +3,11 @@
   "version": "0.0.0-development",
   "description": "Documents the communication protocol between devices, the hello.nrfcloud.com/map backend and web application",
   "type": "module",
-  "types": "./index.d.ts",
   "exports": {
     ".": {
       "import": "./export.js",
-      "node": "./export.js"
+      "node": "./export.js",
+      "types": "./index.d.ts"
     }
   },
   "repository": {
