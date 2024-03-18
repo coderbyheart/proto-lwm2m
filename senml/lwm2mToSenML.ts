@@ -1,6 +1,6 @@
-import type { SenMLType } from './SenMLSchema'
+import type { SenMLType } from './SenMLSchema.js'
 import { instanceTs } from '../lwm2m/instanceTs.js'
-import type { LwM2MObjectInstance, LwM2MResourceValue } from './senMLtoLwM2M'
+import type { LwM2MObjectInstance, LwM2MResourceValue } from './senMLtoLwM2M.js'
 import { timestampResources } from '../lwm2m/timestampResources.js'
 import { definitions } from '../lwm2m/definitions.js'
 import { ResourceType, type LWM2MObjectInfo } from '../lwm2m/LWM2MObjectInfo.js'

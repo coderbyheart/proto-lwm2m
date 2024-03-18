@@ -151,7 +151,7 @@ await writeFile(
 							ts.factory.createIdentifier(name),
 						),
 					]),
-					ts.factory.createStringLiteral(`./object/${ObjectID}`),
+					ts.factory.createStringLiteral(`./object/${ObjectID}.js`),
 				),
 				ts.factory.createExportDeclaration(
 					[],
