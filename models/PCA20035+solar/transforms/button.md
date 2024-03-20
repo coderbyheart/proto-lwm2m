@@ -16,7 +16,7 @@ appId = 'BUTTON'
 
 ```jsonata
 [
-    {"bn": "/14220/0/", "n": "0", "v": $number(data), "bt": ts }
+    {"bn": "14220/0/", "n": "0", "v": $number(data), "bt": ts }
 ]
 ```
 
@@ -36,7 +36,7 @@ appId = 'BUTTON'
 ```json
 [
   {
-    "bn": "/14220/0/",
+    "bn": "14220/0/",
     "n": "0",
     "v": 1,
     "bt": 1676366857236

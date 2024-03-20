@@ -14,7 +14,7 @@ $exists(state.reported.fg)
 
 ```jsonata
 [
-    {"bn": "/14202/0/", "n": "0", "v": state.reported.fg.v.SoC, "bt": state.reported.fg.ts },
+    {"bn": "14202/0/", "n": "0", "v": state.reported.fg.v.SoC, "bt": state.reported.fg.ts },
     {"n": "1", "v": state.reported.fg.v.V/1000 },
     {"n": "2", "v": state.reported.fg.v.I },
     {"n": "3", "v": state.reported.fg.v.T = null ? null : state.reported.fg.v.T/10 },
@@ -50,7 +50,7 @@ $exists(state.reported.fg)
 ```json
 [
   {
-    "bn": "/14202/0/",
+    "bn": "14202/0/",
     "n": "0",
     "v": 99,
     "bt": 1699049685992

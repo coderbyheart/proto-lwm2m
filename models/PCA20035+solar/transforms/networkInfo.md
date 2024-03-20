@@ -14,7 +14,7 @@ appId = 'DEVICE' and $exists(data.networkInfo)
 
 ```jsonata
 [
-    {"bn": "/14203/0/", "n": "0", "vs": data.networkInfo.networkMode, "bt": ts },
+    {"bn": "14203/0/", "n": "0", "vs": data.networkInfo.networkMode, "bt": ts },
     {"n": "1", "v": data.networkInfo.currentBand },
     {"n": "2", "v": data.networkInfo.rsrp },
     {"n": "3", "v": data.networkInfo.areaCode },
@@ -51,7 +51,7 @@ appId = 'DEVICE' and $exists(data.networkInfo)
 ```json
 [
   {
-    "bn": "/14203/0/",
+    "bn": "14203/0/",
     "n": "0",
     "vs": "LTE-M",
     "bt": 1676369307222

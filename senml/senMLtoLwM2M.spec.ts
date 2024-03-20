@@ -7,7 +7,7 @@ void describe('senMLtoLwM2M()', () => {
 	void it('should resolve a senML message into objects', () => {
 		const input: SenMLType = [
 			{
-				bn: '/14201/1/',
+				bn: '14201/1/',
 				blv: '1.1',
 				bt: 1698155694999,
 				n: '0',
@@ -56,7 +56,7 @@ void describe('senMLtoLwM2M()', () => {
 	void it('should drop empty resources', () => {
 		const input: SenMLType = [
 			{
-				bn: '/14203/0/',
+				bn: '14203/0/',
 				n: '0',
 				vs: 'LTE-M',
 				bt: 1676369307222,
@@ -109,14 +109,14 @@ void describe('senMLtoLwM2M()', () => {
 
 	void it('should ignore repeated base properties', () => {
 		const input: SenMLType = [
-			{ bn: '/14203/0/', n: '0', vs: 'LTE-M', bt: 1699049665511 },
+			{ bn: '14203/0/', n: '0', vs: 'LTE-M', bt: 1699049665511 },
 			{ n: '1', v: 20 },
-			{ bn: '/14203/0/', n: '2', v: -89, bt: 1699049665511 },
+			{ bn: '14203/0/', n: '2', v: -89, bt: 1699049665511 },
 			{ n: '3', v: 2305 },
 			{ n: '4', v: 34784790 },
 			{ n: '5', v: 24202 },
 			{ n: '6', vs: '100.81.95.75' },
-			{ bn: '/14203/0/', n: '11', v: 7, bt: 1699049665511 },
+			{ bn: '14203/0/', n: '11', v: 7, bt: 1699049665511 },
 		]
 		const expected: LwM2MObjectInstance[] = [
 			{
@@ -139,10 +139,10 @@ void describe('senMLtoLwM2M()', () => {
 
 	void it('should handle multiple measurements for the same resource', () => {
 		const input: SenMLType = [
-			{ bn: '/14205/0/', n: '0', v: 21, bt: 1699049600000 },
-			{ bn: '/14205/1/', n: '0', v: 31, bt: 1699049600000 },
-			{ bn: '/14205/0/', n: '0', v: 22, bt: 1699049700000 },
-			{ bn: '/14205/1/', n: '0', v: 32, bt: 1699049700000 },
+			{ bn: '14205/0/', n: '0', v: 21, bt: 1699049600000 },
+			{ bn: '14205/1/', n: '0', v: 31, bt: 1699049600000 },
+			{ bn: '14205/0/', n: '0', v: 22, bt: 1699049700000 },
+			{ bn: '14205/1/', n: '0', v: 32, bt: 1699049700000 },
 		]
 		const expected: LwM2MObjectInstance[] = [
 			{

@@ -19,7 +19,7 @@ appId = 'AIR_QUAL'
 
 ```jsonata
 [
-    {"bn": "/14205/0/", "n": "10", "v": $number(data), "bt": ts }
+    {"bn": "14205/0/", "n": "10", "v": $number(data), "bt": ts }
 ]
 ```
 
@@ -39,7 +39,7 @@ appId = 'AIR_QUAL'
 ```json
 [
   {
-    "bn": "/14205/0/",
+    "bn": "14205/0/",
     "n": "10",
     "v": 177,
     "bt": 1681985384511

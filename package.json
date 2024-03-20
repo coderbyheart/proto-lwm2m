@@ -32,7 +32,7 @@
   },
   "scripts": {
     "prepare": "husky",
-    "test": "find ./ -type f -name \\*.spec.ts -not -path './node_modules/*' | xargs npx tsx --test --test-reporter spec",
+    "test": "npx globstar -- npx tsx --test --test-reporter spec \"!(node_modules)/**/*.spec.ts\"",
     "prepublishOnly": "./compile.sh"
   },
   "devDependencies": {
@@ -44,6 +44,7 @@
     "@types/node": "20.11.30",
     "@types/xml2js": "0.4.14",
     "chalk": "5.3.0",
+    "globstar": "1.0.0",
     "husky": "9.0.11",
     "lint-staged": "15.2.2",
     "prettier-plugin-organize-imports": "3.2.4",

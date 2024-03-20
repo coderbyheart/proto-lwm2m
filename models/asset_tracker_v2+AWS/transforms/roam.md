@@ -16,14 +16,14 @@ $exists(state.reported.roam)
 
 ```jsonata
 [
-    {"bn": "/14203/0/", "n": "0", "vs": state.reported.roam.v.nw, "bt": state.reported.roam.ts },
+    {"bn": "14203/0/", "n": "0", "vs": state.reported.roam.v.nw, "bt": state.reported.roam.ts },
     {"n": "1", "v": state.reported.roam.v.band },
-    {"bn": "/14203/0/", "n": "2", "v": state.reported.roam.v.rsrp, "bt": state.reported.roam.ts },
+    {"bn": "14203/0/", "n": "2", "v": state.reported.roam.v.rsrp, "bt": state.reported.roam.ts },
     {"n": "3", "v": state.reported.roam.v.area },
     {"n": "4", "v": state.reported.roam.v.cell },
     {"n": "5", "v": state.reported.roam.v.mccmnc },
     {"n": "6", "vs": state.reported.roam.v.ip },
-    {"bn": "/14203/0/", "n": "11", "v": state.reported.roam.v.eest, "bt": state.reported.roam.ts }
+    {"bn": "14203/0/", "n": "11", "v": state.reported.roam.v.eest, "bt": state.reported.roam.ts }
 ]
 ```
 
@@ -59,7 +59,7 @@ properties, so the `bn` and `bt` properties are repeated.
 ```json
 [
   {
-    "bn": "/14203/0/",
+    "bn": "14203/0/",
     "n": "0",
     "vs": "LTE-M",
     "bt": 1699049665511
@@ -69,7 +69,7 @@ properties, so the `bn` and `bt` properties are repeated.
     "v": 20
   },
   {
-    "bn": "/14203/0/",
+    "bn": "14203/0/",
     "n": "2",
     "v": -89,
     "bt": 1699049665511
@@ -91,7 +91,7 @@ properties, so the `bn` and `bt` properties are repeated.
     "vs": "100.81.95.75"
   },
   {
-    "bn": "/14203/0/",
+    "bn": "14203/0/",
     "n": "11",
     "v": 7,
     "bt": 1699049665511

@@ -7,7 +7,7 @@ void describe('SenMLType', () => {
 	void it('it should validate a SenML payload', () => {
 		const example: SenMLType = [
 			{
-				bn: '/14201/0/',
+				bn: '14201/0/',
 				n: '0',
 				v: 33.98755678796222,
 				bt: 1698155694999,

@@ -14,7 +14,7 @@ $exists(state.reported.gnss)
 
 ```jsonata
 [
-    {"bn": "/14201/0/", "n": "0", "v": state.reported.gnss.v.lat, "bt": state.reported.gnss.ts },
+    {"bn": "14201/0/", "n": "0", "v": state.reported.gnss.v.lat, "bt": state.reported.gnss.ts },
     {"n": "1", "v": state.reported.gnss.v.lng },
     {"n": "2", "v": state.reported.gnss.v.alt },
     {"n": "3", "v": state.reported.gnss.v.acc },
@@ -51,7 +51,7 @@ $exists(state.reported.gnss)
 ```json
 [
   {
-    "bn": "/14201/0/",
+    "bn": "14201/0/",
     "n": "0",
     "v": 33.98771459323253,
     "bt": 1699049744000

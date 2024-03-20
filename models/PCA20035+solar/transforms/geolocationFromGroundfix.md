@@ -19,7 +19,7 @@ appId = 'GROUND_FIX' and $exists(data.lat) and $exists(data.lon) and $exists(dat
 
 ```jsonata
 [
-    {"bn": "/14201/1/", "n": "0", "v": data.lat, "bt": $millis() },
+    {"bn": "14201/1/", "n": "0", "v": data.lat, "bt": $millis() },
     {"n": "1", "v": data.lon },
     {"n": "3", "v": data.uncertainty },
     {"n": "6", "vs": data.fulfilledWith }
@@ -46,7 +46,7 @@ appId = 'GROUND_FIX' and $exists(data.lat) and $exists(data.lon) and $exists(dat
 ```json
 [
   {
-    "bn": "/14201/1/",
+    "bn": "14201/1/",
     "n": "0",
     "v": 59.3381238,
     "bt": 1699999999999

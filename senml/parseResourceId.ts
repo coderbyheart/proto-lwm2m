@@ -6,13 +6,15 @@ export type ResourceID = {
 }
 
 export const parseResourceId = (resourceId: string): ResourceID | null => {
-	if (!/^\/\d+\/\d+\/\d+\/\d+$/.test(resourceId)) return null
+	if (!/^\d+\/\d+\/\d+\/\d+$/.test(resourceId)) return null
 
 	const [ObjectID, ObjectInstanceID, ResourceID, ResourceInstanceId] =
-		resourceId
-			.slice(1)
-			.split('/')
-			.map((s) => parseInt(s, 10)) as [number, number, number, number]
+		resourceId.split('/').map((s) => parseInt(s, 10)) as [
+			number,
+			number,
+			number,
+			number,
+		]
 
 	return {
 		ObjectID,

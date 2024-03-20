@@ -16,7 +16,7 @@ $exists(state.reported.env)
 
 ```jsonata
 [
-    {"bn": "/14205/0/", "n": "0", "v": state.reported.env.v.temp, "bt": state.reported.env.ts },
+    {"bn": "14205/0/", "n": "0", "v": state.reported.env.v.temp, "bt": state.reported.env.ts },
     {"n": "1", "v": state.reported.env.v.hum },
     {"n": "2", "v": state.reported.env.v.atmp },
     {"n": "10", "v": state.reported.env.v.bsec_iaq }
@@ -48,7 +48,7 @@ $exists(state.reported.env)
 ```json
 [
   {
-    "bn": "/14205/0/",
+    "bn": "14205/0/",
     "n": "0",
     "v": 27.06,
     "bt": 1699050061608

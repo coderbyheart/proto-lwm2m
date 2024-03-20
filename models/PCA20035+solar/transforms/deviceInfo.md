@@ -14,7 +14,7 @@ appId = 'DEVICE' and $exists(data.deviceInfo)
 
 ```jsonata
 [
-    {"bn": "/14204/0/", "n": "0", "vs": data.deviceInfo.imei, "bt": ts },
+    {"bn": "14204/0/", "n": "0", "vs": data.deviceInfo.imei, "bt": ts },
     {"n": "1", "vs": data.deviceInfo.iccid },
     {"n": "2", "vs": data.deviceInfo.modemFirmware },
     {"n": "3", "vs": data.deviceInfo.appVersion },
@@ -47,7 +47,7 @@ appId = 'DEVICE' and $exists(data.deviceInfo)
 ```json
 [
   {
-    "bn": "/14204/0/",
+    "bn": "14204/0/",
     "n": "0",
     "vs": "350457794611739",
     "bt": 1676369307189

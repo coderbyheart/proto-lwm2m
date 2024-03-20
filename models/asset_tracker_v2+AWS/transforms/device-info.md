@@ -14,7 +14,7 @@ $exists(state.reported.dev)
 
 ```jsonata
 [
-    {"bn": "/14204/0/", "n": "0", "vs": state.reported.dev.v.imei, "bt": state.reported.dev.ts },
+    {"bn": "14204/0/", "n": "0", "vs": state.reported.dev.v.imei, "bt": state.reported.dev.ts },
     {"n": "1", "vs": state.reported.dev.v.iccid },
     {"n": "2", "vs": state.reported.dev.v.modV },
     {"n": "3", "vs": state.reported.dev.v.appV },
@@ -48,7 +48,7 @@ $exists(state.reported.dev)
 ```json
 [
   {
-    "bn": "/14204/0/",
+    "bn": "14204/0/",
     "n": "0",
     "vs": "358299840016535",
     "bt": 1699284007851

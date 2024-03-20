@@ -30,7 +30,7 @@ const asSenML = (lwm2m: LwM2MObjectInstance<any>): SenMLType | null => {
 	if (first === undefined) return null
 	return [
 		{
-			bn: `/${lwm2m.ObjectID}/${lwm2m.ObjectInstanceID ?? 0}/`,
+			bn: `${lwm2m.ObjectID}/${lwm2m.ObjectInstanceID ?? 0}/`,
 			n: first[0],
 			[toKey(def, parseInt(first[0], 10))]: first[1],
 			bt: i.getTime(),
