@@ -3,7 +3,7 @@
 set -e
 set -x
 
-for DIR in generator lwm2m markdown models senml
+for DIR in generator lwm2m markdown models senml api
 do
     npx swc -C jsc.experimental.keepImportAttributes=true -C jsc.experimental.emitAssertForImportAttributes=true -d dist/ ./$DIR
 done

@@ -5,9 +5,12 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./export.js",
-      "node": "./export.js",
+      "default": "./export.js",
       "types": "./index.d.ts"
+    },
+    "./*": {
+      "default": "./dist/*/index.js",
+      "types": "./dist/*/index.d.ts"
     }
   },
   "repository": {
