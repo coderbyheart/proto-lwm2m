@@ -103,6 +103,7 @@
     "dist",
     "export.js",
     "index.d.ts",
+    "api",
     "senml",
     "models",
     "lwm2m"
