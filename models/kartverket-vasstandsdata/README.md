@@ -1,6 +1,7 @@
 # Kartverket Vasstandsdata
 
-A simulated device reporting the current sea level as provided by the
+A [simulated device](https://github.com/hello-nrfcloud/kartverket-vasstand)
+reporting the current sea level as provided by the
 [Kartverket](https://www.kartverket.no/)'s (Norwegian Mapping Authority)
 [API for vasstandsdata](https://api.sehavniva.no/tideapi_no.html) (API for water
 level data).
