@@ -21,7 +21,7 @@ Devices publish LwM2M objects using
 [SenML](https://datatracker.ietf.org/doc/html/rfc8428) directly, which needs to
 map to the defined LwM2M objects ([example](./senml/SenMLSchema.spec.ts)).
 
-The SenML payload will be [expanded](./senml/senMLtoLwM2M.spec.ts] to fully
+The SenML payload will be [expanded](./senml/senMLtoLwM2M.spec.ts) to fully
 qualified LwM2M object representations which can then be processed further, e.g.
 stored in a database.
 
