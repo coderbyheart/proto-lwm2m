@@ -108,7 +108,7 @@
     "lwm2m"
   ],
   "peerDependencies": {
-    "@sinclair/typebox": "^0.32.21",
+    "@sinclair/typebox": "^0.32.22",
     "ajv": "^8.12.0",
     "jsonata": "^2.0.4"
   }
