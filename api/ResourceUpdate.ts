@@ -20,7 +20,7 @@ export const ResourceUpdate = Type.Object(
 		deviceId: PublicDeviceId,
 	},
 	{
-		title: 'Resource history',
+		title: 'Resource update',
 		description: 'Describes an update to a LwM2M resource for a device.',
 	},
 )
