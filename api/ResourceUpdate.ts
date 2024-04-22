@@ -13,8 +13,8 @@ export const ResourceUpdate = Type.Object(
 	{
 		'@context': Type.Literal(Context.resourceUpdate.toString()),
 		ObjectID,
-		ObjectInstanceID,
-		ObjectVersion,
+		ObjectInstanceID: Type.Optional(ObjectInstanceID),
+		ObjectVersion: Type.Optional(ObjectVersion),
 		Resources,
 		ts: Timestamp,
 		deviceId: PublicDeviceId,
