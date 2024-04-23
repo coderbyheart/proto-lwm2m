@@ -1,13 +1,13 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
 import { validate } from '../validate.js'
-import { ResourceUpdate } from './ResourceUpdate.js'
+import { ObjectUpdate } from './ObjectUpdate.js'
 import type { Static } from '@sinclair/typebox'
 
-void describe('ResourceUpdate', () => {
+void describe('ObjectUpdate', () => {
 	void it('should validate', () => {
-		const input: Static<typeof ResourceUpdate> = {
-			'@context': 'https://github.com/hello-nrfcloud/proto-map/resource/update',
+		const input: Static<typeof ObjectUpdate> = {
+			'@context': 'https://github.com/hello-nrfcloud/proto-map/object/update',
 			ObjectID: 14201,
 			ObjectVersion: '1.0',
 			ObjectInstanceID: 0,
@@ -21,7 +21,7 @@ void describe('ResourceUpdate', () => {
 			deviceId: 'bassetto-ennobler-toilless',
 			ts: '2024-04-19T08:30:00.000Z',
 		}
-		const maybeValid = validate(ResourceUpdate)(input)
+		const maybeValid = validate(ObjectUpdate)(input)
 		assert.equal('errors' in maybeValid, false)
 		assert.deepEqual('value' in maybeValid && maybeValid.value, input)
 	})
