@@ -1,15 +1,8 @@
 import chalk from 'chalk'
-import jsonata from 'jsonata'
 import assert from 'node:assert/strict'
 import { readFile, readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
-import { FrontMatter, ModelIDRegExp } from './types.js'
-import { senMLtoLwM2M } from '../senml/senMLtoLwM2M.js'
-import { getCodeBlock } from '../markdown/getCodeBlock.js'
-import { getFrontMatter } from '../markdown/getFrontMatter.js'
-import { validateSenML } from '../senml/validateSenML.js'
-import { isRegisteredLwM2MObject } from '../lwm2m/isRegisteredLwM2MObject.js'
-import { hasValue } from '../senml/hasValue.js'
+import { ModelIDRegExp } from './types.js'
 import { parseREADME } from 'markdown/parseREADME.js'
 
 console.log(chalk.gray('Models rules check'))
@@ -40,86 +33,4 @@ for (const model of await readdir(modelsDir)) {
 		throw new Error(`README is not valid for ${model}!`)
 	}
 	console.log(chalk.green('✔'), chalk.gray(`README.md is valid`))
-
-	// Validate jsonata expressions
-	let hasTransforms = false
-	const transformsFolder = path.join(modelDir, 'transforms')
-	try {
-		await stat(transformsFolder)
-		hasTransforms = true
-		console.log(' ', chalk.gray('Transforms:'))
-	} catch {
-		console.log(' ', chalk.gray('No transforms found.'))
-	}
-	if (hasTransforms) {
-		for (const transform of (await readdir(transformsFolder)).filter((f) =>
-			f.endsWith('.md'),
-		)) {
-			console.log(' ', chalk.white('·'), chalk.white.bold(transform))
-			const markdown = await readFile(
-				path.join(modelDir, 'transforms', transform),
-				'utf-8',
-			)
-
-			// Validate front-matter
-			const type = getFrontMatter(markdown, FrontMatter).type
-			console.log(' ', chalk.green('✔'), chalk.gray(`Type ${type} is valid`))
-			const findBlock = getCodeBlock(markdown)
-			const matchExpression = findBlock('jsonata', 'Match Expression')
-			const transformExpression = findBlock('jsonata', 'Transform Expression')
-			const inputExample = JSON.parse(findBlock('json', 'Input Example'))
-			const resultExample = JSON.parse(findBlock('json', 'Result Example'))
-
-			const selectResult = await jsonata(matchExpression).evaluate(inputExample)
-			if (selectResult !== true) {
-				throw new Error(
-					`The select expression did not evaluate to true with the given example.`,
-				)
-			}
-			console.log(
-				' ',
-				chalk.green('✔'),
-				chalk.gray('Select expression evaluated to true for the example input'),
-			)
-
-			const transformResult = await jsonata(
-				// For testing purposes this function call result is hardcoded
-				transformExpression.replace('$millis()', '1699999999999'),
-			).evaluate(inputExample)
-
-			const maybeValidSenML = validateSenML(transformResult.filter(hasValue))
-			if ('errors' in maybeValidSenML) {
-				console.error(maybeValidSenML.errors)
-				throw new Error('The JSONata expression must produce valid SenML')
-			}
-
-			assert.deepEqual(maybeValidSenML.value, resultExample)
-			console.log(
-				' ',
-				chalk.green('✔'),
-				chalk.gray('Transformation result is valid SenML'),
-			)
-
-			assert.deepEqual(maybeValidSenML.value, resultExample)
-			console.log(
-				' ',
-				chalk.green('✔'),
-				chalk.gray('The transformation result matches the example'),
-			)
-
-			// Validate
-			for (const object of senMLtoLwM2M(maybeValidSenML.value)) {
-				if (!isRegisteredLwM2MObject(object, console.error)) {
-					throw new Error(
-						'The LwM2M object must follow LwM2M schema definition',
-					)
-				}
-				console.log(
-					' ',
-					chalk.green('✔'),
-					chalk.gray('SenML object is valid LwM2M'),
-				)
-			}
-		}
-	}
 }

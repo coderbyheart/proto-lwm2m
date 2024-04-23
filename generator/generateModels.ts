@@ -6,38 +6,10 @@ import { parseREADME } from 'markdown/parseREADME.js'
 export const generateModels = (
 	models: {
 		id: string
-		transforms: {
-			type: 'shadow' | 'messages'
-			match: string
-			transform: string
-		}[]
 		readmeMarkdown: string
 	}[],
 ): ts.Node[] => {
 	const types: ts.Node[] = []
-
-	types.push(
-		ts.factory.createImportDeclaration(
-			undefined,
-			ts.factory.createImportClause(
-				false,
-				undefined,
-				ts.factory.createNamedImports([
-					ts.factory.createImportSpecifier(
-						true,
-						undefined,
-						ts.factory.createIdentifier('Transform'),
-					),
-					ts.factory.createImportSpecifier(
-						false,
-						undefined,
-						ts.factory.createIdentifier('TransformType'),
-					),
-				]),
-			),
-			ts.factory.createStringLiteral(`./types.js`),
-		),
-	)
 
 	types.push(
 		addDocBlock(
@@ -68,17 +40,6 @@ export const generateModels = (
 						ts.factory.createStringLiteral('id'),
 						undefined,
 						ts.factory.createTypeReferenceNode('ModelID'),
-					),
-				),
-				addDocBlock(
-					['The transforms defined for this model.'],
-					ts.factory.createPropertySignature(
-						undefined,
-						ts.factory.createStringLiteral('transforms'),
-						undefined,
-						ts.factory.createTypeReferenceNode('Array', [
-							ts.factory.createTypeReferenceNode('Transform'),
-						]),
 					),
 				),
 				addDocBlock(
@@ -150,37 +111,6 @@ export const generateModels = (
 														ts.factory.createIdentifier(tokenizeName(model.id)),
 													),
 												),
-												// transforms
-												ts.factory.createPropertyAssignment(
-													ts.factory.createStringLiteral('transforms'),
-													ts.factory.createArrayLiteralExpression(
-														model.transforms.map((transform) =>
-															ts.factory.createObjectLiteralExpression([
-																// type
-																ts.factory.createPropertyAssignment(
-																	ts.factory.createStringLiteral('type'),
-																	transform.type === 'messages'
-																		? ts.factory.createIdentifier(
-																				'TransformType.Messages',
-																			)
-																		: ts.factory.createIdentifier(
-																				'TransformType.Shadow',
-																			),
-																),
-																// match
-																ts.factory.createPropertyAssignment(
-																	ts.factory.createStringLiteral('match'),
-																	createAssignment(transform.match),
-																),
-																// transform
-																ts.factory.createPropertyAssignment(
-																	ts.factory.createStringLiteral('transform'),
-																	createAssignment(transform.transform),
-																),
-															]),
-														),
-													),
-												),
 												// About
 												ts.factory.createPropertyAssignment(
 													ts.factory.createStringLiteral('about'),
@@ -212,29 +142,4 @@ export const generateModels = (
 	)
 
 	return types
-}
-
-const createAssignment = (v: unknown): ts.Expression => {
-	if (v === null) return ts.factory.createNull()
-	if (typeof v === 'string') {
-		return ts.factory.createStringLiteral(v)
-	}
-	if (Array.isArray(v)) {
-		return ts.factory.createArrayLiteralExpression(
-			v.map((el) => createAssignment(el)),
-		)
-	}
-	if (typeof v === 'object')
-		return ts.factory.createObjectLiteralExpression(
-			Object.entries(v).map(([k, v]) =>
-				ts.factory.createPropertyAssignment(
-					ts.factory.createStringLiteral(k),
-					createAssignment(v),
-				),
-			),
-		)
-	return addDocBlock(
-		[`Could not convert node`, JSON.stringify(v)],
-		ts.factory.createNull(),
-	)
 }
