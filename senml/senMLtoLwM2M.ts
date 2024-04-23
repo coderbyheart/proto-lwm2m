@@ -42,14 +42,12 @@ const isInfoForDifferentInstance = (
 	currentObject: LwM2MObjectInstance,
 	resourceID: ResourceID,
 	currentBaseTime: number,
+	tsRes: number,
 ): boolean => {
 	if (currentObject === undefined) return true
 	if (currentObject.ObjectID !== resourceID.ObjectID) return true
 	if ((currentObject.ObjectInstanceID ?? 0) !== resourceID.ObjectInstanceID)
 		return true
-	const tsRes = timestampResources[resourceID.ObjectID]
-	if (tsRes === undefined)
-		throw new Error(`Unknown LwM2M Object ID: ${resourceID.ObjectID}!`)
 	if (
 		currentBaseTime !==
 		(currentObject.Resources?.[tsRes] as Date | undefined)?.getTime()
@@ -70,11 +68,13 @@ const getValue = (
 	if ('vd' in measurement) return measurement.vd
 	return undefined
 }
-export const senMLtoLwM2M = (senML: SenMLType): Array<LwM2MObjectInstance> => {
+export const senMLtoLwM2M = (
+	senML: SenMLType,
+): { lwm2m: Array<LwM2MObjectInstance> } | { error: Error } => {
 	let currentBaseName: string = ''
 	let currentBaseTime: number | undefined = undefined
 	let currentObject: LwM2MObjectInstance | undefined = undefined
-	const items: LwM2MObjectInstance[] = []
+	const lwm2m: Array<LwM2MObjectInstance> = []
 
 	for (const item of senML) {
 		if ('bn' in item && item.bn !== undefined) currentBaseName = item.bn
@@ -82,20 +82,37 @@ export const senMLtoLwM2M = (senML: SenMLType): Array<LwM2MObjectInstance> => {
 		if (!hasValue(item)) continue
 		const itemResourceId = `${currentBaseName}${item.n ?? ''}/0`
 		const resourceId = parseResourceId(itemResourceId)
-		if (resourceId === null)
-			throw new Error(`Invalid resource ID: ${itemResourceId}`)
+		if (resourceId === null) {
+			return { error: new Error(`Invalid resource ID: ${itemResourceId}`) }
+		}
+
+		const tsRes = timestampResources[resourceId.ObjectID]
+		if (tsRes === undefined) {
+			return {
+				error: new Error(
+					`No timestamp resource defined for object: ${resourceId.ObjectID}`,
+				),
+			}
+		}
 
 		if (
 			currentObject === undefined ||
 			(currentBaseTime !== undefined &&
-				isInfoForDifferentInstance(currentObject, resourceId, currentBaseTime))
+				isInfoForDifferentInstance(
+					currentObject,
+					resourceId,
+					currentBaseTime,
+					tsRes,
+				))
 		) {
-			if (currentObject !== undefined) items.push(currentObject)
-			const tsRes = timestampResources[resourceId.ObjectID]
-			if (tsRes === undefined)
-				throw new Error(`Unknown LwM2M Object ID: ${resourceId.ObjectID}!`)
-			if (currentBaseTime === undefined)
-				throw new Error(`No base time defined for object!`)
+			if (currentObject !== undefined) lwm2m.push(currentObject)
+			if (currentBaseTime === undefined) {
+				return {
+					error: new Error(
+						`No base time defined for object: ${resourceId.ObjectID}!`,
+					),
+				}
+			}
 			currentObject = {
 				ObjectID: resourceId.ObjectID,
 				Resources: {
@@ -115,7 +132,7 @@ export const senMLtoLwM2M = (senML: SenMLType): Array<LwM2MObjectInstance> => {
 			}
 		}
 	}
-	if (currentObject !== undefined) items.push(currentObject)
+	if (currentObject !== undefined) lwm2m.push(currentObject)
 
-	return items
+	return { lwm2m }
 }

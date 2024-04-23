@@ -9,14 +9,8 @@ import { ResourceType, type LWM2MObjectInfo } from '../lwm2m/LWM2MObjectInfo.js'
  * Convert LwM2M Object Instances to senML
  */
 export const lwm2mToSenML = (
-	lwm2m: Array<LwM2MObjectInstance<any>>,
-): SenMLType =>
-	lwm2m
-		.map(asSenML)
-		.flat()
-		.filter((v) => v !== null) as SenMLType
-
-const asSenML = (lwm2m: LwM2MObjectInstance<any>): SenMLType | null => {
+	lwm2m: LwM2MObjectInstance<any>,
+): { senML: SenMLType } | { errors: Array<Error> } => {
 	const def = definitions[lwm2m.ObjectID]
 	const i = instanceTs(lwm2m)
 	const tsResourceId = timestampResources[lwm2m.ObjectID] as number // All registered objects must have a timestamp resource
@@ -27,22 +21,50 @@ const asSenML = (lwm2m: LwM2MObjectInstance<any>): SenMLType | null => {
 		// Filter out undefined values (and timestamp resource)
 		.filter((r): r is [string, LwM2MResourceValue] => r[1] !== undefined)
 
-	if (first === undefined) return null
-	return [
-		{
+	if (first === undefined)
+		return { errors: [new Error(`No valid LwM2M object found`)] }
+
+	const senML: SenMLType = []
+	const errors: Array<Error> = []
+	const resourceId = parseInt(first[0], 10)
+	const firstKey = toKey(def, resourceId)
+	if (firstKey === null) {
+		errors.push(
+			new Error(
+				`Unknown ResourceID ${resourceId} for LwM2M Object ${def.ObjectID}!`,
+			),
+		)
+	} else {
+		senML.push({
 			bn: `${lwm2m.ObjectID}/${lwm2m.ObjectInstanceID ?? 0}/`,
 			n: first[0],
-			[toKey(def, parseInt(first[0], 10))]: first[1],
+			[firstKey]: first[1],
 			bt: i.getTime(),
-		},
-		...rest.map((r) => ({
-			n: r[0],
-			[toKey(def, parseInt(r[0], 10))]: r[1],
-		})),
-	]
+		})
+	}
+
+	for (const r of rest) {
+		const resourceId = parseInt(r[0], 10)
+		const key = toKey(def, resourceId)
+		if (key === null) {
+			errors.push(
+				new Error(
+					`Unknown ResourceID ${resourceId} for LwM2M Object ${def.ObjectID}!`,
+				),
+			)
+		} else {
+			senML.push({
+				n: r[0],
+				[key]: r[1],
+			})
+		}
+	}
+
+	if (errors.length > 0) return { errors }
+	return { senML }
 }
 
-const toKey = (def: LWM2MObjectInfo, resourceId: number) => {
+const toKey = (def: LWM2MObjectInfo, resourceId: number): string | null => {
 	switch (def.Resources[resourceId]?.Type) {
 		case ResourceType.String:
 			return 'vs'
@@ -55,8 +77,6 @@ const toKey = (def: LWM2MObjectInfo, resourceId: number) => {
 		case ResourceType.Opaque:
 			return 'vd'
 		default:
-			throw new Error(
-				`Unknown ResourceID ${resourceId} for LwM2M Object ${def.ObjectID}!`,
-			)
+			return null
 	}
 }

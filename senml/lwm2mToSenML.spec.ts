@@ -69,6 +69,12 @@ void describe('lwm2mToSenML()', () => {
 			{ n: '1', vs: 'AES' },
 		]
 
-		assert.deepEqual(lwm2mToSenML(lwm2m), expected)
+		assert.deepEqual(
+			lwm2m
+				.map(lwm2mToSenML)
+				.map((res) => 'senML' in res && res.senML)
+				.flat(),
+			expected,
+		)
 	})
 })

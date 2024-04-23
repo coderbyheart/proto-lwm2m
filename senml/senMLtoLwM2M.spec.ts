@@ -50,7 +50,8 @@ void describe('senMLtoLwM2M()', () => {
 				},
 			},
 		]
-		assert.deepEqual(senMLtoLwM2M(input), expected)
+		const res = senMLtoLwM2M(input)
+		assert.deepEqual('lwm2m' in res && res.lwm2m, expected)
 	})
 
 	void it('should drop empty resources', () => {
@@ -104,7 +105,8 @@ void describe('senMLtoLwM2M()', () => {
 				},
 			},
 		]
-		assert.deepEqual(senMLtoLwM2M(input), expected)
+		const res = senMLtoLwM2M(input)
+		assert.deepEqual('lwm2m' in res && res.lwm2m, expected)
 	})
 
 	void it('should ignore repeated base properties', () => {
@@ -134,7 +136,8 @@ void describe('senMLtoLwM2M()', () => {
 				},
 			},
 		]
-		assert.deepEqual(senMLtoLwM2M(input), expected)
+		const res = senMLtoLwM2M(input)
+		assert.deepEqual('lwm2m' in res && res.lwm2m, expected)
 	})
 
 	void it('should handle multiple measurements for the same resource', () => {
@@ -176,6 +179,7 @@ void describe('senMLtoLwM2M()', () => {
 				},
 			},
 		]
-		assert.deepEqual(senMLtoLwM2M(input), expected)
+		const res = senMLtoLwM2M(input)
+		assert.deepEqual('lwm2m' in res && res.lwm2m, expected)
 	})
 })
