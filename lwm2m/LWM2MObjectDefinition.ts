@@ -44,9 +44,11 @@ export const LWM2MObjectDefinition = Type.Object(
 			Type.Integer({ minimum: 0, maximum: 65534 }),
 			Type.Object({
 				Name: Type.String({ minLength: 1, examples: ['Latitude'] }),
-				Operations: Type.Literal('R', {
-					description: 'Only read-properties are supported',
-				}),
+				Operations: Type.Union([
+					Type.Literal('R'),
+					Type.Literal('W'),
+					Type.Literal('RW'),
+				]),
 				MultipleInstances: Type.Literal('Single'),
 				Mandatory: Type.Union([
 					Type.Literal('Optional'),
