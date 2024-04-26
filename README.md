@@ -68,9 +68,9 @@ The conformity to the rules is checked using the script
 ### Model definition rules
 
 - **device models** are identified using a model name, for example
-  `PCA20035+solar`
-- a [`README.md`](./models/PCA20035+solar/README.md) must be provided that
-  describes the model
+  `kartverket-vasstandsdata`
+- a [`README.md`](./models/kartverket-vasstandsdata/README.md) must be provided
+  that describes the model
 
 The conformity to the rules is checked using the script
 [`./models/check-model-rules.ts`](./models/check-model-rules.ts).
