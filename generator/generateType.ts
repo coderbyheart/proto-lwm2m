@@ -86,29 +86,26 @@ export const generateType = ({
 									: ts.factory.createToken(ts.SyntaxKind.QuestionToken),
 								typeScriptResourceType(resource.Type),
 							)
-							addDocBlock(
-								[
-									`${resource.Name}${
-										resource.Units.length > 0 ? ` (${resource.Units})` : ''
-									}`,
-									``,
-									resource.Description,
-								],
-								res,
-							)
+							const docs: Array<string> = [
+								`${resource.Name}${
+									resource.Units.length > 0 ? ` (${resource.Units})` : ''
+								}`,
+								``,
+								resource.Description,
+							]
 							if (resource.RangeEnumeration.length > 0) {
 								const maybeRange = parseRangeEnumeration(
 									resource.RangeEnumeration,
 								)
 								if ('error' in maybeRange) throw maybeRange.error
-								addDocBlock(
-									[
-										`Minimum: ${maybeRange.range.min}`,
-										`Maximum: ${maybeRange.range.max}`,
-									],
-									res,
+								docs.push(
+									``,
+									`Minimum: ${maybeRange.range.min}`,
+									`Maximum: ${maybeRange.range.max}`,
 								)
 							}
+
+							addDocBlock(docs, res)
 							return res
 						}),
 					),
