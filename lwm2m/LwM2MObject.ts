@@ -1,4 +1,4 @@
-import type { LwM2MResourceValue } from './LwM2MObjectInstance.ts'
+import type { LwM2MResourceValue } from './LwM2MObjectInstance.js'
 import type { LwM2MObjectID } from './LwM2MObjectID.js'
 
 export type LwM2MObject<
