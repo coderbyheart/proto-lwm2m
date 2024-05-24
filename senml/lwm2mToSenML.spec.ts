@@ -6,7 +6,7 @@ import type {
 } from '../lwm2m/objects.js'
 import { LwM2MObjectID } from '../lwm2m/LwM2MObjectID.js'
 import assert from 'node:assert/strict'
-import type { LwM2MObjectInstance } from './senMLtoLwM2M.js'
+import type { LwM2MObjectInstance } from '../lwm2m/LwM2MObjectInstance.js'
 import { lwm2mToSenML } from './lwm2mToSenML.js'
 
 void describe('lwm2mToSenML()', () => {

@@ -22,6 +22,22 @@ export const generateValidators = (
 		),
 		ts.factory.createStringLiteral('./LwM2MObjectID.js'),
 	)
+	// import type { LwM2MObjectInstance } from "./LwM2MObjectInstance.js";
+	const importLwM2MObjectInstance = ts.factory.createImportDeclaration(
+		undefined,
+		ts.factory.createImportClause(
+			true,
+			undefined,
+			ts.factory.createNamedImports([
+				ts.factory.createImportSpecifier(
+					false,
+					undefined,
+					ts.factory.createIdentifier(`LwM2MObjectInstance`),
+				),
+			]),
+		),
+		ts.factory.createStringLiteral('./LwM2MObjectInstance.js'),
+	)
 
 	const validatorImports: ts.Node[] = objects.map((object) =>
 		ts.factory.createImportDeclaration(
@@ -66,7 +82,28 @@ export const generateValidators = (
 										),
 									),
 								],
-								ts.factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword),
+
+								ts.factory.createUnionTypeNode([
+									ts.factory.createTypeLiteralNode([
+										ts.factory.createPropertySignature(
+											undefined,
+											ts.factory.createIdentifier('error'),
+											undefined,
+											ts.factory.createTypeReferenceNode(`Error`),
+										),
+									]),
+									ts.factory.createTypeLiteralNode([
+										ts.factory.createPropertySignature(
+											undefined,
+											ts.factory.createIdentifier('object'),
+											undefined,
+											ts.factory.createTypeReferenceNode(
+												ts.factory.createIdentifier('LwM2MObjectInstance'),
+												[],
+											),
+										),
+									]),
+								]),
 							),
 						],
 						[],
@@ -100,6 +137,7 @@ export const generateValidators = (
 
 	return [
 		importLwM2MObjectID,
+		importLwM2MObjectInstance,
 		...validatorImports,
 		validators,
 		...validatorRegistrations,

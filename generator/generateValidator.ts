@@ -22,11 +22,11 @@ export const generateValidator = ({
 				ts.factory.createImportSpecifier(
 					false,
 					undefined,
-					ts.factory.createIdentifier(`LwM2MObject`),
+					ts.factory.createIdentifier(`LwM2MObjectInstance`),
 				),
 			]),
 		),
-		ts.factory.createStringLiteral('../LwM2MObject.js'),
+		ts.factory.createStringLiteral('../LwM2MObjectInstance.js'),
 	)
 	/*
     import {
@@ -43,12 +43,13 @@ export const generateValidator = ({
 			false,
 			undefined,
 			ts.factory.createNamedImports(
-				[...getResourceValidators({ Resources }), 'validate'].map((res) =>
-					ts.factory.createImportSpecifier(
-						false,
-						undefined,
-						ts.factory.createIdentifier(res),
-					),
+				[...getResourceValidators({ Resources }), 'validateInstance'].map(
+					(res) =>
+						ts.factory.createImportSpecifier(
+							false,
+							undefined,
+							ts.factory.createIdentifier(res),
+						),
 				),
 			),
 		),
@@ -108,45 +109,41 @@ export const generateValidator = ({
 								undefined,
 								ts.factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword),
 							),
-							ts.factory.createParameterDeclaration(
-								undefined,
-								undefined,
-								ts.factory.createIdentifier('onError'),
-								ts.factory.createToken(ts.SyntaxKind.QuestionToken),
-								ts.factory.createFunctionTypeNode(
-									undefined,
-									[
-										ts.factory.createParameterDeclaration(
-											undefined,
-											undefined,
-											ts.factory.createIdentifier('error'),
-											undefined,
-											ts.factory.createTypeReferenceNode(
-												ts.factory.createIdentifier('Error'),
-											),
-										),
-									],
-									ts.factory.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
-								),
-							),
 						],
-						ts.factory.createTypePredicateNode(
-							undefined,
-							ts.factory.createIdentifier('o'),
-							ts.factory.createTypeReferenceNode(
-								ts.factory.createIdentifier('LwM2MObject'),
+						ts.factory.createUnionTypeNode([
+							ts.factory.createTypeLiteralNode([
+								ts.factory.createPropertySignature(
+									undefined,
+									ts.factory.createIdentifier('error'),
+									undefined,
+									ts.factory.createTypeReferenceNode(`Error`),
+								),
+							]),
+							ts.factory.createTypeLiteralNode([
+								ts.factory.createPropertySignature(
+									undefined,
+									ts.factory.createIdentifier('object'),
+									undefined,
+									ts.factory.createTypeReferenceNode(
+										ts.factory.createIdentifier('LwM2MObjectInstance'),
+										[
+											ts.factory.createTypeReferenceNode(
+												ts.factory.createIdentifier(name),
+											),
+										],
+									),
+								),
+							]),
+						]),
+						undefined,
+						ts.factory.createCallExpression(
+							ts.factory.createCallExpression(
+								ts.factory.createIdentifier('validateInstance'),
 								[
 									ts.factory.createTypeReferenceNode(
 										ts.factory.createIdentifier(name),
 									),
 								],
-							),
-						),
-						undefined,
-						ts.factory.createCallExpression(
-							ts.factory.createCallExpression(
-								ts.factory.createIdentifier('validate'),
-								undefined,
 								[
 									ts.factory.createPropertyAccessExpression(
 										ts.factory.createIdentifier('LwM2MObjectID'),
@@ -166,10 +163,7 @@ export const generateValidator = ({
 								],
 							),
 							undefined,
-							[
-								ts.factory.createIdentifier('o'),
-								ts.factory.createIdentifier('onError'),
-							],
+							[ts.factory.createIdentifier('o')],
 						),
 					),
 				),

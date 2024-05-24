@@ -4,10 +4,6 @@
   "description": "Documents the communication protocol between devices, the hello.nrfcloud.com/map backend and web application",
   "type": "module",
   "exports": {
-    ".": {
-      "default": "./export.js",
-      "types": "./index.d.ts"
-    },
     "./*": {
       "default": "./dist/*/index.js",
       "types": "./*/index.ts"
@@ -96,8 +92,6 @@
     "LICENSE",
     "README.md",
     "dist",
-    "export.js",
-    "index.d.ts",
     "api",
     "senml",
     "models",

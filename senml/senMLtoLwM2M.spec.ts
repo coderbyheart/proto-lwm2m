@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { senMLtoLwM2M, type LwM2MObjectInstance } from './senMLtoLwM2M.js'
+import { senMLtoLwM2M } from './senMLtoLwM2M.js'
+import { type LwM2MObjectInstance } from '../lwm2m/LwM2MObjectInstance.js'
 import type { SenMLType } from './SenMLSchema.js'
 
 void describe('senMLtoLwM2M()', () => {

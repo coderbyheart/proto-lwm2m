@@ -2,41 +2,7 @@ import type { MeasurementType, SenMLType } from './SenMLSchema.js'
 import { timestampResources } from '../lwm2m/timestampResources.js'
 import { parseResourceId, type ResourceID } from './parseResourceId.js'
 import { hasValue } from './hasValue.js'
-import type { LwM2MObjectID } from '../lwm2m/LwM2MObjectID.js'
-
-export type LwM2MResourceValue = string | number | boolean | Date
-type GenericLwM2MObjectInstance = {
-	ObjectID: LwM2MObjectID
-	/**
-	 * @default 0
-	 */
-	ObjectInstanceID?: number
-	/**
-	 * @default '1.0'
-	 */
-	ObjectVersion?: string
-	/**
-	 * Key range: 0..65534
-	 */
-	Resources: Partial<Record<number, LwM2MResourceValue>>
-}
-export type LwM2MObjectInstance<
-	Instance extends GenericLwM2MObjectInstance = GenericLwM2MObjectInstance,
-> = {
-	ObjectID: LwM2MObjectID
-	/**
-	 * @default 0
-	 */
-	ObjectInstanceID?: number
-	/**
-	 * @default '1.0'
-	 */
-	ObjectVersion?: Instance['ObjectVersion']
-	/**
-	 * Key range: 0..65534
-	 */
-	Resources: Instance['Resources']
-}
+import type { LwM2MObjectInstance } from '../lwm2m/LwM2MObjectInstance.js'
 
 const isInfoForDifferentInstance = (
 	currentObject: LwM2MObjectInstance,

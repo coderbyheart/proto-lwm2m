@@ -1,4 +1,4 @@
-import type { LwM2MObjectInstance } from '../senml/senMLtoLwM2M.js'
+import type { LwM2MObjectInstance } from './LwM2MObjectInstance.js'
 import { definitions } from './definitions.js'
 import { timestampResources } from './timestampResources.js'
 

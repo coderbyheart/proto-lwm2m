@@ -1,13 +1,13 @@
 import { Type } from '@sinclair/typebox'
 import { Context } from './Context.js'
 import { PublicDeviceId } from './DeviceId.js'
-import { models } from '@hello.nrfcloud.com/proto-map'
 import {
 	ObjectID,
 	ObjectInstanceID,
 	ObjectVersion,
 	Resources,
 } from './LwM2M.js'
+import { models } from '../models/models.js'
 
 export const LwM2MObjectInstance = Type.Object({
 	ObjectID,
