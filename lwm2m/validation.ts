@@ -106,6 +106,3 @@ export const OptionalResource =
 	) =>
 	(r: unknown): boolean =>
 		r === undefined ? true : validator(r)
-
-export const isLwM2MObjectID = (o: unknown): o is LwM2MObjectID =>
-	typeof o === 'number' && LwM2MObjectIDs.includes(o)
