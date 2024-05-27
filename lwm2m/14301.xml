@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
+  <Object ObjectType="MODefinition">
+    <Name>Application Configuration</Name>
+    <Description1><![CDATA[Describes application configuration]]></Description1>
+    <ObjectID>14301</ObjectID>
+    <ObjectURN>urn:oma:lwm2m:x:14301</ObjectURN>
+    <MultipleInstances>Multiple</MultipleInstances>
+    <Mandatory>Optional</Mandatory>
+    <Resources>
+      <Item ID="0">
+        <Name>Mode</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Integer</Type>
+        <RangeEnumeration>0..99</RangeEnumeration>
+        <Units/>
+        <Description><![CDATA[The operation mode of the application, e.g. 0: "real-time", 1: "interactive", 2: "low-power".]]></Description>
+      </Item>
+      <Item ID="1">
+        <Name>GNSSEnabled</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Boolean</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[Whether to enabled the device's GNSS receiver.]]></Description>
+      </Item>
+      <Item ID="99">
+        <Name>Timestamp</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Time</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[The timestamp of when the configuration was updated.]]></Description>
+      </Item>
+    </Resources>
+    <Description2/>
+  </Object>
+</LWM2M>
