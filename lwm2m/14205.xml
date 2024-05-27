@@ -35,8 +35,8 @@
         <Mandatory>Optional</Mandatory>
         <Type>Float</Type>
         <RangeEnumeration/>
-        <Units>Pa</Units>
-        <Description><![CDATA[Atmospheric pressure in pascal. Examples: 1003.6, 977.]]></Description>
+        <Units>hPa</Units>
+        <Description><![CDATA[Atmospheric pressure in hectopascal. Examples: 1003.6, 977.]]></Description>
       </Item>
       <Item ID="10">
         <Name>Air Quality Index</Name>
