@@ -1,6 +1,6 @@
 import type { LwM2MObjectID } from './LwM2MObjectID.js'
 
-export type LwM2MResourceValue = string | number | boolean | Date
+export type LwM2MResourceValue = string | number | boolean
 type GenericLwM2MObjectInstance = {
 	ObjectID: LwM2MObjectID
 	/**

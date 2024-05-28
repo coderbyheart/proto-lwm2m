@@ -15,7 +15,7 @@ void describe('validate()', () => {
 				'1': 6.151946,
 				'6': 'Fixed',
 				'3': 1,
-				'99': new Date(1710147413003),
+				'99': 1710147413003,
 			},
 		}
 		const maybeValid = v(object)

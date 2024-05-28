@@ -19,7 +19,7 @@ void describe('lwm2mToSenML()', () => {
 				'1': 6.151946,
 				'6': 'Fixed',
 				'3': 1,
-				'99': new Date(1710147413003),
+				'99': 1710147413003,
 			},
 		}
 		const level1: LwM2MObjectInstance<SeaWaterLevel_14230> = {
@@ -28,7 +28,7 @@ void describe('lwm2mToSenML()', () => {
 			Resources: {
 				'0': 84.3,
 				'1': 'AES',
-				'99': new Date(1710140400000),
+				'99': 1710140400000,
 			},
 		}
 		const level2: LwM2MObjectInstance<SeaWaterLevel_14230> = {
@@ -37,7 +37,7 @@ void describe('lwm2mToSenML()', () => {
 			Resources: {
 				'0': 140.4,
 				'1': 'AES',
-				'99': new Date(1710144000000),
+				'99': 1710144000000,
 			},
 		}
 		const level3: LwM2MObjectInstance<SeaWaterLevel_14230> = {
@@ -47,7 +47,7 @@ void describe('lwm2mToSenML()', () => {
 			Resources: {
 				'0': 140.7,
 				'1': 'AES',
-				'99': new Date(1710144001000),
+				'99': 1710144001000,
 			},
 		}
 		const lwm2m: Array<LwM2MObjectInstance<any>> = [

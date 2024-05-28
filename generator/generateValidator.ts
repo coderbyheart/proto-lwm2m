@@ -30,9 +30,9 @@ export const generateValidator = ({
 	)
 	/*
     import {
-        DateResource,
         NumberResource,
-        OptionalResource,
+        TimeResource,
+		OptionalResource,
         StringResource,
         validate,
     } from './validation.js'
@@ -214,7 +214,7 @@ const typeToValidator = (Type: Resource['Type']): string => {
 		case 'Boolean':
 			return 'BooleanResource'
 		case 'Time':
-			return 'DateResource'
+			return 'TimeResource'
 		default:
 			throw new Error(`Unsupported Resource type ${Type as string}!`)
 	}

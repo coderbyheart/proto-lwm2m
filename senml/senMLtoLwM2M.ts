@@ -15,8 +15,7 @@ const isInfoForDifferentInstance = (
 	if ((currentObject.ObjectInstanceID ?? 0) !== resourceID.ObjectInstanceID)
 		return true
 	if (
-		currentBaseTime !==
-		(currentObject.Resources?.[tsRes] as Date | undefined)?.getTime()
+		currentBaseTime !== (currentObject.Resources?.[tsRes] as number | undefined)
 	)
 		return true
 	return false
@@ -82,7 +81,7 @@ export const senMLtoLwM2M = (
 			currentObject = {
 				ObjectID: resourceId.ObjectID,
 				Resources: {
-					[tsRes]: new Date(currentBaseTime),
+					[tsRes]: currentBaseTime,
 				},
 			}
 			if (resourceId.ObjectInstanceID !== 0)

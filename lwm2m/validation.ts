@@ -48,12 +48,11 @@ export const isLwM2MObject = (
 		0
 	)
 		return error(`All resource IDs must be a number`)
-	// All values must be number, string, boolean, or Date
+	// All values must be number, string, boolean
 	for (const v of Object.values(object.Resources)) {
 		if (typeof v === 'string') continue
 		if (typeof v === 'boolean') continue
 		if (typeof v === 'number') continue
-		if (typeof v === 'object' && v instanceof Date) continue
 		return error(`Invalid value type ${typeof v}`)
 	}
 	return { object: object as LwM2MObjectInstance }
@@ -90,9 +89,9 @@ export const validateInstance =
 	}
 
 export const NumberResource = (r: unknown): r is number => typeof r === 'number'
+export const TimeResource = (r: unknown): r is number =>
+	NumberResource(r) && r > 1700000000000 && r < 9999999999999
 export const StringResource = (r: unknown): r is string => typeof r === 'string'
-export const DateResource = (r: unknown): r is Date =>
-	typeof r === 'object' && r instanceof Date
 export const BooleanResource = (r: unknown): r is boolean =>
 	typeof r === 'boolean'
 
@@ -100,8 +99,8 @@ export const OptionalResource =
 	(
 		validator:
 			| typeof NumberResource
+			| typeof TimeResource
 			| typeof StringResource
-			| typeof DateResource
 			| typeof BooleanResource,
 	) =>
 	(r: unknown): boolean =>

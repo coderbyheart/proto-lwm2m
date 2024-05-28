@@ -42,7 +42,7 @@ export const lwm2mToSenML = (
 			bn: `${lwm2m.ObjectID}/${lwm2m.ObjectInstanceID ?? 0}/`,
 			n: first[0],
 			[firstKey]: first[1],
-			bt: i.getTime(),
+			bt: i,
 		})
 	}
 

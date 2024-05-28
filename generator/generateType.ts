@@ -128,6 +128,7 @@ const typeScriptResourceType = (type: string): ts.TypeNode => {
 		case LwM2MType.Float:
 		case LwM2MType.Integer:
 		case LwM2MType.UnsignedInteger:
+		case LwM2MType.Time:
 			return ts.factory.createTypeReferenceNode('number')
 		case LwM2MType.Boolean:
 			return ts.factory.createTypeReferenceNode('boolean')
@@ -136,8 +137,6 @@ const typeScriptResourceType = (type: string): ts.TypeNode => {
 		case LwM2MType.Corelnk:
 		case LwM2MType.Objlnk:
 			return ts.factory.createTypeReferenceNode('string')
-		case LwM2MType.Time:
-			return ts.factory.createTypeReferenceNode('Date')
 		default:
 			throw new Error(`Unexpected resource type: ${type}`)
 	}
