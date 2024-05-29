@@ -9,17 +9,17 @@
     <Mandatory>Optional</Mandatory>
     <Resources>
       <Item ID="0">
-        <Name>Mode</Name>
+        <Name>Update interval</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
         <Type>Integer</Type>
-        <RangeEnumeration>0..99</RangeEnumeration>
+        <RangeEnumeration>0..31622400</RangeEnumeration>
         <Units/>
-        <Description><![CDATA[The operation mode of the application, e.g. 0: "real-time", 1: "interactive", 2: "low-power".]]></Description>
+        <Description><![CDATA[The update interval in seconds. Examples: 10, 3600.]]></Description>
       </Item>
       <Item ID="1">
-        <Name>GNSSEnabled</Name>
+        <Name>GNSS enabled</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
