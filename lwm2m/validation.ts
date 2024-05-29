@@ -82,7 +82,9 @@ export const validateInstance =
 
 		for (const [ResourceID, validator] of Object.entries(Resources)) {
 			if (validator(i.Resources[parseInt(ResourceID, 10)]) === false) {
-				return error(`Resource ${ResourceID} is invalid.`)
+				return error(
+					`Resource ${ResourceID} for Object ${ObjectID} is invalid.`,
+				)
 			}
 		}
 		return { object: o as LwM2MObjectInstance<O> }
