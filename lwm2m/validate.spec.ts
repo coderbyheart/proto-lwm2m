@@ -26,4 +26,23 @@ void describe('validate()', () => {
 		const maybeValid = v({})
 		assert.equal('error' in maybeValid, true)
 	})
+
+	void it('should validate an object with undefined optional resources', () => {
+		const object = {
+			ObjectID: 14203,
+			ObjectVersion: '1.0',
+			Resources: {
+				'0': 'LTE-M GPS',
+				'1': 20,
+				'3': 33187,
+				'4': 52661514,
+				'5': 24201,
+				'6': '10.234.105.140',
+				11: undefined,
+				'99': 1716988087000,
+			},
+		}
+		const maybeValid = v(object)
+		assert.deepEqual('object' in maybeValid && maybeValid.object, object)
+	})
 })

@@ -50,6 +50,7 @@ export const isLwM2MObject = (
 		return error(`All resource IDs must be a number`)
 	// All values must be number, string, boolean
 	for (const v of Object.values(object.Resources)) {
+		if (v === undefined) continue
 		if (typeof v === 'string') continue
 		if (typeof v === 'boolean') continue
 		if (typeof v === 'number') continue
