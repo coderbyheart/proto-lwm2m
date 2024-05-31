@@ -1,6 +1,9 @@
 import ts, { type ObjectLiteralElementLike } from 'typescript'
 import { addDocBlock } from './addDocBlock.js'
-import type { ParsedLwM2MObjectDefinition } from '../lwm2m/ParsedLwM2MObjectDefinition.js'
+import type {
+	ParsedLwM2MObjectDefinition,
+	Resource,
+} from '../lwm2m/ParsedLwM2MObjectDefinition.js'
 import { generateName } from './generateType.js'
 import { parseRangeEnumeration } from '../lwm2m/parseRangeEnumeration.js'
 import type { Range } from '../lwm2m/LWM2MObjectInfo.js'
@@ -89,101 +92,9 @@ export const generateLwM2MDefinitions = (
 									ts.factory.createPropertyAssignment(
 										'Resources',
 										ts.factory.createObjectLiteralExpression(
-											definition.Resources.Item.map((Resource) => {
-												let range: Range | undefined = undefined
-												if (Resource.RangeEnumeration.length > 0) {
-													const maybeRange = parseRangeEnumeration(
-														Resource.RangeEnumeration,
-													)
-													if ('error' in maybeRange) throw maybeRange.error
-													range = maybeRange.range
-												}
-
-												const props: ObjectLiteralElementLike[] = [
-													ts.factory.createPropertyAssignment(
-														'ResourceID',
-														ts.factory.createNumericLiteral(Resource.$.ID),
-													),
-													ts.factory.createPropertyAssignment(
-														'Name',
-														ts.factory.createStringLiteral(Resource.Name),
-													),
-													ts.factory.createPropertyAssignment(
-														'Mandatory',
-														ts.factory.createIdentifier(
-															Resource.Mandatory === 'Mandatory'
-																? 'true'
-																: 'false',
-														),
-													),
-													ts.factory.createPropertyAssignment(
-														'Type',
-														ts.factory.createPropertyAccessExpression(
-															ts.factory.createIdentifier('ResourceType'),
-															Resource.Type,
-														),
-													),
-													ts.factory.createPropertyAssignment(
-														'Description',
-														ts.factory.createStringLiteral(
-															Resource.Description,
-														),
-													),
-												]
-
-												if (Resource.RangeEnumeration.length > 0) {
-													const maybeRange = parseRangeEnumeration(
-														Resource.RangeEnumeration,
-													)
-													if ('error' in maybeRange) throw maybeRange.error
-													const { min, max } = maybeRange.range
-													props.push(
-														ts.factory.createPropertyAssignment(
-															'RangeEnumeration',
-
-															ts.factory.createObjectLiteralExpression([
-																ts.factory.createPropertyAssignment(
-																	'min',
-																	createNumber(min),
-																),
-																ts.factory.createPropertyAssignment(
-																	'max',
-																	createNumber(max),
-																),
-															]),
-														),
-													)
-												}
-
-												if (Resource.Units.length > 0)
-													props.push(
-														ts.factory.createPropertyAssignment(
-															'Units',
-															ts.factory.createStringLiteral(Resource.Units),
-														),
-													)
-
-												const resourceDef = ts.factory.createPropertyAssignment(
-													ts.factory.createNumericLiteral(Resource.$.ID),
-													ts.factory.createObjectLiteralExpression(props),
-												)
-
-												const docStrings: string[] = [
-													`${Resource.Name} (${Resource.Type})`,
-													``,
-													Resource.Description,
-												]
-												if (range !== undefined) {
-													docStrings.push(
-														``,
-														`Minimum: ${range.min}`,
-														`Maximum: ${range.max}`,
-													)
-												}
-												addDocBlock(docStrings, resourceDef)
-
-												return resourceDef
-											}),
+											Array.isArray(definition.Resources.Item)
+												? definition.Resources.Item.map(createResource)
+												: [createResource(definition.Resources.Item)],
 										),
 									),
 								]),
@@ -223,3 +134,81 @@ const createNumber = (n: number): ts.Expression =>
 				ts.factory.createNumericLiteral(-n),
 			)
 		: ts.factory.createNumericLiteral(n)
+
+const createResource = (Resource: Resource) => {
+	let range: Range | undefined = undefined
+	if (Resource.RangeEnumeration.length > 0) {
+		const maybeRange = parseRangeEnumeration(Resource.RangeEnumeration)
+		if ('error' in maybeRange) throw maybeRange.error
+		range = maybeRange.range
+	}
+
+	const props: ObjectLiteralElementLike[] = [
+		ts.factory.createPropertyAssignment(
+			'ResourceID',
+			ts.factory.createNumericLiteral(Resource.$.ID),
+		),
+		ts.factory.createPropertyAssignment(
+			'Name',
+			ts.factory.createStringLiteral(Resource.Name),
+		),
+		ts.factory.createPropertyAssignment(
+			'Mandatory',
+			ts.factory.createIdentifier(
+				Resource.Mandatory === 'Mandatory' ? 'true' : 'false',
+			),
+		),
+		ts.factory.createPropertyAssignment(
+			'Type',
+			ts.factory.createPropertyAccessExpression(
+				ts.factory.createIdentifier('ResourceType'),
+				Resource.Type,
+			),
+		),
+		ts.factory.createPropertyAssignment(
+			'Description',
+			ts.factory.createStringLiteral(Resource.Description),
+		),
+	]
+
+	if (Resource.RangeEnumeration.length > 0) {
+		const maybeRange = parseRangeEnumeration(Resource.RangeEnumeration)
+		if ('error' in maybeRange) throw maybeRange.error
+		const { min, max } = maybeRange.range
+		props.push(
+			ts.factory.createPropertyAssignment(
+				'RangeEnumeration',
+
+				ts.factory.createObjectLiteralExpression([
+					ts.factory.createPropertyAssignment('min', createNumber(min)),
+					ts.factory.createPropertyAssignment('max', createNumber(max)),
+				]),
+			),
+		)
+	}
+
+	if (Resource.Units.length > 0)
+		props.push(
+			ts.factory.createPropertyAssignment(
+				'Units',
+				ts.factory.createStringLiteral(Resource.Units),
+			),
+		)
+
+	const resourceDef = ts.factory.createPropertyAssignment(
+		ts.factory.createNumericLiteral(Resource.$.ID),
+		ts.factory.createObjectLiteralExpression(props),
+	)
+
+	const docStrings: string[] = [
+		`${Resource.Name} (${Resource.Type})`,
+		``,
+		Resource.Description,
+	]
+	if (range !== undefined) {
+		docStrings.push(``, `Minimum: ${range.min}`, `Maximum: ${range.max}`)
+	}
+	addDocBlock(docStrings, resourceDef)
+
+	return resourceDef
+}

@@ -33,11 +33,18 @@ console.log(chalk.gray('', '·'), chalk.gray('timestamp resources map'))
 const timestampResources: Record<number, number> = {}
 for (const definition of definitions) {
 	const ObjectID = parseInt(definition.ObjectID, 10)
-	const ResourceId = parseInt(
-		definition.Resources.Item.find(({ Type }) => Type === 'Time')?.$
-			.ID as string,
-		10,
-	)
+	const Item = definition.Resources.Item
+	let ResourceId: number | undefined = undefined
+	if (Array.isArray(Item)) {
+		ResourceId = parseInt(
+			Item.find(({ Type }) => Type === 'Time')?.$.ID as string,
+			10,
+		)
+	} else {
+		if (Item.Type === 'Time') ResourceId = parseInt(Item.$.ID, 10)
+	}
+	if (ResourceId === undefined)
+		throw new Error(`No Time resource found in ${ObjectID}!`)
 	timestampResources[ObjectID] = ResourceId
 	console.log(
 		'  ',

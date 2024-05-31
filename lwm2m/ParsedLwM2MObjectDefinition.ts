@@ -22,7 +22,10 @@ export type ParsedLwM2MObjectDefinition = {
 	MultipleInstances: 'Multiple'
 	Mandatory: 'Optional'
 	Resources: {
-		Item: Resource[]
+		Item:
+			| Resource[]
+			// if Object only has one Resource
+			| Resource
 	}
 	Description2: string // e.g. ''
 }

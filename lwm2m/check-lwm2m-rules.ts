@@ -87,7 +87,12 @@ const listLwm2mDefinitions = async (
 		const objectDef: LWM2MObjectDefinitionType = {
 			...definition,
 			LWM2MVersion: '1.1',
-			Resources: definition.Resources.Item.reduce<Record<string, any>>(
+			Resources: {},
+		}
+
+		const Item = definition.Resources.Item
+		if (Array.isArray(Item)) {
+			objectDef.Resources = Item.reduce<Record<string, any>>(
 				(resources, { $, ...item }) => {
 					if (resources[$.ID] !== undefined)
 						throw new Error(`Duplicate resource ID: ${$.ID}`)
@@ -101,7 +106,12 @@ const listLwm2mDefinitions = async (
 					}
 				},
 				{},
-			),
+			)
+		} else {
+			// Object only has one Resource
+			objectDef.Resources = {
+				[Item.$.ID]: Item,
+			}
 		}
 
 		const maybeValid = v(objectDef)

@@ -2,22 +2,12 @@
 <LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
   <Object ObjectType="MODefinition">
     <Name>Button press</Name>
-    <Description1><![CDATA[Describes a button press event.]]></Description1>
+    <Description1><![CDATA[Describes a button press event. The ObjectInstanceID is used to describe which button has been pressed.]]></Description1>
     <ObjectID>14220</ObjectID>
     <ObjectURN>urn:oma:lwm2m:x:14220</ObjectURN>
     <MultipleInstances>Multiple</MultipleInstances>
     <Mandatory>Optional</Mandatory>
     <Resources>
-      <Item ID="0">
-        <Name>Button ID</Name>
-        <Operations>R</Operations>
-        <MultipleInstances>Single</MultipleInstances>
-        <Mandatory>Mandatory</Mandatory>
-        <Type>Integer</Type>
-        <RangeEnumeration/>
-        <Units/>
-        <Description><![CDATA[The ID of the button that was pressed. Examples: 1, 2.]]></Description>
-      </Item>
       <Item ID="99">
         <Name>Timestamp</Name>
         <Operations>R</Operations>

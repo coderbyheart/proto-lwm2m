@@ -77,7 +77,9 @@ export const generateType = ({
 					ts.factory.createIdentifier('Resources'),
 					undefined,
 					ts.factory.createTypeLiteralNode(
-						byImportance(Resources.Item).map((resource) => {
+						byImportance(
+							Array.isArray(Resources.Item) ? Resources.Item : [Resources.Item],
+						).map((resource) => {
 							const res = ts.factory.createPropertySignature(
 								undefined,
 								ts.factory.createIdentifier(`${resource.$.ID}`),

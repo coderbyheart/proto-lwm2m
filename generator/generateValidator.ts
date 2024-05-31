@@ -151,7 +151,10 @@ export const generateValidator = ({
 									),
 									ts.factory.createStringLiteral(ObjectVersion ?? '1.0'),
 									ts.factory.createObjectLiteralExpression(
-										Resources.Item.map((Resource) => {
+										(Array.isArray(Resources.Item)
+											? Resources.Item
+											: [Resources.Item]
+										).map((Resource) => {
 											const validator = ts.factory.createPropertyAssignment(
 												ts.factory.createNumericLiteral(Resource.$.ID),
 												toResourceValidator(Resource),
@@ -224,7 +227,7 @@ const getResourceValidators = ({
 	Resources,
 }: Pick<ParsedLwM2MObjectDefinition, 'Resources'>): Set<string> =>
 	new Set(
-		Object.values(Resources.Item)
+		(Array.isArray(Resources.Item) ? Resources.Item : [Resources.Item])
 			.map(({ Type, Mandatory }) => [
 				typeToValidator(Type),
 				Mandatory === 'Optional' ? 'OptionalResource' : undefined,
