@@ -51,7 +51,7 @@ export const senMLtoLwM2M = (
 			return { error: new Error(`Invalid resource ID: ${itemResourceId}`) }
 		}
 
-		const tsRes = timestampResources[resourceId.ObjectID]
+		const tsRes = timestampResources.get(resourceId.ObjectID)
 		if (tsRes === undefined) {
 			return {
 				error: new Error(

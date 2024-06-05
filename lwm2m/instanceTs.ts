@@ -4,6 +4,6 @@ import { timestampResources } from './timestampResources.js'
 
 export const instanceTs = (instance: LwM2MObjectInstance): number => {
 	const definition = definitions[instance.ObjectID]
-	const tsResourceId = timestampResources[definition.ObjectID] as number // All registered objects must have a timestamp resource
+	const tsResourceId = timestampResources.get(definition.ObjectID) as number // All registered objects must have a timestamp resource
 	return instance.Resources[tsResourceId] as number
 }

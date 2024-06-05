@@ -16,7 +16,7 @@ export const lwm2mToSenML = (
 ): { senML: SenMLType } | { errors: Array<Error> } => {
 	const def = definitions[lwm2m.ObjectID]
 	const i = instanceTs(lwm2m)
-	const tsResourceId = timestampResources[lwm2m.ObjectID] as number // All registered objects must have a timestamp resource
+	const tsResourceId = timestampResources.get(lwm2m.ObjectID) as number // All registered objects must have a timestamp resource
 	const [first, ...rest] = Object.entries({
 		...lwm2m.Resources,
 		[tsResourceId]: undefined,

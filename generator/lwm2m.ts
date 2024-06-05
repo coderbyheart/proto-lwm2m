@@ -8,6 +8,7 @@ import { generateLwm2mTimestampResources } from './generateLwm2mTimestampResourc
 import { printNode } from './printNode.js'
 import os from 'node:os'
 import { generateLwM2MDefinitions } from './generateLwM2MDefinitions.js'
+import { generateName } from './generateType.js'
 
 const baseDir = process.cwd()
 const subDir = (...tree: string[]): string => path.join(baseDir, ...tree)
@@ -30,7 +31,7 @@ for (const objectDefinitionFile of (await readdir(subDir('lwm2m'))).filter(
 }
 
 console.log(chalk.gray('', '·'), chalk.gray('timestamp resources map'))
-const timestampResources: Record<number, number> = {}
+const timestampResources: Record<string, number> = {}
 for (const definition of definitions) {
 	const ObjectID = parseInt(definition.ObjectID, 10)
 	const Item = definition.Resources.Item
@@ -45,7 +46,7 @@ for (const definition of definitions) {
 	}
 	if (ResourceId === undefined)
 		throw new Error(`No Time resource found in ${ObjectID}!`)
-	timestampResources[ObjectID] = ResourceId
+	timestampResources[generateName(definition)] = ResourceId
 	console.log(
 		'  ',
 		chalk.gray('·'),

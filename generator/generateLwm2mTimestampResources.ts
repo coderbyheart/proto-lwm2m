@@ -2,8 +2,24 @@ import ts from 'typescript'
 import { addDocBlock } from './addDocBlock.js'
 
 export const generateLwm2mTimestampResources = (
-	timestampResources: Record<number, number>,
+	timestampResources: Record<string, number>,
 ): ts.Node[] => {
+	const importLwM2MObjectID = ts.factory.createImportDeclaration(
+		undefined,
+		ts.factory.createImportClause(
+			false,
+			undefined,
+			ts.factory.createNamedImports([
+				ts.factory.createImportSpecifier(
+					false,
+					undefined,
+					ts.factory.createIdentifier(`LwM2MObjectID`),
+				),
+			]),
+		),
+		ts.factory.createStringLiteral('./LwM2MObjectID.js'),
+	)
+
 	const type = ts.factory.createVariableStatement(
 		[ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
 		ts.factory.createVariableDeclarationList(
@@ -12,18 +28,30 @@ export const generateLwm2mTimestampResources = (
 					ts.factory.createIdentifier(`timestampResources`),
 					undefined,
 					ts.factory.createTypeReferenceNode('Readonly', [
-						ts.factory.createTypeReferenceNode('Record', [
-							ts.factory.createTypeReferenceNode('number'),
+						ts.factory.createTypeReferenceNode('Map', [
+							ts.factory.createTypeReferenceNode('LwM2MObjectID'),
 							ts.factory.createTypeReferenceNode('number'),
 						]),
 					]),
-					ts.factory.createObjectLiteralExpression(
-						Object.entries(timestampResources).map(([k, v]) =>
-							ts.factory.createPropertyAssignment(
-								k,
-								ts.factory.createNumericLiteral(v),
+					ts.factory.createNewExpression(
+						ts.factory.createIdentifier('Map'),
+						[
+							ts.factory.createTypeReferenceNode('LwM2MObjectID'),
+							ts.factory.createTypeReferenceNode('number'),
+						],
+						[
+							ts.factory.createArrayLiteralExpression(
+								Object.entries(timestampResources).map(([k, v]) =>
+									ts.factory.createArrayLiteralExpression([
+										ts.factory.createPropertyAccessExpression(
+											ts.factory.createIdentifier('LwM2MObjectID'),
+											ts.factory.createIdentifier(k),
+										),
+										ts.factory.createNumericLiteral(v),
+									]),
+								),
 							),
-						),
+						],
 					),
 				),
 			],
@@ -37,5 +65,5 @@ export const generateLwm2mTimestampResources = (
 		type,
 	)
 
-	return [type]
+	return [importLwM2MObjectID, type]
 }
