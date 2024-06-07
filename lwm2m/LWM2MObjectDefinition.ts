@@ -49,7 +49,10 @@ export const LWM2MObjectDefinition = Type.Object(
 					Type.Literal('W'),
 					Type.Literal('RW'),
 				]),
-				MultipleInstances: Type.Literal('Single'),
+				MultipleInstances: Type.Union([
+					Type.Literal('Single'),
+					Type.Literal('Multiple'),
+				]),
 				Mandatory: Type.Union([
 					Type.Literal('Optional'),
 					Type.Literal('Mandatory'),

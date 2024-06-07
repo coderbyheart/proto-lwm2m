@@ -19,6 +19,7 @@ export type LwM2MResourceInfo = {
 	Description: string // e.g. 'The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].'
 	RangeEnumeration?: Range
 	Units?: string // e.g. 'lat'
+	Multiple: boolean
 }
 
 export type Range = {

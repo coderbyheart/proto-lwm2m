@@ -15,9 +15,9 @@ void describe('generateLwM2MDefinitions()', () => {
 				0: {
 					ResourceID: 0,
 					Name: 'Latitude',
-
 					Mandatory: true,
 					Type: ResourceType.Float,
+					Multiple: false,
 					Description:
 						'The decimal notation of latitude in degrees, e.g. -43.5723 [World Geodetic System 1984].',
 					Units: '°',
@@ -31,6 +31,7 @@ void describe('generateLwM2MDefinitions()', () => {
 					Name: 'Longitude',
 					Mandatory: true,
 					Type: ResourceType.Float,
+					Multiple: false,
 					Description:
 						'The decimal notation of longitude in degrees, e.g. 153.21760 [World Geodetic System 1984].',
 					Units: '°',
@@ -44,6 +45,7 @@ void describe('generateLwM2MDefinitions()', () => {
 					Name: 'Altitude',
 					Mandatory: false,
 					Type: ResourceType.Float,
+					Multiple: false,
 					Description:
 						'The decimal notation of altitude in meters above sea level.',
 					Units: 'm',
@@ -53,6 +55,7 @@ void describe('generateLwM2MDefinitions()', () => {
 					Name: 'Radius',
 					Mandatory: false,
 					Type: ResourceType.Float,
+					Multiple: false,
 					Description:
 						'The value in this resource indicates the radius of a circular area in meters. The circular area is used to describe uncertainty about a point for coordinates in a two-dimensional coordinate reference systems (CRS). The center point of a circular area is specified by using the Latitude and the Longitude Resources.',
 					Units: 'm',
@@ -62,6 +65,7 @@ void describe('generateLwM2MDefinitions()', () => {
 					Name: 'Speed',
 					Mandatory: false,
 					Type: ResourceType.Float,
+					Multiple: false,
 					Description: 'Speed is the time rate of change in position.',
 					Units: 'm/s',
 				},
@@ -70,6 +74,7 @@ void describe('generateLwM2MDefinitions()', () => {
 					Name: 'Heading',
 					Mandatory: false,
 					Type: ResourceType.Float,
+					Multiple: false,
 					Description: 'The angle of movement in degrees.',
 					Units: '°',
 					RangeEnumeration: {
@@ -82,6 +87,7 @@ void describe('generateLwM2MDefinitions()', () => {
 					Name: 'Source',
 					Mandatory: true,
 					Type: ResourceType.String,
+					Multiple: false,
 					Description:
 						'The source of the geo location, e.g. GNSS, SCELL, MCELL, WIFI.',
 				},
@@ -90,10 +96,18 @@ void describe('generateLwM2MDefinitions()', () => {
 					Name: 'Timestamp',
 					Mandatory: true,
 					Type: ResourceType.Time,
+					Multiple: false,
 					Description:
 						'The timestamp of when the location measurement was performed.',
 				},
 			},
 		})
+
+		// Support for multiple instance resources
+		assert.deepEqual(
+			definitions[LwM2MObjectID.NRFCloudServiceInfo_14401].Resources[0]
+				?.Multiple,
+			true,
+		)
 	})
 })

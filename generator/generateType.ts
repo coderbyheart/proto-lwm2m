@@ -80,13 +80,19 @@ export const generateType = ({
 						byImportance(
 							Array.isArray(Resources.Item) ? Resources.Item : [Resources.Item],
 						).map((resource) => {
+							let valueType = typeScriptResourceType(resource.Type)
+							if (resource.MultipleInstances === 'Multiple') {
+								valueType = ts.factory.createTypeReferenceNode('Array', [
+									valueType,
+								])
+							}
 							const res = ts.factory.createPropertySignature(
 								undefined,
 								ts.factory.createIdentifier(`${resource.$.ID}`),
 								resource.Mandatory === 'Mandatory'
 									? undefined
 									: ts.factory.createToken(ts.SyntaxKind.QuestionToken),
-								typeScriptResourceType(resource.Type),
+								valueType,
 							)
 							const docs: Array<string> = [
 								`${resource.Name}${

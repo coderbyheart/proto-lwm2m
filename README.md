@@ -38,8 +38,6 @@ in a meaningful way to users without the need for custom implementation.
 - All objects must define one `Time` property.
 - Objects must be `Multiple` instance.
 - Objects must be `Optional`.
-- Resources must be `Single` instance. `Multiple` could be useful in some cases,
-  e.g. IP addresses, but until it is really needed, we do not support it.
 - Resources should only be marked as mandatory in case they must be published
   together (e.g. latitude and longitude). This allows devices to only update the
   values that have changed.

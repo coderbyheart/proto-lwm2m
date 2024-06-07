@@ -166,6 +166,12 @@ const createResource = (Resource: Resource) => {
 			),
 		),
 		ts.factory.createPropertyAssignment(
+			'Multiple',
+			ts.factory.createIdentifier(
+				Resource.MultipleInstances === 'Multiple' ? 'true' : 'false',
+			),
+		),
+		ts.factory.createPropertyAssignment(
 			'Description',
 			ts.factory.createStringLiteral(Resource.Description),
 		),

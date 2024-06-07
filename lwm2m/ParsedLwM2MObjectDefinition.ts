@@ -4,7 +4,7 @@ export type Resource = {
 	}
 	Name: string // e.g. 'Latitude'
 	Operations: 'R'
-	MultipleInstances: 'Single'
+	MultipleInstances: 'Single' | 'Multiple'
 	Mandatory: 'Optional' | 'Mandatory'
 	Type: 'String' | 'Integer' | 'Float' | 'Boolean' | 'Opaque' | 'Time'
 	RangeEnumeration: string // e.g. -10..10
