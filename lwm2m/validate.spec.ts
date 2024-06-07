@@ -1,14 +1,13 @@
 import { describe, it } from 'node:test'
 import { validate } from './validate.js'
 import { validators } from './validators.js'
-import { LwM2MObjectID } from './LwM2MObjectID.js'
 import assert from 'node:assert'
 
 void describe('validate()', () => {
 	const v = validate(validators)
 	void it('should validate a LwM2M object instance', () => {
 		const object = {
-			ObjectID: LwM2MObjectID.Geolocation_14201,
+			ObjectID: 14201,
 			ObjectVersion: '1.0',
 			Resources: {
 				'0': 62.469414,
@@ -40,6 +39,19 @@ void describe('validate()', () => {
 				'6': '10.234.105.140',
 				11: undefined,
 				'99': 1716988087000,
+			},
+		}
+		const maybeValid = v(object)
+		assert.deepEqual('object' in maybeValid && maybeValid.object, object)
+	})
+
+	void it('should validate an object with multiple instance resource', () => {
+		const object = {
+			ObjectID: 14401,
+			ObjectVersion: '1.0',
+			Resources: {
+				'0': ['BOOT', 'MODEM', 'APP'],
+				'99': 1717409966000,
 			},
 		}
 		const maybeValid = v(object)

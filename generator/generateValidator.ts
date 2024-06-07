@@ -193,9 +193,16 @@ export const generateValidator = ({
 }
 
 const toResourceValidator = (Resource: Resource): ts.Expression => {
-	const valueValidator = ts.factory.createIdentifier(
+	let valueValidator: ts.Expression = ts.factory.createIdentifier(
 		typeToValidator(Resource.Type),
 	)
+	if (Resource.MultipleInstances === 'Multiple') {
+		valueValidator = ts.factory.createCallExpression(
+			ts.factory.createIdentifier('MultipleInstanceResource'),
+			undefined,
+			[valueValidator],
+		)
+	}
 	if (Resource.Mandatory === 'Optional')
 		return ts.factory.createCallExpression(
 			ts.factory.createIdentifier('OptionalResource'),
@@ -228,9 +235,12 @@ const getResourceValidators = ({
 }: Pick<ParsedLwM2MObjectDefinition, 'Resources'>): Set<string> =>
 	new Set(
 		(Array.isArray(Resources.Item) ? Resources.Item : [Resources.Item])
-			.map(({ Type, Mandatory }) => [
+			.map(({ Type, Mandatory, MultipleInstances }) => [
 				typeToValidator(Type),
 				Mandatory === 'Optional' ? 'OptionalResource' : undefined,
+				MultipleInstances === 'Multiple'
+					? 'MultipleInstanceResource'
+					: undefined,
 			])
 			.flat()
 			.filter((d) => d !== undefined) as string[],

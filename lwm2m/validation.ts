@@ -50,13 +50,21 @@ export const isLwM2MObject = (
 		return error(`All resource IDs must be a number`)
 	// All values must be number, string, boolean
 	for (const v of Object.values(object.Resources)) {
-		if (v === undefined) continue
-		if (typeof v === 'string') continue
-		if (typeof v === 'boolean') continue
-		if (typeof v === 'number') continue
+		if (isSimpleResource(v)) continue
+		if (Array.isArray(v) && v.every((v) => isSimpleResource(v))) continue
 		return error(`Invalid value type ${typeof v}`)
 	}
 	return { object: object as LwM2MObjectInstance }
+}
+
+const isSimpleResource = (
+	v?: unknown,
+): v is number | string | boolean | undefined => {
+	if (v === undefined) return true
+	if (typeof v === 'string') return true
+	if (typeof v === 'boolean') return true
+	if (typeof v === 'number') return true
+	return false
 }
 
 export const validateInstance =
@@ -99,12 +107,11 @@ export const BooleanResource = (r: unknown): r is boolean =>
 	typeof r === 'boolean'
 
 export const OptionalResource =
-	(
-		validator:
-			| typeof NumberResource
-			| typeof TimeResource
-			| typeof StringResource
-			| typeof BooleanResource,
-	) =>
+	(validator: (r: unknown) => boolean) =>
 	(r: unknown): boolean =>
 		r === undefined ? true : validator(r)
+
+export const MultipleInstanceResource =
+	(validator: (r: unknown) => boolean) =>
+	(r: unknown): boolean =>
+		Array.isArray(r) && r.every(validator)
