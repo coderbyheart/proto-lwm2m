@@ -20,11 +20,18 @@ export const ObjectInstanceID = Type.Integer({
 	examples: [0, 1],
 })
 
+const String = Type.String({ minLength: 1, title: 'LwM2M string value' })
+const Number = Type.Number({ title: 'LwM2M number value' })
+const Boolean = Type.Boolean({ title: 'LwM2M boolean value' })
+
 export const Resources = Type.Record(
 	Type.Integer({ minimum: 0 }),
 	Type.Union([
-		Type.String({ minLength: 1, title: 'LwM2M string value' }),
-		Type.Number({ title: 'LwM2M number value' }),
-		Type.Boolean({ title: 'LwM2M boolean value' }),
+		String,
+		Type.Array(String),
+		Number,
+		Type.Array(Number),
+		Boolean,
+		Type.Array(Boolean),
 	]),
 )
