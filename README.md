@@ -35,7 +35,8 @@ in a meaningful way to users without the need for custom implementation.
   (non-inclusively).
 - The URN must have the prefix `urn:oma:lwm2m:x:`.
 - The `ObjectVersion` must be appended if it is not `1.0`, which is the default.
-- All objects must define one `Time` property.
+- All objects must define one `Time` property. Time is a signed integer
+  representing the number of seconds since Jan 1 st, 1970 in the UTC time zone.
 - Objects must be `Multiple` instance.
 - Objects must be `Optional`.
 - Resources should only be marked as mandatory in case they must be published

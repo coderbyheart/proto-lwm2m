@@ -101,7 +101,7 @@ export const validateInstance =
 
 export const NumberResource = (r: unknown): r is number => typeof r === 'number'
 export const TimeResource = (r: unknown): r is number =>
-	NumberResource(r) && r > 1700000000000 && r < 9999999999999
+	NumberResource(r) && r > 1700000000 && r < 9999999999
 export const StringResource = (r: unknown): r is string => typeof r === 'string'
 export const BooleanResource = (r: unknown): r is boolean =>
 	typeof r === 'boolean'

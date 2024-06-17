@@ -14,7 +14,7 @@ void describe('validate()', () => {
 				'1': 6.151946,
 				'6': 'Fixed',
 				'3': 1,
-				'99': 1710147413003,
+				'99': 1710147413,
 			},
 		}
 		const maybeValid = v(object)
@@ -38,7 +38,7 @@ void describe('validate()', () => {
 				'5': 24201,
 				'6': '10.234.105.140',
 				11: undefined,
-				'99': 1716988087000,
+				'99': 1716988087,
 			},
 		}
 		const maybeValid = v(object)
@@ -51,7 +51,7 @@ void describe('validate()', () => {
 			ObjectVersion: '1.0',
 			Resources: {
 				'0': ['BOOT', 'MODEM', 'APP'],
-				'99': 1717409966000,
+				'99': 1717409966,
 			},
 		}
 		const maybeValid = v(object)
