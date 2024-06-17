@@ -211,6 +211,12 @@ const createResource = (Resource: Resource) => {
 		``,
 		Resource.Description,
 	]
+	if (Resource.Type === 'Time') {
+		docStrings.push(
+			``,
+			`Time resources in LwM2M are represented as a signed integer representing the number of seconds since Jan 1, 1970 in the UTC time zone.`,
+		)
+	}
 	if (range !== undefined) {
 		docStrings.push(``, `Minimum: ${range.min}`, `Maximum: ${range.max}`)
 	}
