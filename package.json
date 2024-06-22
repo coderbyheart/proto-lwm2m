@@ -98,6 +98,6 @@
     "lwm2m"
   ],
   "peerDependencies": {
-    "@sinclair/typebox": "^0.32.33"
+    "@sinclair/typebox": "^0.32.34"
   }
 }
