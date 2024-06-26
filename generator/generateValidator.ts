@@ -243,5 +243,5 @@ const getResourceValidators = ({
 					: undefined,
 			])
 			.flat()
-			.filter((d) => d !== undefined) as string[],
+			.filter((d) => d !== undefined),
 	)
