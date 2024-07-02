@@ -35,7 +35,7 @@
     "prepublishOnly": "./compile.sh"
   },
   "devDependencies": {
-    "@bifravst/eslint-config-typescript": "6.1.6",
+    "@bifravst/eslint-config-typescript": "6.1.8",
     "@bifravst/prettier-config": "1.0.3",
     "@commitlint/config-conventional": "19.2.2",
     "@swc/cli": "0.4.0",
@@ -46,7 +46,7 @@
     "globstar": "1.0.0",
     "husky": "9.0.11",
     "lint-staged": "15.2.7",
-    "prettier-plugin-organize-imports": "3.2.4",
+    "prettier-plugin-organize-imports": "4.0.0",
     "remark": "15.0.1",
     "remark-frontmatter": "5.0.0",
     "tsmatchers": "5.0.2",
