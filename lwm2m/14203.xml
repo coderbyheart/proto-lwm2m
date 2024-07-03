@@ -34,7 +34,7 @@
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
         <Type>Integer</Type>
-        <RangeEnumeration>-140..-40</RangeEnumeration>
+        <RangeEnumeration>-160..-40</RangeEnumeration>
         <Units>dBm</Units>
         <Description><![CDATA[Reference Signal Received Power (RSRP). The average power level in dBm received from a single reference signal in an LTE (Long-term Evolution) network. Typically this value ranges from -140 to -40 dBm. Examples: -97, -104.]]></Description>
       </Item>
