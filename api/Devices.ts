@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import { Context } from './Context.js'
-import { PublicDeviceId } from './DeviceId.js'
+import { DeviceId, PublicDeviceId } from './DeviceId.js'
 import {
 	ObjectID,
 	ObjectInstanceID,
@@ -29,6 +29,7 @@ export const PublicDevice = Type.Object(
 	{
 		'@context': Type.Literal(Context.device.toString()),
 		id: PublicDeviceId,
+		deviceId: DeviceId,
 		model: Model,
 		state: Type.Optional(Type.Array(LwM2MObjectInstance)),
 	},
