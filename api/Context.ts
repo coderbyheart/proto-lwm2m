@@ -8,6 +8,5 @@ export const Context = {
 		request: new URL(`${baseURL}/share-device-request`),
 		ownershipConfirmed: new URL(`${baseURL}/share-device-ownership-confirmed`),
 	},
-	named: (name: string): URL => new URL(`${baseURL}/${name}`),
 	apiHealth: new URL(`${baseURL}/api/health`),
 }
