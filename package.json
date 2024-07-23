@@ -51,7 +51,7 @@
     "remark-frontmatter": "5.0.0",
     "tsmatchers": "5.0.2",
     "tsx": "4.16.2",
-    "typescript": "5.5.3",
+    "typescript": "5.5.4",
     "xml2js": "0.6.2",
     "yaml": "2.4.5"
   },
