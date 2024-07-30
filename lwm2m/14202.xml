@@ -45,8 +45,8 @@
         <Mandatory>Optional</Mandatory>
         <Type>Float</Type>
         <RangeEnumeration/>
-        <Units>C</Units>
-        <Description><![CDATA[Battery temperature in Celsius. Examples: 21.7, 23.123.]]></Description>
+        <Units>°C</Units>
+        <Description><![CDATA[Battery temperature in degree Celsius. Examples: 21.7, 23.123.]]></Description>
       </Item>
       <Item ID="4">
         <Name>Time to full</Name>

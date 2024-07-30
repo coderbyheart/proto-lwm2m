@@ -16,7 +16,7 @@
         <Type>Float</Type>
         <RangeEnumeration/>
         <Units>°C</Units>
-        <Description><![CDATA[Environmental temperature in Celsius. Examples: 23.5, -10.2.]]></Description>
+        <Description><![CDATA[Environmental temperature in degree Celsius. Examples: 23.5, -10.2.]]></Description>
       </Item>
       <Item ID="1">
         <Name>Humidity</Name>
