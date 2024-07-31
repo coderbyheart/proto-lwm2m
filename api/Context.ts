@@ -2,6 +2,7 @@ const baseURL = `https://github.com/hello-nrfcloud/proto-map`
 
 export const Context = {
 	device: new URL(`${baseURL}/device`),
+	deviceCredentials: new URL(`${baseURL}/device/credentials`),
 	devices: new URL(`${baseURL}/devices`),
 	deviceJWT: new URL(`${baseURL}/device-jwt`),
 	shareDevice: {
