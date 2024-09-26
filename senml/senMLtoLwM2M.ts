@@ -1,8 +1,9 @@
-import type { MeasurementType, SenMLType } from './SenMLSchema.js'
-import { timestampResources } from '../lwm2m/timestampResources.js'
-import { parseResourceId, type ResourceID } from './parseResourceId.js'
-import { hasValue } from './hasValue.js'
 import type { LwM2MObjectInstance } from '../lwm2m/LwM2MObjectInstance.js'
+import { timestampResources } from '../lwm2m/timestampResources.js'
+import { hasName } from './hasName.js'
+import { hasValue } from './hasValue.js'
+import { parseResourceId, type ResourceID } from './parseResourceId.js'
+import type { MeasurementType, SenMLType } from './SenMLSchema.js'
 
 const isInfoForDifferentInstance = (
 	currentObject: LwM2MObjectInstance,
@@ -41,10 +42,15 @@ export const senMLtoLwM2M = (
 	let currentObject: LwM2MObjectInstance | undefined = undefined
 	const lwm2m: Array<LwM2MObjectInstance> = []
 
+	// Special case for timestamp only object
+	const maybeTimestampOnly = parseTimestampOnly(senML)
+	if (maybeTimestampOnly !== null) return { lwm2m: [maybeTimestampOnly] }
+
 	for (const item of senML) {
 		if ('bn' in item && item.bn !== undefined) currentBaseName = item.bn
 		if ('bt' in item && item.bt !== undefined) currentBaseTime = item.bt
 		if (!hasValue(item)) continue
+		if (!hasName(item)) continue
 		const itemResourceId = `${currentBaseName}${item.n ?? ''}/0`
 		const resourceId = parseResourceId(itemResourceId)
 		if (resourceId === null) {
@@ -100,4 +106,21 @@ export const senMLtoLwM2M = (
 	if (currentObject !== undefined) lwm2m.push(currentObject)
 
 	return { lwm2m }
+}
+
+const parseTimestampOnly = (senML: SenMLType): LwM2MObjectInstance | null => {
+	if (senML.length !== 1) return null
+	const item = senML[0]!
+	if (!('bn' in item) || !('bt' in item)) return null
+	const objectInfo = parseResourceId(`${item.bn}0/0`)
+	if (objectInfo === null) return null
+	const tsRes = timestampResources.get(objectInfo.ObjectID)
+	if (tsRes === undefined) return null
+	return {
+		ObjectID: objectInfo.ObjectID,
+		ObjectInstanceID: objectInfo.ObjectInstanceID,
+		Resources: {
+			[tsRes]: item.bt,
+		},
+	}
 }

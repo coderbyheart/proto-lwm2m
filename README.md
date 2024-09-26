@@ -63,6 +63,9 @@ The conformity to the rules is checked using the script
 - Timestamps are to be expressed in the **base time** property `bt` and are
   mapped to the LwM2M object's timestamp property and must not be send as a
   property.
+- SenML records may be a Time only, in case it is sufficient to express the
+  object as a combination of InstanceID and timestamp, for example in case of
+  the [Button Press (14220) object](./lwm2m/14220.xml).
 
 ### Model definition rules
 

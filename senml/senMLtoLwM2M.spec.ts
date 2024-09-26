@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { senMLtoLwM2M } from './senMLtoLwM2M.js'
 import { type LwM2MObjectInstance } from '../lwm2m/LwM2MObjectInstance.js'
 import type { SenMLType } from './SenMLSchema.js'
+import { senMLtoLwM2M } from './senMLtoLwM2M.js'
 
 void describe('senMLtoLwM2M()', () => {
 	void it('should resolve a senML message into objects', () => {
@@ -177,6 +177,21 @@ void describe('senMLtoLwM2M()', () => {
 				Resources: {
 					0: 32,
 					99: 1699049700,
+				},
+			},
+		]
+		const res = senMLtoLwM2M(input)
+		assert.deepEqual('lwm2m' in res && res.lwm2m, expected)
+	})
+
+	void it('should allow timestamp only values', async () => {
+		const input: SenMLType = [{ bn: '14220/1/', bt: 1699049600 }]
+		const expected: LwM2MObjectInstance[] = [
+			{
+				ObjectID: 14220,
+				ObjectInstanceID: 1,
+				Resources: {
+					99: 1699049600,
 				},
 			},
 		]

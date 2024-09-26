@@ -31,6 +31,9 @@ export const Measurement = Type.Intersect(
 				}),
 				bt: Type.Optional(Time),
 			}),
+			Type.Object({
+				bn: ResourceIDPart,
+			}),
 		]),
 		// Value combinations
 		Type.Union([
