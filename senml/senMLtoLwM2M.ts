@@ -108,11 +108,16 @@ export const senMLtoLwM2M = (
 	return { lwm2m }
 }
 
+/**
+ * Handle objects which are only `bt` (base time) and `bn` (base name)
+ */
 const parseTimestampOnly = (senML: SenMLType): LwM2MObjectInstance | null => {
 	if (senML.length !== 1) return null
 	const item = senML[0]!
 	if (!('bn' in item) || !('bt' in item)) return null
-	const objectInfo = parseResourceId(`${item.bn}0/0`)
+	const { bn, bt, ...rest } = item
+	if (Object.keys(rest).length !== 0) return null
+	const objectInfo = parseResourceId(`${bn}0/0`)
 	if (objectInfo === null) return null
 	const tsRes = timestampResources.get(objectInfo.ObjectID)
 	if (tsRes === undefined) return null
@@ -120,7 +125,7 @@ const parseTimestampOnly = (senML: SenMLType): LwM2MObjectInstance | null => {
 		ObjectID: objectInfo.ObjectID,
 		ObjectInstanceID: objectInfo.ObjectInstanceID,
 		Resources: {
-			[tsRes]: item.bt,
+			[tsRes]: bt,
 		},
 	}
 }
